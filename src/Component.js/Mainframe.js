@@ -7,11 +7,14 @@ import { Link } from 'react-router-dom';
 export default function Mainframe() {
   const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
+  const [papervalue,setpapervalue]=useState("MATTE")
+  const [framematerial,setframematerial]=useState("CLASSIC")
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
   }, [])
-  console.log("uploadedimage", uploaded_images)
+  console.log("papervalue", papervalue)
+  console.log("framematerial", framematerial)
   const Upload_Product_Image = () => {
     const options = {
       fromSources: ["local_file_system", "instagram", "facebook"],
@@ -58,7 +61,7 @@ export default function Mainframe() {
             <div className="mt-2 item">
               <figure >
               <img src="/assets/img/photos/black-frame.png" alt="example"  style={{width:"100%"}} /> 
-              <img src={itm} alt="img" className='minimage' style={{width:"94%"}} />             
+              <img src={itm} alt="img" className='minimage' style={framematerial==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                 <button onClick={()=>removeimage(k)} className="item-cart"><RxCross2 className='mt-1'/> remove</button>
               </figure>
             </div>
@@ -83,50 +86,43 @@ export default function Mainframe() {
        </div>       
         </div> 
         </div>
-        <div className=' col-12 col-md-4 col-lg-4'>
-        <div className='p-2 my-5' >
-          <h3 className="my-4 ">Mini Frames</h3>
+        <div className=' col-12 col-md-4 col-lg-4  '>
+        <div className='p-2 my-5 border-cart ' >
+          <h3 className="mt-4  ">Mini Frames</h3>
+          {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
-            <table className="table table-order">
-              <tbody>
-             
-                  <td className="ps-0"><strong className="text-dark">Papper</strong></td><br/>              
-                  <div class="switch-field">
-                    <input type="radio" id="radio-one" name="switch-one" value="MATTE" checked/>
-                    <label for="radio-one">MATTE</label>
-                    <input type="radio" id="radio-two" name="switch-one" value="GLOSS" />
-                    <label for="radio-two">GLOSS</label>
-                  </div><br/>
-                
-                
-{/*                
-                  <td className="ps-0"><strong className="text-dark">Frame Material</strong></td><br/>
-                
-                  <div class="switch-field">
-                    <input type="radio" id="radio-one" name="switch-two" value="Classic look" checked/>
-                    <label for="radio-one">CLASSIC LOOK</label>
-                    <input type="radio" id="radio-two" name="switch-two" value="Modern Look" />
-                    <label for="radio-two">MODERN LOOK</label>
-                  </div> */}
-                  
-                
-                
-                <tr>
-                  <td className="ps-0"><strong className="text-dark">Shipping</strong></td>
-                  <td className="pe-0 text-end">
+          <div className='line-break'/>
+                  <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
+                 <div className="switch-field ">
+                  <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("MATTE"):""} value="true" defaultChecked/>
+                  <label className='label1' for="radio-one">MATTE</label>
+                  <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
+                  <label className='label2' for="radio-two">GLOSS</label>
+                </div>
+                <br/>
+                <div className='line-break'/>
+                  <label className="ps-0"><strong className="text-dark">Frame Material</strong></label><br/>              
+                 <div className="switch-field2 ">
+                  <input   value="CLASSIC" />
+                  <label className='label1' onClick={()=>setframematerial("CLASSIC")}  style={framematerial==="CLASSIC"?{backgroundColor: "#111111",boxShadow: "none", color: "white"}:{}} >CLASSIC LOOK</label>
+                  <input     value="MODERN" />
+                  <label className='label2' onClick={()=>setframematerial("MODERN")} style={framematerial==="MODERN"?{backgroundColor: "#111111",boxShadow: "none", color: "white"}:{}} >MODERN LOOK</label>
+                </div>
+                <br/>
+                <div className='line-break'/>
+                  <div className='row'>
+                    <div className='col-8'>
+                    <label className="ps-0"><strong className="text-dark">Price for {uploaded_images.length}</strong></label>
+                    </div>
+                    <div className='col-4'>
+                    <span className="pe-0 text-start">
                     <p className="price">$10</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-0"><strong className="text-dark">Grand Total</strong></td>
-                  <td className="pe-0 text-end">
-                    <p className="price text-dark fw-bold">$152.79</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </span>
+                    </div>
+                  </div>
+                  
           </div>
-          <a href="#" className="btn btn-primary rounded w-100 mt-4">Proceed to Checkout</a>
+          <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>
