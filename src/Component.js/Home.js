@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import { MdOutlineEmail } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import { SlLocationPin } from "react-icons/sl";
+import Scripts from './Scripts';
 export default function Home() {
   useEffect(() => {
+    Scripts()
     window.scrollTo(0, 0);
   }, [])
   
@@ -51,7 +53,7 @@ export default function Home() {
           {/*/column */}
           <div className="col-md-6 col-xl-4">
             <div className="card shadow-lg card-border-bottom border-soft-green ">
-              <Link>
+              <Link to="/college">
               <div className="card-body frame_card">            
                 <img src="\assets\img\photos\collage-622.jpg" className='image_width' alt="img"/>
                 <h4>Collage</h4>              

@@ -51,7 +51,7 @@ export default function Mainframe() {
   return (
     <div>
       <div className=''>
-        <div className='row '>
+        <div className='row padd' >
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
@@ -59,7 +59,7 @@ export default function Mainframe() {
           {uploaded_images.map((itm,k)=>(
             <div key={k} className='col-6 col-md-4 '>
             <div className="mt-2 item">
-              <figure >
+              <figure className='framebox-shadow' >
               <img src="/assets/img/photos/black-frame.png" alt="example"  style={{width:"100%"}} /> 
               <img src={itm} alt="img" className='minimage' style={framematerial==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                 <button onClick={()=>removeimage(k)} className="item-cart"><RxCross2 className='mt-1'/> remove</button>
@@ -86,8 +86,8 @@ export default function Mainframe() {
        </div>       
         </div> 
         </div>
-        <div className=' col-12 col-md-4 col-lg-4  '>
-        <div className='p-2 my-5 border-cart ' >
+        <div className=' col-12 col-md-4 col-lg-4'>
+        <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
           <h3 className="mt-4  ">Mini Frames</h3>
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
@@ -95,9 +95,9 @@ export default function Mainframe() {
                   <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
                  <div className="switch-field ">
                   <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("MATTE"):""} value="true" defaultChecked/>
-                  <label className='label1' for="radio-one">MATTE</label>
+                  <label className='label1' htmlFor="radio-one">MATTE</label>
                   <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
-                  <label className='label2' for="radio-two">GLOSS</label>
+                  <label className='label2' htmlFor="radio-two">GLOSS</label>
                 </div>
                 <br/>
                 <div className='line-break'/>

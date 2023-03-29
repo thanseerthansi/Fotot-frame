@@ -39,57 +39,8 @@ export default function Header() {
                 <ul className="navbar-nav">
                   
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Pages</a>
-                    <ul className="dropdown-menu">
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">Services</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="services.html">Services I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="services2.html">Services II</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">About</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="about.html">About I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="about2.html">About II</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">Shop</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="shop.html">Shop I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="shop2.html">Shop II</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="shop-product.html">Product Page</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="shop-cart.html">Shopping Cart</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="shop-checkout.html">Checkout</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">Contact</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="contact.html">Contact I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="contact2.html">Contact II</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="contact3.html">Contact III</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">Career</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="career.html">Job Listing I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="career2.html">Job Listing II</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="career-job.html">Job Description</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown dropdown-submenu dropend"><a className="dropdown-item dropdown-toggle" href="/" data-bs-toggle="dropdown">Utility</a>
-                        <ul className="dropdown-menu">
-                          <li className="nav-item"><a className="dropdown-item" href="404.html">404 Not Found</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="page-loader.html">Page Loader</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="signin.html">Sign In I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="signin2.html">Sign In II</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="signup.html">Sign Up I</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="signup2.html">Sign Up II</a></li>
-                          <li className="nav-item"><a className="dropdown-item" href="terms.html">Terms</a></li>
-                        </ul>
-                      </li>
-                      <li className="nav-item"><a className="dropdown-item" href="pricing.html">Pricing</a></li>
-                      <li className="nav-item"><a className="dropdown-item" href="onepage.html">One Page</a></li>
-                    </ul>
+                    <Link className="nav-link" to="/" >Home</Link>
+                    
                   </li>
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Projects</a>
