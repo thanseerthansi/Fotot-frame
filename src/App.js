@@ -8,6 +8,9 @@ import Mainframe from './Component.js/Mainframe';
 import Collage from './Component.js/Collage';
 import Collegeframes from './Component.js/Collegeframes';
 import Potratecollege from './Component.js/Potratecollege';
+import Squareframes from './Component.js/Squareframes';
+import Squarecollege from './Component.js/Squarecollege';
+import Canvasframe from './Component.js/Canvasframe';
 
 function App() {
   return (
@@ -21,6 +24,10 @@ function App() {
           <Route path='college' element={<Collage/>} />
           <Route path='collegeframe' element={<Collegeframes/>} />
           <Route path='potratecollege' element={<Potratecollege/>} />
+          <Route path='squareframes' element={<Squareframes/>} />
+          <Route path='squarecollege/:framesize' element={<Squarecollege/>} />
+          <Route path='canavsframe' element={<Canvasframe/>} />
+
           
         </Route>
       </Routes>

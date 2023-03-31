@@ -3,9 +3,8 @@ import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export default function Potratecollege () {
+export default function Canvasframe() {
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
   const [papervalue,setpapervalue]=useState("MATTE")
@@ -28,9 +27,9 @@ export default function Potratecollege () {
           force: true,
         },
       },
-      maxFiles: 4,
-      minFiles: 2,
-      uploadInBackground: false,
+      maxFiles: 1,
+      minFiles: 1,
+      uploadInBackground:false,
       onUploadDone: (res) => {
         if (res.filesUploaded.length !== 0) {
           var newArray = [...uploaded_images];
@@ -41,24 +40,9 @@ export default function Potratecollege () {
         }
       },
     };
-
     client.picker(options).open();
   };
-//   const removeimage =(k)=>{
-//     let imagelist = uploaded_images
-//     imagelist.splice(k)
-//     console.log("imagelist",imagelist)
-//     setuploaded_images(()=>[...imagelist])
-//   }
-const handleOnDragEnd = (result) => {
-  if (!result.destination) return;
 
-  const newItems = [...uploaded_images];
-  const [reorderedItem] = newItems.splice(result.source.index, 1);
-  newItems.splice(result.destination.index, 0, reorderedItem);
-
-  setuploaded_images(newItems);
-};
   return (
     <div>
         <div className=''>
@@ -66,41 +50,19 @@ const handleOnDragEnd = (result) => {
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
-        <div className=" " >
-          <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
+        <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
           <h4>Drag & reorder images</h4>
           </div>
+        <div className="overflowbar " >
+          
           
             {uploaded_images.length? 
-            <div className={frame==="Black"?'  border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{width:"300px",margin:"auto"}}   >
-              <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="uploaded-images" direction='vertical'>
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} >
-            {uploaded_images.map((image, index) => (
-              <Draggable key={index} draggableId={index.toString()} index={index}>
-                {(provided) => (
-                  <img
-                  src={image}
-                  alt="img"
-                  className="image-pcp pcpwidth "
-                  
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+            <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto"}:uploaded_images.length===3?{width:"780px",height:"200px"}:{width:"1049px",height:"200px"}}   >
+
               
-            {/* {uploaded_images.length?uploaded_images.map((itm,k)=>(               
-                <img src={itm} alt="img" className='image-lcp1' style={uploaded_images.length===3?{width:"31.5%",height:"100%"}:uploaded_images.length===2?{width:"47.2%",height:"100%"}:{width:"23.2%",height:"100%"}}    />     
-            )):null} */}
+            {uploaded_images.length?uploaded_images.map((itm,k)=>(               
+                <img src={itm} alt="img" className='image-lcp1' style={{width:"47.2%",height:"100%"}}    />     
+            )):null}
             </div>  
             :<div>
                 <p>No Images Selected</p>

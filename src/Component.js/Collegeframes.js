@@ -66,13 +66,14 @@ const handleOnDragEnd = (result) => {
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
-        <div className=" " >
-          <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
+        <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
           <h4>Drag & reorder images</h4>
           </div>
+        <div className="overflowbar " >
+          
           
             {uploaded_images.length? 
-            <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={uploaded_images.length===2?{width:"80%",height:"100%",margin:"auto"}:{width:"100%",height:"100%"}}   >
+            <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto"}:uploaded_images.length===3?{width:"780px",height:"200px"}:{width:"1049px",height:"200px"}}   >
               <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="uploaded-images" direction='horizontal'>
         {(provided) => (
@@ -83,7 +84,8 @@ const handleOnDragEnd = (result) => {
                   <img
                   src={image}
                   alt="img"
-                  className={uploaded_images.length===3?"image-lcp1 image_length3":uploaded_images.length===2?"image-lcp1 image_length2":"image-lcp1 image_lengthelse"}  
+                  // className='image-lcp1 imagelcp_width'
+                  className={uploaded_images.length===2?"image-lcp1 imagelcp_width2":"image-lcp1 imagelcp_width"}  
                   
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

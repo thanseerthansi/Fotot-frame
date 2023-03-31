@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
-import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Link, useParams} from 'react-router-dom';
+import { ListManager } from 'react-beautiful-dnd-grid';
 
-export default function Potratecollege () {
+export default function Squarecollege () {
+  const  urlparam  = useParams()
+  let framesize =  urlparam.framesize
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("Black")
-  
+ 
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
   }, [])
  
-  console.log("uploadeimage", uploaded_images)
+  // console.log("urlparam",framesize)
 
   const Upload_Product_Image = () => {
     const options = {
@@ -24,12 +25,12 @@ export default function Potratecollege () {
       accept: ["image/*"],
       transformations: {
         crop: {
-          aspectRatio:3/2,
+          aspectRatio:1/1,
           force: true,
         },
       },
-      maxFiles: 4,
-      minFiles: 2,
+      maxFiles:framesize==="2"? 4:framesize==="3"?9:16,
+      minFiles: framesize==="2"? 4:framesize==="3"?9:16,
       uploadInBackground: false,
       onUploadDone: (res) => {
         if (res.filesUploaded.length !== 0) {
@@ -44,19 +45,12 @@ export default function Potratecollege () {
 
     client.picker(options).open();
   };
-//   const removeimage =(k)=>{
-//     let imagelist = uploaded_images
-//     imagelist.splice(k)
-//     console.log("imagelist",imagelist)
-//     setuploaded_images(()=>[...imagelist])
-//   }
-const handleOnDragEnd = (result) => {
-  if (!result.destination) return;
 
+const handleOnDragEnd = (sourceindex,destinationindex) => {
+  // if (!destinationindex) return;
   const newItems = [...uploaded_images];
-  const [reorderedItem] = newItems.splice(result.source.index, 1);
-  newItems.splice(result.destination.index, 0, reorderedItem);
-
+  const [reorderedItem] = newItems.splice(sourceindex, 1);
+  newItems.splice(destinationindex, 0, reorderedItem);
   setuploaded_images(newItems);
 };
   return (
@@ -66,38 +60,24 @@ const handleOnDragEnd = (result) => {
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
-        <div className=" " >
+        <div className="overflowbar " >
           <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
           <h4>Drag & reorder images</h4>
           </div>
           
             {uploaded_images.length? 
-            <div className={frame==="Black"?'  border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{width:"300px",margin:"auto"}}   >
-              <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="uploaded-images" direction='vertical'>
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} >
-            {uploaded_images.map((image, index) => (
-              <Draggable key={index} draggableId={index.toString()} index={index}>
-                {(provided) => (
-                  <img
-                  src={image}
-                  alt="img"
-                  className="image-pcp pcpwidth "
-                  
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+            <div className={frame==="Black"?'  border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={framesize==="2"? {width:"386px",margin:"auto",padding:"5px"}:framesize==="3"?{width:"505px",margin:"auto",padding:"5px"}:{width:"505px",margin:"auto",padding:"5px"}}   >
               
+    <div className="App">
+      <ListManager
+        items={uploaded_images}
+        direction="horizontal"
+        maxItems={framesize==="2"? 2:framesize==="3"?3:4}
+        render={item => <img src={item} alt="img" className='square-image' style={framesize==="4"?{width:"120px",height:"100%"}:framesize==="3"?{width:"160px",height:"100%"}:{width:"180px",height:"100%"}}/>}
+        onDragEnd={handleOnDragEnd}
+      />
+    </div>
+      
             {/* {uploaded_images.length?uploaded_images.map((itm,k)=>(               
                 <img src={itm} alt="img" className='image-lcp1' style={uploaded_images.length===3?{width:"31.5%",height:"100%"}:uploaded_images.length===2?{width:"47.2%",height:"100%"}:{width:"23.2%",height:"100%"}}    />     
             )):null} */}

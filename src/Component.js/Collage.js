@@ -50,6 +50,7 @@ export default function Collage() {
             </div>
             <div  className='col-12 col-md-4 '>
             <div className="card-bodyframe" >
+              <Link to="/squareframes">
               <div className='  border-cp ' >
               <div className='d-flex'>
               <div className='image_cs '>
@@ -68,7 +69,8 @@ export default function Collage() {
               </div>
               </div>  
              
-              </div>         
+              </div>   
+              </Link>      
             </div>
             </div>
        
