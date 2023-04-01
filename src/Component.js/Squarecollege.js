@@ -3,12 +3,13 @@ import * as filestack from "filestack-js";
 import { FaUpload } from "react-icons/fa";
 import { Link, useParams} from 'react-router-dom';
 import { ListManager } from 'react-beautiful-dnd-grid';
+import { apikey } from './filestackapikey';
 
 export default function Squarecollege () {
   const  urlparam  = useParams()
   let framesize =  urlparam.framesize
     const [uploaded_images, setuploaded_images] = useState([]);
-  var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
+  var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("Black")
  

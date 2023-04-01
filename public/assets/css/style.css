@@ -48866,8 +48866,19 @@ footer.bg-dark.angled.upper-start:before {
 
 @media screen and (max-width:768px) {
     .photocard_style{
-        margin-top: 30px;
+        margin: 0px;
         margin-left:30px;
+    }
+    .margin-css{
+        margin-top: 128px;
+        width:60%
+    }
+    .margin-csl{
+        margin-top: 187px;
+        margin-left: 50px;
+    }
+    .margin-csp{
+        margin:50px;
     }
     
 }
@@ -48878,6 +48889,20 @@ footer.bg-dark.angled.upper-start:before {
     }
     .padd {
         padding: 10px;
+    }
+    .margin-css{
+        margin-top: 128px;
+        width: 55%;
+
+    }
+    .margin-csl{
+        margin-top: 187px;
+        margin-left: 50px;
+        width: 60%;
+    }
+    .margin-csp{
+        width:50%;
+        margin:50px
     }
 }
 .upload_card{
@@ -49337,4 +49362,54 @@ footer.bg-dark.angled.upper-start:before {
 }
 .square-image:first-child{
     padding: 5px;
+}
+.canvas-border{
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    transform-origin: right 36%;
+    /* transform: rotateY(-57deg); */
+    transform:
+    perspective(1001px) 
+    rotateX(0deg) 
+    rotateY(-56deg) 
+    rotateZ(0deg);
+    overflow: hidden;
+}
+.canvas-rotate{
+    /* transform-style: preserve-3d;
+    transform-origin: left 50%;
+    transform: rotateY(15deg); */
+    transform:
+    perspective(1001px) 
+    rotateX(0deg) 
+    rotateY(26deg) 
+    rotateZ(0deg);
+    box-shadow: 24px 16px 64px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    
+}
+.border-rotate{
+    /* transform-style: preserve-3d;
+    transform-origin: left 50%;
+    transform: rotateY(15deg); */
+    transform:
+    perspective(1001px) 
+    rotateX(0deg) 
+    rotateY(26deg) 
+    rotateZ(0deg);
+    box-shadow: 24px 16px 64px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    
+     /* position: absolute;
+     top: 0;
+     left: -20px;
+     width: 20px;
+     height: 100%;
+     transform-origin: right 50%;
+     transform: rotateY(-70deg);
+     overflow: hidden; */
+ 
 }

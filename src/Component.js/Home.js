@@ -66,7 +66,7 @@ export default function Home() {
           {/*/column */}
           <div className="col-md-6 col-xl-4">
             <div className="card shadow-lg card-border-bottom border-soft-orange ">
-                <Link to="/canavsframe">
+                <Link to="/canavstype">
               <div className="card-body frame_card ">
                 <img src="\assets\img\photos\canvas-622.jpg" className='image_width' alt="img"/>
                 <br/><h4> Canvas</h4>

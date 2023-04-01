@@ -11,6 +11,7 @@ import Potratecollege from './Component.js/Potratecollege';
 import Squareframes from './Component.js/Squareframes';
 import Squarecollege from './Component.js/Squarecollege';
 import Canvasframe from './Component.js/Canvasframe';
+import Canvastype from './Component.js/Canvastype';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route path='potratecollege' element={<Potratecollege/>} />
           <Route path='squareframes' element={<Squareframes/>} />
           <Route path='squarecollege/:framesize' element={<Squarecollege/>} />
-          <Route path='canavsframe' element={<Canvasframe/>} />
+          <Route path='canavsframe/:frametype' element={<Canvasframe/>} />
+          <Route path='canavstype' element={<Canvastype/>} />
 
           
         </Route>

@@ -4,9 +4,10 @@ import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { apikey } from './filestackapikey';
 export default function Mainframe() {
   const [uploaded_images, setuploaded_images] = useState([]);
-  var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
+  var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [framematerial,setframematerial]=useState("CLASSIC")
   useEffect(() => {

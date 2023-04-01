@@ -4,10 +4,11 @@ import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { apikey } from './filestackapikey';
 
 export default function Collegeframes() {
     const [uploaded_images, setuploaded_images] = useState([]);
-  var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
+  var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("Black")
   

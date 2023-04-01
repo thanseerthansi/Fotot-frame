@@ -2,28 +2,33 @@ import React, { useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { apikey } from './filestackapikey';
 
 export default function Canvasframe() {
     const [uploaded_images, setuploaded_images] = useState([]);
-  var client = filestack.init("AVVeQEjIOS36URjpO3geuz");
-  const [papervalue,setpapervalue]=useState("MATTE")
+  var client = filestack.init(apikey);
+  const [framecanvas,setframecanvas]=useState(false)
   const [frame,setframe]=useState("Black")
-  
+  let params = useParams()
+  let frametype = params.frametype
+  console.log("frametype",frametype)
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
   }, [])
  
-  console.log("uploadeimage", uploaded_images)
-
+  // console.log("frame canvas", framecanvas)
+ 
+  // console.log("rtio",ratio)
   const Upload_Product_Image = () => {
     const options = {
       fromSources: ["local_file_system", "instagram", "facebook"],
       accept: ["image/*"],
       transformations: {
+        
         crop: {
-          aspectRatio:3/2,
+          aspectRatio:frametype==="landscape"?3/2:frametype==="potrate"?2/3:1/1,
           force: true,
         },
       },
@@ -51,19 +56,33 @@ export default function Canvasframe() {
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
         <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
-          <h4>Drag & reorder images</h4>
+          
           </div>
-        <div className="overflowbar " >
-          
-          
-            {uploaded_images.length? 
-            <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto"}:uploaded_images.length===3?{width:"780px",height:"200px"}:{width:"1049px",height:"200px"}}   >
-
-              
+        <div className="overflowbar m-auto" >       
+            {uploaded_images.length? <>
+            {framecanvas?  <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{margin:"auto"}}  >
             {uploaded_images.length?uploaded_images.map((itm,k)=>(               
-                <img src={itm} alt="img" className='image-lcp1' style={{width:"47.2%",height:"100%"}}    />     
+                <img src={itm} alt="img" className='' style={{width:"200px"}}    />     
             )):null}
-            </div>  
+            </div>
+            :
+            <>
+            {uploaded_images.length?uploaded_images.map((itm,k)=>( 
+              <div className=" margin-css m-auto" >            
+              <div className=' ' >             
+              <div className='canvas-rotate '>
+                <img src={itm} alt="img" style={{width:"400px"}}   />   
+                <div className='canvas-border '>
+                  
+                <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
+                </div>
+              </div>
+              </div> 
+        
+          </div>   
+              )):null}
+              </>  }</>
+            
             :<div>
                 <p>No Images Selected</p>
                 <div className='col-6 col-md-3'>
@@ -84,16 +103,16 @@ export default function Canvasframe() {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <h3 className="mt-4  ">Mini Frames</h3>
+          <h3 className="mt-4  ">Canvas</h3>
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
           <div className='line-break'/>
-              <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
+              {/* <label className="ps-0"><strong className="text-dark">Streched</strong></label><br/>               */}
               <div className="switch-field ">
-              <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("MATTE"):""} value="true" defaultChecked/>
-              <label className='label1' htmlFor="radio-one">MATTE</label>
-              <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
-              <label className='label2' htmlFor="radio-two">GLOSS</label>
+              <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(false):""} value="true" defaultChecked/>
+              <label className='label1' htmlFor="radio-one">Streched</label>
+              <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(true):""} defaultValue="GLOSS" />
+              <label className='label2' htmlFor="radio-two">Framed</label>
             </div>
             <br/>
             <div className='line-break'/>
