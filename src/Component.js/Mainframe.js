@@ -13,6 +13,15 @@ export default function Mainframe() {
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+      // return "";
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
   }, [])
   console.log("papervalue", papervalue)
   console.log("framematerial", framematerial)

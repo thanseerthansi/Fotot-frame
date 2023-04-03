@@ -17,7 +17,7 @@ export default function Canvastype() {
             
             <div  className='col-12 col-md-4 '>
             <div className=" margin-csl"  >
-                <Link to="/canavsframe/landscape">
+                <Link to={{pathname: "/canavsframe"}} state={{string: "landscape"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
                 <img src="\assets\img\photos\demo-landscape2.jpg" alt="img" style={{width:"100%"}}   />   
@@ -33,7 +33,7 @@ export default function Canvastype() {
             </div>  
             <div  className='col-12 col-md-4 '>
             <div className=" margin-csp"  >
-                <Link to="/canavsframe/potrate">
+                <Link  to={{pathname: "/canavsframe"}} state={{string: "potrate"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
                 <img src="\assets\img\photos\demo-portrait2.jpg" alt="img" style={{width:"100%"}}   />   
@@ -47,7 +47,7 @@ export default function Canvastype() {
             </div>  
             <div  className='col-12 col-md-4 '>
             <div className=" margin-css" >
-                <Link to="/canavsframe/square">
+                <Link  to={{pathname: "/canavsframe"}} state={{string: "square"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
                 <img src="\assets\img\photos\demo-square2.jpg" alt="img" style={{width:"100%"}}   />   

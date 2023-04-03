@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
-import { RxCross2 } from "react-icons/rx";
+import { GrPowerReset } from "react-icons/gr";
 import { FaUpload } from "react-icons/fa";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { apikey } from './filestackapikey';
 
 export default function Canvasframe() {
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [framecanvas,setframecanvas]=useState(false)
-  const [frame,setframe]=useState("Black")
-  let params = useParams()
-  let frametype = params.frametype
-  console.log("frametype",frametype)
+  const [frame,setframe]=useState('')
+  let location = useLocation();
+  console.log("satae",location.state.string)
+  // let params = useParams()
+  // let frametype = params.frametype
+  let frametype = location.state.string
+
+  // console.log("setframe",frame?"ok":"not")
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
+    // to prevent reload of page 
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+      // return "";
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
   }, [])
  
   // console.log("frame canvas", framecanvas)
@@ -60,9 +74,9 @@ export default function Canvasframe() {
           </div>
         <div className="overflowbar m-auto" >       
             {uploaded_images.length? <>
-            {framecanvas?  <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{margin:"auto"}}  >
+            {framecanvas?  <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{width:"416px",margin:"auto"}} >
             {uploaded_images.length?uploaded_images.map((itm,k)=>(               
-                <img src={itm} alt="img" className='' style={{width:"200px"}}    />     
+                <img src={itm} alt="img" className='' style={{width:"400px"}}    />     
             )):null}
             </div>
             :
@@ -71,7 +85,7 @@ export default function Canvasframe() {
               <div className=" margin-css m-auto" >            
               <div className=' ' >             
               <div className='canvas-rotate '>
-                <img src={itm} alt="img" style={{width:"400px"}}   />   
+                <img src={itm} alt="img" style={{width:"400px "}}   />   
                 <div className='canvas-border '>
                   
                 <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
@@ -97,6 +111,7 @@ export default function Canvasframe() {
         </div>
         </div>}     
         </div>
+        <div className='text-center mt-5' style={uploaded_images.length?{display:'block'}:{display:'none'}}><span onClick={()=>setuploaded_images([]) & Upload_Product_Image()} className=' reset-link'><GrPowerReset color="white" /> reset image</span></div>
         {/* <img src="\assets\img\photos\collage-622.jpg" width={150} height={150} alt="img" /> */}
        </div>       
         </div> 
@@ -109,16 +124,17 @@ export default function Canvasframe() {
           <div className='line-break'/>
               {/* <label className="ps-0"><strong className="text-dark">Streched</strong></label><br/>               */}
               <div className="switch-field ">
-              <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(false):""} value="true" defaultChecked/>
+              <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(false) & setframe(''):""} value="true" defaultChecked/>
               <label className='label1' htmlFor="radio-one">Streched</label>
-              <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(true):""} defaultValue="GLOSS" />
+              <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(true)&setframe("Black"):""} defaultValue="GLOSS" />
               <label className='label2' htmlFor="radio-two">Framed</label>
             </div>
             <br/>
+            
+            <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
             <div className='line-break'/>
-            <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex'>
+              <div className='d-flex overflowbar'>
               <div className='ps-2'>
                <img className='frameimage ' style={frame==="Black"?{border:"2px solid black"}:{}} onClick={()=>setframe("Black")} src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
               </div>
@@ -132,17 +148,32 @@ export default function Canvasframe() {
             </div>
                 
                 <div className='line-break'/>
-                  <div className='row'>
+                <div className='mb-3'>
+              <label className='ps-0 mb-2'><strong className='text-dark'>Frame Size</strong></label><br/>
+              <div className='form-select-wrapper'>
+              <select className="form-select form-select-md ">
+                    <option value={"45 x 30 cm"}  >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
+                    <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
+                    <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
+                    
+                    
+                   
+                  </select>
+              
+              
+              </div>
+            </div>
+                  {/* <div className='row'>
                     <div className='col-6'>
-                    <label className="ps-0"><strong className="text-dark">Size </strong></label>
+                    <label className="ps-0"><strong className="text-dark"> Size </strong></label>
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
                     <p className="price">89.5cm x 22cm</p>
                   </span>
                     </div>
-                  </div>
-                  <div className='row'>
+                  </div> */}
+                  {/* <div className='row'>
                     <div className='col-6'>
                     <label className="ps-0"><strong className="text-dark">Price </strong></label>
                     </div>
@@ -151,7 +182,7 @@ export default function Canvasframe() {
                     <p className="price"><span style={{fontSize:"80%"}}>AED</span> 10</p>
                   </span>
                     </div>
-                  </div>
+                  </div> */}
                   
           </div>
           <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>

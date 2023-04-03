@@ -12,6 +12,8 @@ import Squareframes from './Component.js/Squareframes';
 import Squarecollege from './Component.js/Squarecollege';
 import Canvasframe from './Component.js/Canvasframe';
 import Canvastype from './Component.js/Canvastype';
+import Carttext from './Component.js/Carttext';
+import Checkout from './Component.js/Checkout';
 
 function App() {
   return (
@@ -26,9 +28,11 @@ function App() {
           <Route path='collegeframe' element={<Collegeframes/>} />
           <Route path='potratecollege' element={<Potratecollege/>} />
           <Route path='squareframes' element={<Squareframes/>} />
-          <Route path='squarecollege/:framesize' element={<Squarecollege/>} />
-          <Route path='canavsframe/:frametype' element={<Canvasframe/>} />
+          <Route path='squarecollege' element={<Squarecollege/>} />
+          <Route path='canavsframe' element={<Canvasframe/>} />
           <Route path='canavstype' element={<Canvastype/>} />
+          <Route path='carttext' element={<Carttext/>} />
+          <Route path='checkout' element={<Checkout/>} />
 
           
         </Route>

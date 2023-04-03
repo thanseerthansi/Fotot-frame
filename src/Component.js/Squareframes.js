@@ -18,7 +18,7 @@ export default function Squareframes() {
            
             <div  className='col-12 col-md-4 '>
             <div className=" margin1-csq" >
-                <Link to="/squarecollege/2">
+                <Link to={{pathname: "/squarecollege"}} state={{number: 2}}>
               <div className='  border-cp ' >
               <div className='d-flex'>
               <div className='image_cs '>
@@ -43,7 +43,7 @@ export default function Squareframes() {
             </div>
             <div  className='col-12 col-md-4 '>
             <div className=" margin2-csq"  >
-                <Link to="/squarecollege/3">
+                <Link to={{pathname: "/squarecollege"}} state={{number: 3}}>
               <div className='  border-cp '  >
               <div className='d-flex'>
               <div className='image_cs '>
@@ -85,7 +85,8 @@ export default function Squareframes() {
             </div>
             <div  className='col-12 col-md-4 '>
             <div className=" margin3-csq"  >
-                <Link to="/squarecollege/4">
+                {/* <Link to="/squarecollege/4" > */}
+                <Link to={{pathname: "/squarecollege"}} state={{number: 4}}>
               <div className='  border-cp ' >
               <div className='d-flex'>
               <div className='image_cs '>

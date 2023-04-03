@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { FaUpload } from "react-icons/fa";
-import { Link, useParams} from 'react-router-dom';
+import { Link, useLocation, useParams} from 'react-router-dom';
 import { ListManager } from 'react-beautiful-dnd-grid';
 import { apikey } from './filestackapikey';
 
 export default function Squarecollege () {
-  const  urlparam  = useParams()
-  let framesize =  urlparam.framesize
+  // const  urlparam  = useParams()
+  // let framesize =  urlparam.framesize
+  let location = useLocation();
+  // console.log("location",location)
+  // console.log("locationstate",location.state.number)
+
+  let framesize=location.state.number
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
@@ -16,6 +21,15 @@ export default function Squarecollege () {
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+      // return "";
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
   }, [])
  
   // console.log("urlparam",framesize)

@@ -14,7 +14,7 @@ export default function Header() {
             <div className="navbar-other ms-auto">
               <ul className="navbar-nav flex-row align-items-center">
                 <li className="nav-item">
-                    <Link className="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info">
+                    <Link className="nav-link" to="/carttext">
                         {/* <i className="uil uil-info-circle" /> */}
                         <BsHandbag size={25}/>
                         </Link>

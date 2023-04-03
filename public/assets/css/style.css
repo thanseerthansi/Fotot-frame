@@ -49385,7 +49385,7 @@ footer.bg-dark.angled.upper-start:before {
     transform:
     perspective(1001px) 
     rotateX(0deg) 
-    rotateY(26deg) 
+    rotateY(6deg) 
     rotateZ(0deg);
     box-shadow: 24px 16px 64px 0 rgba(0, 0, 0, 0.08);
     border-radius: 2px;
@@ -49412,4 +49412,12 @@ footer.bg-dark.angled.upper-start:before {
      transform: rotateY(-70deg);
      overflow: hidden; */
  
+}
+.reset-link{
+    color: blue;
+    cursor: pointer;
+
+}
+.reset-link:hover{
+    color:var(--bs-blue)
 }

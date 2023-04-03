@@ -15,6 +15,15 @@ export default function Collegeframes() {
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = '';
+      // return "";
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
   }, [])
  
   console.log("uploadeimage", uploaded_images)
