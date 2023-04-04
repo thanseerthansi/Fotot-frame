@@ -48870,11 +48870,12 @@ footer.bg-dark.angled.upper-start:before {
         margin-left:30px;
     }
     .margin-css{
-        margin-top: 128px;
-        width:60%
+        margin-top: 20px;
+        width:60%;
+        margin-left: 15%;
     }
     .margin-csl{
-        margin-top: 187px;
+        margin-top: 11%;
         margin-left: 50px;
     }
     .margin-csp{
@@ -48891,18 +48892,18 @@ footer.bg-dark.angled.upper-start:before {
         padding: 10px;
     }
     .margin-css{
-        margin-top: 128px;
+        margin-top: 30%;
         width: 55%;
 
     }
     .margin-csl{
-        margin-top: 187px;
+        margin-top: 46%;
         margin-left: 50px;
         width: 60%;
     }
     .margin-csp{
         width:50%;
-        margin:50px
+        margin:11%;
     }
 }
 .upload_card{
@@ -49420,4 +49421,17 @@ footer.bg-dark.angled.upper-start:before {
 }
 .reset-link:hover{
     color:var(--bs-blue)
+}
+.card_style{
+    height:250px
+    
+}
+.card_style img{
+    /* object-fit: fill; */
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+}
+.project{
+    height:400px;
 }

@@ -42,35 +42,8 @@ export default function Header() {
                     <Link className="nav-link" to="/" >Home</Link>
                     
                   </li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Projects</a>
-                    <div className="dropdown-menu dropdown-lg">
-                      <div className="dropdown-lg-content">
-                        <div>
-                          <h6 className="dropdown-header">Project Pages</h6>
-                          <ul className="list-unstyled">
-                            <li><a className="dropdown-item" href="projects.html">Projects I</a></li>
-                            <li><a className="dropdown-item" href="projects2.html">Projects II</a></li>
-                            <li><a className="dropdown-item" href="projects3.html">Projects III</a></li>
-                            <li><a className="dropdown-item" href="projects4.html">Projects IV</a></li>
-                          </ul>
-                        </div>
-                        {/* /.column */}
-                        <div>
-                          <h6 className="dropdown-header">Single Projects</h6>
-                          <ul className="list-unstyled">
-                            <li><a className="dropdown-item" href="single-project.html">Single Project I</a></li>
-                            <li><a className="dropdown-item" href="single-project2.html">Single Project II</a></li>
-                            <li><a className="dropdown-item" href="single-project3.html">Single Project III</a></li>
-                            <li><a className="dropdown-item" href="single-project4.html">Single Project IV</a></li>
-                          </ul>
-                        </div>
-                        {/* /.column */}
-                      </div>
-                      {/* /auto-column */}
-                    </div>
-                  </li>
-                  <li className="nav-item dropdown">
+                  
+                  {/* <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Blog</a>
                     <ul className="dropdown-menu">
                       <li className="nav-item"><a className="dropdown-item" href="blog.html">Blog without Sidebar</a></li>
@@ -84,103 +57,38 @@ export default function Header() {
                         </ul>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                   <li className="nav-item dropdown dropdown-mega">
-                    <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Blocks</a>
+                    <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Frames</a>
                     <ul className="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
                       <li className="mega-menu-content">
                         <ul className="row row-cols-1 row-cols-lg-6 gx-0 gx-lg-6 gy-lg-4 list-unstyled">
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/about.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block1.svg" alt="img"/></div>
-                              <span>About</span>
-                            </a>
+                          <li className="col"><Link className="dropdown-item"  to="/miniframe">
+                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="\assets\img\photos\miniframes-622.jpg" width={107} alt="img"/></div>
+                              <span>Mini Frame</span>
+                            </Link>
                           </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/blog.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block2.svg" alt="img"/></div>
-                              <span>Blog</span>
-                            </a>
+                          <li className="col"><Link className="dropdown-item" to='/college'>
+                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0"src="\assets\img\photos\collage-622.jpg" width={107} alt="img"/></div>
+                              <span>College</span>
+                            </Link>
                           </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/call-to-action.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block3.svg" alt="img"/></div>
-                              <span>Call to Action</span>
-                            </a>
+                          <li className="col"><Link className="dropdown-item" to='/canavstype'>
+                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="\assets\img\photos\canvas-622.jpg" width={107} alt="img"/></div>
+                              <span>Canvas</span>
+                            </Link>
                           </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/clients.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block4.svg" alt="img"/></div>
-                              <span>Clients</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/contact.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block5.svg" alt="img"/></div>
-                              <span>Contact</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/facts.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block6.svg" alt="img"/></div>
-                              <span>Facts</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/faq.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block7.svg" alt="img"/></div>
-                              <span>FAQ</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/features.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block8.svg" alt="img"/></div>
-                              <span>Features</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/footer.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block9.svg" alt="img"/></div>
-                              <span>Footer</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/hero.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block10.svg" alt="img"/></div>
-                              <span>Hero</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/misc.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block17.svg" alt="img"/></div>
-                              <span>Misc</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/navbar.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block11.svg" alt="img"/></div>
-                              <span>Navbar</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/portfolio.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block12.svg" alt="img"/></div>
-                              <span>Portfolio</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/pricing.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block13.svg" alt="img"/></div>
-                              <span>Pricing</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/process.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block14.svg" alt="img"/></div>
-                              <span>Process</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/team.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block15.svg" alt="img"/></div>
-                              <span>Team</span>
-                            </a>
-                          </li>
-                          <li className="col"><a className="dropdown-item" href="docs/blocks/testimonials.html">
-                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="assets/img/demos/block16.svg" alt="img"/></div>
-                              <span>Testimonials</span>
-                            </a>
-                          </li>
+                         
                         </ul>
                         {/*/.row */}
                       </li>
                       {/*/.mega-menu-content*/}
                     </ul>
                     {/*/.dropdown-menu */}
+                  </li>
+                  <li className="nav-item dropdown">
+                    <Link className="nav-link" to="/shopping" >Paintings</Link>
+                    
                   </li>
                   <li className="nav-item dropdown dropdown-mega">
                     <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Documentation</a>

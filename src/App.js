@@ -14,6 +14,7 @@ import Canvasframe from './Component.js/Canvasframe';
 import Canvastype from './Component.js/Canvastype';
 import Carttext from './Component.js/Carttext';
 import Checkout from './Component.js/Checkout';
+import Shoppinghome from './Shopping.js/Shoppinghome';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='canavstype' element={<Canvastype/>} />
           <Route path='carttext' element={<Carttext/>} />
           <Route path='checkout' element={<Checkout/>} />
+          <Route path='shopping' element={<Shoppinghome/>}/>
 
           
         </Route>
