@@ -134,7 +134,7 @@ const handleOnDragEnd = (result) => {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <h3 className="mt-4  ">Mini Frames</h3>
+          <h3 className="mt-4  ">College</h3>
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
           <div className='line-break'/>

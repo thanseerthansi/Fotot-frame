@@ -15,6 +15,7 @@ import Canvastype from './Component.js/Canvastype';
 import Carttext from './Component.js/Carttext';
 import Checkout from './Component.js/Checkout';
 import Shoppinghome from './Shopping.js/Shoppinghome';
+import Productdetails from './Shopping.js/Productdetails';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='carttext' element={<Carttext/>} />
           <Route path='checkout' element={<Checkout/>} />
           <Route path='shopping' element={<Shoppinghome/>}/>
+          <Route path='productdetails' element={<Productdetails/>}/>
 
           
         </Route>
