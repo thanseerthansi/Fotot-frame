@@ -63,6 +63,11 @@ export default function Header() {
                     <ul className="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
                       <li className="mega-menu-content">
                         <ul className="row row-cols-1 row-cols-lg-6 gx-0 gx-lg-6 gy-lg-4 list-unstyled">
+                          <li className="col"><Link className="dropdown-item"  to="/papertype">
+                              <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="\assets\img\photos\print-ff.jpg" width={107} alt="img"/></div>
+                              <span>Print</span>
+                            </Link>
+                          </li>
                           <li className="col"><Link className="dropdown-item"  to="/miniframe">
                               <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="\assets\img\photos\miniframes-622.jpg" width={107} alt="img"/></div>
                               <span>Mini Frame</span>

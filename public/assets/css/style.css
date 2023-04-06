@@ -49461,3 +49461,6 @@ footer.bg-dark.angled.upper-start:before {
     border-radius: 8px;
     height: 118px;
 }
+.box-shadow{
+    box-shadow: 1px 1px 6px grey;
+}

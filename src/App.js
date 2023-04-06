@@ -16,6 +16,8 @@ import Carttext from './Component.js/Carttext';
 import Checkout from './Component.js/Checkout';
 import Shoppinghome from './Shopping.js/Shoppinghome';
 import Productdetails from './Shopping.js/Productdetails';
+import Papertype from './Component.js/Papertype';
+import Papperprint from './Component.js/Papperprint';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path='checkout' element={<Checkout/>} />
           <Route path='shopping' element={<Shoppinghome/>}/>
           <Route path='productdetails' element={<Productdetails/>}/>
+          <Route path='papertype' element={<Papertype/>}/>
+          <Route path='paperprint' element={<Papperprint/>}/>
 
           
         </Route>

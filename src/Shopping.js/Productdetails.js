@@ -57,6 +57,19 @@ export default function Productdetails() {
                   <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
                   <label className='label2' htmlFor="radio-two">GLOSS</label>
                 </div>
+                <div className='line-break'/>
+                  <label className="ps-0"><strong className="text-dark">Frame Type</strong></label><br/>              
+                  <div className='d-flex'>
+              <div className='ps-2'>
+               <img className='frameimage ' src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
+              </div>
+              <div className='ps-2'>
+               <img className='frameimage'  src="\assets\img\photos\oakH.jpg" width={70} alt="img" />
+              </div>
+              <div className='ps-2'>
+               <img className='frameimage'  src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
+              </div>
+              </div>
                 <br/>
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Frame </strong></label><br/>              
@@ -71,6 +84,7 @@ export default function Productdetails() {
                <img className='frameimage' style={frame==="White"?{border:"2px solid black"}:{}} onClick={()=>setframe("White")} src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
               </div>
               </div>
+                <br/>
                 <br/>
                 <div className='line-break'/>
                   <div className='row'>
