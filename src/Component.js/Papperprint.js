@@ -174,7 +174,7 @@ export default function Papperprint() {
                   </div> */}
                   
           </div>
-          <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="/" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>

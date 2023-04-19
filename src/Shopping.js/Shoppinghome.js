@@ -1,7 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Callaxios from '../Component.js/Callaxios'
 
 export default function Shoppinghome() {
+  const [productdata,setproductdata]=useState([])
+  const [themedata,setthemedata]=useState([])
+  const [orientation,setorientation]=useState('')
+  const [color,setcolor]=useState('')
+  useEffect(() => {
+    Getproduct()
+    Gettheme()
+  }, [])
+  
+  const Getproduct=async()=>{
+    try {
+      let data = await Callaxios("get","product/product/")
+      console.log("data",data)
+      if(data.status===200){
+        setproductdata(data.data)       
+      }
+    } catch (error) {
+      
+    }
+  }
+  const Gettheme =async()=>{
+    try {
+      let data = await Callaxios("get","product/producttheme/")
+      console.log("themedata",data)
+      if (data.status===200){
+        // console.log("data",data.data)
+        setthemedata(data.data)
+      }
+    } catch (error) { 
+      
+      
+    }
+  }
   return (
     <div>
         <div>
@@ -32,176 +66,39 @@ export default function Shoppinghome() {
           {/*/.row */}
           <div className="grid grid-view projects-masonry shop mb-13">
             <div className="row gx-md-8 gy-10 gy-md-13 isotope">
-              <div className="project item col-6 col-md-3 col-xl-3">
+              {productdata.map((itm,k)=>(
+                <div key={k} className="project item col-6 col-md-3 col-xl-3">
                 <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\marilyn.jpg" alt=""/>
+                  <img src={itm.product_image} alt=""/>
                   {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
                   <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
+                  <Link to="/productdetails" className="item-cart"> Add to Cart</Link>
                   {/* <span className="avatar bg-pink text-white w-10 h-10 position-absolute text-uppercase fs-13" style={{top: '1rem', left: '1rem'}}><span>Sale!</span></span> */}
                 </figure>
                 <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
+                  {/* <div className="d-flex flex-row align-items-center justify-content-between mb-2">
                     <div className="post-category text-ash mb-0">Shoes</div>
                     <span className="ratings five" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Nike Air Sneakers</Link></h2>
-                  <p className="price"><del><span className="amount">$55.00</span></del> <ins><span className="amount">$45.00</span></ins></p>
+                  </div> */}
+                  <h6 className="post-title h3 fs-17"><Link to="/productdetails" className="link-dark">{itm.product_name}</Link></h6>
+                  <p className="price">
+                    {/* <del><span className="amount">$55.00</span></del> */}
+                     <ins><span className="amount">{itm.price}</span></ins><b className='aedsize'> AED</b></p>
                 </div>
                 {/* /.post-header */}
               </div>
+              ))}
+              
               {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\mona_lisa_glitch_0_0.jpg" alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Electronics</div>
-                    <span className="ratings four" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Apple Watch</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\new_abstract_dxb_2.jpg"  alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                  {/* <span className="avatar bg-aqua text-white w-10 h-10 position-absolute text-uppercase fs-13" style={{top: '1rem', left: '1rem'}}><span>New!</span></span> */}
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Electronics</div>
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Headphones</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\welcome_to_the_jungle.jpg"  alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Shoes</div>
-                    <span className="ratings three" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Colorful Sneakers</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\marilyn.jpg" alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                  {/* <span className="avatar bg-pink text-white w-10 h-10 position-absolute text-uppercase fs-13" style={{top: '1rem', left: '1rem'}}><span>Sale!</span></span> */}
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Shoes</div>
-                    <span className="ratings five" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Nike Air Sneakers</Link></h2>
-                  <p className="price"><del><span className="amount">$55.00</span></del> <ins><span className="amount">$45.00</span></ins></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\mona_lisa_glitch_0_0.jpg" alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Electronics</div>
-                    <span className="ratings four" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Apple Watch</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\new_abstract_dxb_2.jpg"  alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                  {/* <span className="avatar bg-aqua text-white w-10 h-10 position-absolute text-uppercase fs-13" style={{top: '1rem', left: '1rem'}}><span>New!</span></span> */}
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Electronics</div>
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Headphones</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
-              <div className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
-                  <img src="\assets\img\brands\welcome_to_the_jungle.jpg"  alt=""/>
-                  {/* <a className="item-like" href="/" data-bs-toggle="white-tooltip" title="Add to wishlist"><i className="uil uil-heart" /></a>
-                  <a className="item-view" href="/" data-bs-toggle="white-tooltip" title="Quick view"><i className="uil uil-eye" /></a> */}
-                  <a href="/" className="item-cart"><i className="uil uil-shopping-bag" /> Add to Cart</a>
-                </figure>
-                <div className="post-header">
-                  <div className="d-flex flex-row align-items-center justify-content-between mb-2">
-                    <div className="post-category text-ash mb-0">Shoes</div>
-                    <span className="ratings three" />
-                  </div>
-                  <h2 className="post-title h3 fs-22"><Link to="/productdetails" className="link-dark">Colorful Sneakers</Link></h2>
-                  <p className="price"><span className="amount">$55.00</span></p>
-                </div>
-                {/* /.post-header */}
-              </div>
-              {/* /.item */}
+             
+              
              
             
             </div>
             {/* /.row */}
           </div>
           {/* /.grid */}
-          <nav className="d-flex" aria-label="pagination">
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <a className="page-link" href="/" aria-label="Previous">
-                  <span aria-hidden="true"><i className="uil uil-arrow-left" /></span>
-                </a>
-              </li>
-              <li className="page-item active"><a className="page-link" href="/">1</a></li>
-              <li className="page-item"><a className="page-link" href="/">2</a></li>
-              <li className="page-item"><a className="page-link" href="/">3</a></li>
-              <li className="page-item">
-                <a className="page-link" href="/" aria-label="Next">
-                  <span aria-hidden="true"><i className="uil uil-arrow-right" /></span>
-                </a>
-              </li>
-            </ul>
-            {/* /.pagination */}
-          </nav>
+         {/* pagination */}
           {/* /nav */}
         </div>
         {/* /column */}
@@ -258,24 +155,14 @@ export default function Shoppinghome() {
           </div> */}<div className="widget">
             <h4 className="widget-title mb-3">Theme</h4>
             <div className='row col-12 overflowx-theme'>
-            <div className="form-check  col-6">
-            
-              <input className="form-check-input" type="checkbox" id="xs" defaultChecked />
-              <label className="form-check-label" htmlFor="xs">Abstract</label>
+              {themedata.map((titm,tk)=>(
+                 <div key={tk} className="form-check  col-6">           
+                 <input className="form-check-input" type="checkbox" id="xs"  />
+                 <label className="form-check-label" htmlFor="xs">{titm.theme_name}</label>           
+               </div>
+              ))}
            
-            </div>
-            <div className="form-check  col-6">
-              <input className="form-check-input" type="checkbox" id="s" />
-              <label className="form-check-label" htmlFor="s">Digital</label>
-            </div>
-            <div className="form-check  col-6">
-              <input className="form-check-input" type="checkbox" id="s" />
-              <label className="form-check-label" htmlFor="s">Photography</label>
-            </div>
-            <div className="form-check  col-6">
-              <input className="form-check-input" type="checkbox" id="s" />
-              <label className="form-check-label" htmlFor="s">Architecture</label>
-            </div>
+            
             </div>
             
           </div>
@@ -286,7 +173,7 @@ export default function Shoppinghome() {
             <h4 className="widget-title mb-3">Color</h4>
             <div className='d-flex'>
             <div className=''>
-              <div className='color-body' style={{border:"1px solid",backgroundColor:"blue"}}/> 
+              <div onClick={()=>setcolor()} className='color-body' style={{border:"1px solid",backgroundColor:"blue"}}/> 
             </div>
            
             <div className=''>
@@ -306,7 +193,7 @@ export default function Shoppinghome() {
           <div className="widget">
             <h4 className="widget-title mb-3">Orientation</h4>
             <div className='d-flex'>
-            <div className='ml-left' >
+            <div onClick={()=>setorientation("potrait")} style={orientation==="potrait"?{border:"2px solid #000"}:{}} className='ml-left' >
               <div className='p-2' style={{width:"80px",height:"100px"}}>
               <div className='card border-cp' style={{width:"100%",height:"100%",borderWidth:"3px"}}/>               
                 <div>
@@ -314,7 +201,7 @@ export default function Shoppinghome() {
                   <div className='button-orient'style={{marginLeft:"10px"}}><h6>Potrait</h6></div>
                 </div>               
               </div>
-            <div className='ml-left' style={{border:"2px solid #000"}} >
+            <div onClick={()=>setorientation("landscape")}  className='ml-left' style={orientation==="landscape"?{border:"2px solid #000"}:{}} >
               <div className='' style={{width:"80px",height:"100px",padding:"29px 10px"}}>
               <div className='card border-cp' style={{width:"100%",height:"100%",borderWidth:"3px"}}/>               
                 <div>
@@ -322,7 +209,7 @@ export default function Shoppinghome() {
                   <div className='button-orient ' style={{marginTop: "19px"}}><h6>Landscape</h6></div>
                 </div>               
               </div>
-            <div className='ml-left' >
+            <div onClick={()=>setorientation("square")} style={orientation==="square"?{border:"2px solid #000"}:{}}  className='ml-left' >
               <div className='' style={{width:"80px",height:"100px",padding:"20px 10px"}}>
               <div className='card border-cp' style={{width:"100%",height:"100%",borderWidth:"3px"}}/>               
                 <div>

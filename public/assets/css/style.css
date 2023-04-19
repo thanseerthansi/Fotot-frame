@@ -49464,3 +49464,6 @@ footer.bg-dark.angled.upper-start:before {
 .box-shadow{
     box-shadow: 1px 1px 6px grey;
 }
+.aedsize{
+    font-size: 80%;
+}
