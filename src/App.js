@@ -18,11 +18,13 @@ import Shoppinghome from './Shopping.js/Shoppinghome';
 import Productdetails from './Shopping.js/Productdetails';
 import Papertype from './Component.js/Papertype';
 import Papperprint from './Component.js/Papperprint';
+import Simplecontextprovider from './Component.js/Simplecontext';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+      <Simplecontextprovider>
       <Routes>
         <Route exact path='text' element={<Text/>} />
         <Route path='/' element={<Outlethome/>}>
@@ -45,6 +47,7 @@ function App() {
           
         </Route>
       </Routes>
+      </Simplecontextprovider>
       </BrowserRouter>
     </div>
   );

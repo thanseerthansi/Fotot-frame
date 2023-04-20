@@ -95,72 +95,7 @@ export default function Header() {
                     <Link className="nav-link" to="/shopping" >Paintings</Link>
                     
                   </li>
-                  <li className="nav-item dropdown dropdown-mega">
-                    <a className="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Documentation</a>
-                    <ul className="dropdown-menu mega-menu">
-                      <li className="mega-menu-content">
-                        <div className="row gx-0 gx-lg-3">
-                          <div className="col-lg-4">
-                            <h6 className="dropdown-header">Usage</h6>
-                            <ul className="list-unstyled cc-2 pb-lg-1">
-                              <li><a className="dropdown-item" href="docs/index.html">Get Started</a></li>
-                              <li><a className="dropdown-item" href="docs/forms.html">Forms</a></li>
-                              <li><a className="dropdown-item" href="docs/faq.html">FAQ</a></li>
-                              <li><a className="dropdown-item" href="docs/changelog.html">Changelog</a></li>
-                              <li><a className="dropdown-item" href="docs/credits.html">Credits</a></li>
-                            </ul>
-                            <h6 className="dropdown-header mt-lg-6">Styleguide</h6>
-                            <ul className="list-unstyled cc-2">
-                              <li><a className="dropdown-item" href="docs/styleguide/colors.html">Colors</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/fonts.html">Fonts</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/icons-svg.html">SVG Icons</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/icons-font.html">Font Icons</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/illustrations.html">Illustrations</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/backgrounds.html">Backgrounds</a></li>
-                              <li><a className="dropdown-item" href="docs/styleguide/misc.html">Misc</a></li>
-                            </ul>
-                          </div>
-                          {/*/column */}
-                          <div className="col-lg-8">
-                            <h6 className="dropdown-header">Elements</h6>
-                            <ul className="list-unstyled cc-3">
-                              <li><a className="dropdown-item" href="docs/elements/accordion.html">Accordion</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/alerts.html">Alerts</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/animations.html">Animations</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/avatars.html">Avatars</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/background.html">Background</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/badges.html">Badges</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/buttons.html">Buttons</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/card.html">Card</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/carousel.html">Carousel</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/dividers.html">Dividers</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/form-elements.html">Form Elements</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/image-hover.html">Image Hover</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/image-mask.html">Image Mask</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/lightbox.html">Lightbox</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/player.html">Media Player</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/modal.html">Modal</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/pagination.html">Pagination</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/progressbar.html">Progressbar</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/shadows.html">Shadows</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/shapes.html">Shapes</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/tables.html">Tables</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/tabs.html">Tabs</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/text-animations.html">Text Animations</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/text-highlight.html">Text Highlight</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/tiles.html">Tiles</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/tooltips-popovers.html">Tooltips &amp; Popovers</a></li>
-                              <li><a className="dropdown-item" href="docs/elements/typography.html">Typography</a></li>
-                            </ul>
-                          </div>
-                          {/*/column */}
-                        </div>
-                        {/*/.row */}
-                      </li>
-                      {/*/.mega-menu-content*/}
-                    </ul>
-                    {/*/.dropdown-menu */}
-                  </li>
+                  
                 </ul>
                 {/* /.navbar-nav */}
                 <div className="offcanvas-footer d-lg-none">

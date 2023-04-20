@@ -42,7 +42,7 @@ export default function Home() {
             <div className="card shadow-lg card-border-bottom border-soft-yellow ">
             <Link to="/miniframe" className=''>
               <div className="card-body frame_card ">
-                <img src="public\assets\img\photos\ffmain.jpg" className='image_width' alt="img"/>
+                <img src="\assets\img\photos\miniframes-622.jpg" className='image_width' alt="img"/>
                 <h4>Mini frame</h4>
               </div>
               </Link>

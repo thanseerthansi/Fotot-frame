@@ -1,33 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { apikey } from './filestackapikey';
+import { Simplecontext } from './Simplecontext';
 
 export default function Collegeframes() {
+  const { framedata,Getframe } = useContext(Simplecontext)
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
-  const [frame,setframe]=useState("Black")
-  
+  const [frame,setframe]=useState()
+  const [selectitm,setselectitm]=useState()
+  console.log("selecrt",selectitm)
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = '';
-      // return "";
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-    }
+    // const handleBeforeUnload = (event) => {
+    //   event.preventDefault();
+    //   event.returnValue = '';
+
+    // };
+    // window.addEventListener('beforeunload', handleBeforeUnload);
+    // return () => {
+    //     window.removeEventListener('beforeunload', handleBeforeUnload);
+    // }
   }, [])
  
-  console.log("uploadeimage", uploaded_images)
-
+  
+ 
   const Upload_Product_Image = () => {
     const options = {
       fromSources: ["local_file_system", "instagram", "facebook"],
@@ -79,11 +82,9 @@ const handleOnDragEnd = (result) => {
         <div className='text-center' style={uploaded_images.length?{display:'block'}:{display:'none'}}>
           <h4>Drag & reorder images</h4>
           </div>
-        <div className="overflowbar " >
-          
-          
-            {uploaded_images.length? 
-            <div className={frame==="Black"?' d-flex border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto"}:uploaded_images.length===3?{width:"780px",height:"200px"}:{width:"1049px",height:"200px"}}   >
+        <div className="overflowbar " >  
+            {uploaded_images.length ? 
+            <div className={"d-flex border-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:uploaded_images.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="uploaded-images" direction='horizontal'>
         {(provided) => (
@@ -150,18 +151,13 @@ const handleOnDragEnd = (result) => {
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
               <div className='d-flex'>
-              <div className='ps-2'>
-               <img className='frameimage ' style={frame==="Black"?{border:"2px solid black"}:{}} onClick={()=>setframe("Black")} src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
+                {framedata.map((itm,k)=>(
+                  <div key={k} className='ps-2'>
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                 </div>
+                ))}              
               </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="Natural oak"?{border:"2px solid black"}:{}} onClick={()=>setframe("Natural oak")} src="\assets\img\photos\oakH.jpg" width={70} alt="img" />
-              </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="White"?{border:"2px solid black"}:{}} onClick={()=>setframe("White")} src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
-              </div>
-              </div>
-            </div>
-                
+            </div>              
                 <div className='line-break'/>
                   <div className='row'>
                     <div className='col-6'>

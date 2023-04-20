@@ -49031,7 +49031,7 @@ footer.bg-dark.angled.upper-start:before {
 .border-cp{
     border-style: solid;
     border-width: 8px;
-    border-image: url(/assets/img/photos/black-frame.png) 1%  stretch repeat;
+    /* border-image: url(/assets/img/photos/black-frame.png) 1%  stretch repeat; */
     
 }
 .border-oak-cp{
@@ -49043,7 +49043,7 @@ footer.bg-dark.angled.upper-start:before {
 .border-white-cp{
     border-style: solid;
     border-width: 8px;
-    border-image: url(/assets/img/photos/white-frame.png) 1%  stretch repeat;
+    /* border-image: url(/assets/img/photos/white-frame.png) 1%  stretch repeat; */
 }
 .image_cp{
     padding-top: 10px;
@@ -49310,7 +49310,7 @@ footer.bg-dark.angled.upper-start:before {
     cursor: pointer;
   }
 .framebox-shadow{
-    box-shadow: 1px 5px 30px grey
+    box-shadow: 1px 5px 30px  rgba(0, 0, 0, 0.2)
 }
 .overflowbar{
     /* -ms-overflow-style: none;  

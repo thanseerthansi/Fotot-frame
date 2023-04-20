@@ -7,6 +7,8 @@ export default function Shoppinghome() {
   const [themedata,setthemedata]=useState([])
   const [orientation,setorientation]=useState('')
   const [color,setcolor]=useState('')
+  const [themesearch,setthemesearch]=useState([])
+  console.log("listtheme",themesearch)
   useEffect(() => {
     Getproduct()
     Gettheme()
@@ -35,6 +37,31 @@ export default function Shoppinghome() {
       
       
     }
+  }
+  const handlecheckadd=(itmid)=>{
+      setthemesearch([...themesearch,itmid])  
+  }
+  const handlecheckdelete=(itmid)=>{
+    const newItems = themesearch.filter(item => item !== itmid);
+    setthemesearch(newItems);
+  }
+  const Searchhandling=()=>{
+    let product = productdata
+    let data = productdata
+    console.log("themesearch",themesearch)
+    if(themesearch.length){
+      let filter_data = data.filter(t =>t.theme.some(th => themesearch.includes(th.id)))
+      // console.log("filter",filter_data)
+      product = filter_data
+    }
+    if (orientation){
+      let filter_data = product.filter(t=>t.orientation.toLowerCase().includes(orientation.toLowerCase()))
+      product = filter_data
+    }
+    if (color){
+      // let filter_data = product.filter
+    }
+    return product
   }
   return (
     <div>
@@ -66,7 +93,7 @@ export default function Shoppinghome() {
           {/*/.row */}
           <div className="grid grid-view projects-masonry shop mb-13">
             <div className="row gx-md-8 gy-10 gy-md-13 isotope">
-              {productdata.map((itm,k)=>(
+              {Searchhandling().map((itm,k)=>(
                 <div key={k} className="project item col-6 col-md-3 col-xl-3">
                 <figure className="rounded mb-6 card_style">
                   <img src={itm.product_image} alt=""/>
@@ -102,7 +129,7 @@ export default function Shoppinghome() {
           {/* /nav */}
         </div>
         {/* /column */}
-        <aside className="col-lg-3 sidebar">
+        <aside className="col-lg-3 sidebar" style={{paddingLeft:"0px"}}>
           {/* <div className="widget mt-1">
             <h4 className="widget-title mb-3">Theme</h4>
             <ul className="list-unstyled ps-0">
@@ -157,7 +184,7 @@ export default function Shoppinghome() {
             <div className='row col-12 overflowx-theme'>
               {themedata.map((titm,tk)=>(
                  <div key={tk} className="form-check  col-6">           
-                 <input className="form-check-input" type="checkbox" id="xs"  />
+                 <input onChange={(e)=>e.target.checked? handlecheckadd(titm.id):handlecheckdelete(titm.id)} className="form-check-input" type="checkbox" id="xs"  />
                  <label className="form-check-label" htmlFor="xs">{titm.theme_name}</label>           
                </div>
               ))}
@@ -191,7 +218,7 @@ export default function Shoppinghome() {
           {/* /.widget */}
           <div className='line-break'/>
           <div className="widget">
-            <h4 className="widget-title mb-3">Orientation</h4>
+            <h4 className="widget-title mb-3">Orientation <button className='btn btn-sm btn-dark mt-1' style={{marginLeft:"60px"}} onClick={()=>setorientation('')}>Clear</button></h4>
             <div className='d-flex'>
             <div onClick={()=>setorientation("potrait")} style={orientation==="potrait"?{border:"2px solid #000"}:{}} className='ml-left' >
               <div className='p-2' style={{width:"80px",height:"100px"}}>
