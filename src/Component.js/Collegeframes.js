@@ -14,6 +14,7 @@ export default function Collegeframes() {
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState()
   const [selectitm,setselectitm]=useState()
+  const [framesize,setframesize]=useState()
   console.log("selecrt",selectitm)
   useEffect(() => {
     Upload_Product_Image()
@@ -72,6 +73,20 @@ const handleOnDragEnd = (result) => {
 
   setuploaded_images(newItems);
 };
+  const framesizehandler=()=>{
+    let size 
+    if (uploaded_images.length===2){
+      // setframesize("48.5cm x 22cm")
+      size="48.5cm x 22cm"
+    }else if (uploaded_images.length===3) {
+      // setframesize("69cm x 22cm") 
+      size = "69cm x 22cm"
+    } else if(uploaded_images.length===4) {
+      // setframesize("89.5cm x 22cm") 
+      size = "89.5cm x 22cm"
+    }
+    return size
+  }
   return (
     <div>
         <div className=''>
@@ -165,7 +180,7 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price">89.5cm x 22cm</p>
+                    <p className="price">{framesizehandler()}</p>
                   </span>
                     </div>
                   </div>
