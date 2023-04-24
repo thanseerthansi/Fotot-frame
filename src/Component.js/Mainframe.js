@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // import * as filestack from 'filestack-js';
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { apikey } from './filestackapikey';
+import { Simplecontext } from './Simplecontext';
+import Callaxios from './Callaxios';
 export default function Mainframe() {
+  const { framepricedata,Getframeprice } = useContext(Simplecontext)
   const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
@@ -58,6 +61,36 @@ export default function Mainframe() {
     console.log("imagelist",imagelist)
     setuploaded_images(()=>[...imagelist])
   }
+  const handlerprice=()=>{
+    let data = framepricedata.filter(t=>t.frame==="miniframe" )
+    .filter(t=>t.price.split("-")[0]==="1")
+    // console.log("datdprice",data)
+    if (data.length){
+      // console.log("datdprice",data)
+      
+      return data[0].price
+    }
+    return null
+  }
+  const Postorder=async(e)=>{
+    e.preventDefault()
+    try {
+      let datalist={
+
+      }
+      let data = await Callaxios("post","order/orders/",datalist)
+
+    } catch (error) {
+      
+    }
+  }
+  const addtocart =()=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+  } 
   return (
     <div>
       <div className=''>
@@ -122,11 +155,21 @@ export default function Mainframe() {
                 <div className='line-break'/>
                   <div className='row'>
                     <div className='col-8'>
+                    <label className="ps-0"><strong className="text-dark">Size</strong></label>
+                    </div>
+                    <div className='col-4'>
+                    <span className="pe-0 text-start">
+                    <p className="price">{uploaded_images.length? framepricedata? handlerprice().split('-')[1] :null:null}</p>
+                  </span>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-8'>
                     <label className="ps-0"><strong className="text-dark">Price for {uploaded_images.length}</strong></label>
                     </div>
                     <div className='col-4'>
                     <span className="pe-0 text-start">
-                    <p className="price">$10</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice().split('-')[2] * uploaded_images.length:null:null}<span className='aedsize'>AED</span></p>
                   </span>
                     </div>
                   </div>
