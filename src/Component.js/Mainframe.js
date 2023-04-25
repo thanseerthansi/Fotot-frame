@@ -13,6 +13,7 @@ export default function Mainframe() {
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [framematerial,setframematerial]=useState("CLASSIC")
+  console.log("uploaded images",uploaded_images)
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
@@ -84,9 +85,24 @@ export default function Mainframe() {
       
     }
   }
-  const addtocart =()=>{
+  const addtocart =(pricetag)=>{
     try {
-      
+      let cart_list = []
+      let body = {
+        total_price : pricetag.split('-')[2] * uploaded_images.length,
+        image_url :uploaded_images,
+        orientation :"square",
+        size :pricetag.split('-')[1],
+        // product_type :"",
+        product_name:"Mini Frame",
+        frame_type :"",
+        // frame_material : "",
+        frame :"",
+        // mount :"",
+        // quantity :"",
+        vat :"",
+        shipping :"",
+      }
     } catch (error) {
       
     }
@@ -175,7 +191,7 @@ export default function Mainframe() {
                   </div>
                   
           </div>
-          <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="#" onClick={()=>addtocart(handlerprice())} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>
