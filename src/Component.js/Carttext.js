@@ -1,11 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import Callaxios from './Callaxios';
 export default function Carttext() {
+  const [cartdata,setcartdata]=useState([])
+  const [delivery,setdelivery]=useState('')
+  // console.log("cartdaatlistbefore",cartdata)
     useEffect(() => {
-        window.scrollTo(0, 0);
+      GetCart()
+      Getshipping()
+      window.scrollTo(0, 0);
+     
     }, [])
+  const GetCart=()=>{
+    let cart_list
+    if(window.localStorage.getItem('ffcart')){
+      cart_list = window.localStorage.getItem('ffcart')     
+      if (cart_list.length){
+        // console.log("cart",cart_list)
+        cart_list = JSON.parse(cart_list)   
+        // console.log("cart",cart_list)  
+        setcartdata(cart_list)
+      }
+    }
     
+  }
+  const Getshipping=async()=>{
+    try {
+      let data = await Callaxios("get","product/delivery/")
+      console.log("delsi",data)
+      if (data.status===200){
+        setdelivery(data.data[0].delivery_charge)
+      }
+    } catch (error) {
+      
+    }
+  }
+  const removecarthandler=(ck)=>{
+    // console.log("cartdata",cartdata)
+    let c_list =cartdata.filter((number, index) => index !== ck)
+    // console.log("removedata",c_list)
+    setcartdata(c_list)
+    window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+  }
   return (
     <div>
         <div>
@@ -31,14 +68,15 @@ export default function Carttext() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {cartdata.length?cartdata.map((citm,ck)=>(
+                <tr key={ck}>
                   <td className="option text-start d-flex flex-row align-items-center ps-0">
-                    <figure className="rounded w-17"><a href="shop-product.html"><img src="\assets\img\photos\canvas.png"  alt="" /></a></figure>
+                    <figure className="rounded w-17"><a href="shop-product.html"><img src={citm.frame_image} alt="" /></a></figure>
                     <div className="w-100 ms-4">
-                      <h3 className="post-title h6 lh-xs mb-1"><a href="shop-product.html" className="link-dark">potrate Canvas</a></h3>
-                      <div className="small">Papper Type: Matte </div>
-                      <div className="small">Size: 45 x 30 cm</div>
-                      <div className="small">Orientation: Landscape</div>
+                      <h3 className="post-title h6 lh-xs mb-1"><a href="shop-product.html" className="link-dark">{citm.product_name} </a></h3>
+                      <div className="small">Papper Type: {citm.papper} </div>
+                      <div className="small">Size: {citm.size}</div>
+                      <div className="small">Orientation: {citm.orientation}</div>
                     </div>
                   </td>
                   {/* <td>
@@ -46,13 +84,13 @@ export default function Carttext() {
                   </td> */}
                  
                   <td>
-                    <p className="price"><span className="amount">AED 45.99</span></p>
+                    <p className="price"><span className="amount">AED {citm.total_price}</span></p>
                   </td>
                   <td className="pe-0">
-                    <RiDeleteBin6Fill/>
+                    <RiDeleteBin6Fill className='pointerb'onClick={()=>removecarthandler(ck)} />
                   </td>
                 </tr>
-                
+                )) : <tr><td>Your Cart is Empty!</td></tr>}
               </tbody>
             </table>
           </div>
@@ -83,25 +121,25 @@ export default function Carttext() {
                 <tr>
                   <td className="ps-0"><strong className="text-dark">Subtotal</strong></td>
                   <td className="pe-0 text-end">
-                    <p className="price">$135.99</p>
+                    <p className="price">{cartdata?cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0):null}<span className='aedsize'> AED</span></p>
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td className="ps-0"><strong className="text-dark">Discount (5%)</strong></td>
                   <td className="pe-0 text-end">
                     <p className="price text-red">-$6.8</p>
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td className="ps-0"><strong className="text-dark">Shipping</strong></td>
                   <td className="pe-0 text-end">
-                    <p className="price">$10</p>
+                    <p className="price">{delivery}<span className='aedsize'> AED</span></p>
                   </td>
                 </tr>
                 <tr>
                   <td className="ps-0"><strong className="text-dark">Grand Total</strong></td>
                   <td className="pe-0 text-end">
-                    <p className="price text-dark fw-bold">$152.79</p>
+                    <p className="price text-dark fw-bold">{cartdata?cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery:null}<span className='aedsize'> AED</span></p>
                   </td>
                 </tr>
               </tbody>

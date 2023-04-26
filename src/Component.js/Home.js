@@ -12,7 +12,7 @@ export default function Home() {
   
   return (
     <div>
-        
+         
     <section className="wrapper bg-soft-primary">
       <div className="container pt-10 pb-15 pt-md-14 pb-md-20">
         <div className="row gx-lg-8 gx-xl-12 gy-10 mb-5 align-items-center">

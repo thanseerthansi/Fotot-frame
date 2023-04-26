@@ -49470,3 +49470,9 @@ footer.bg-dark.angled.upper-start:before {
 .aedsize{
     font-size: 80%;
 }
+.pointerb{
+    cursor: pointer;
+}
+.pointerb:hover{
+    color: #8f0000;
+}

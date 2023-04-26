@@ -3,17 +3,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { apikey } from './filestackapikey';
 import { Simplecontext } from './Simplecontext';
 import Callaxios from './Callaxios';
 export default function Mainframe() {
-  const { framepricedata,Getframeprice } = useContext(Simplecontext)
+  const { framepricedata,Getframeprice,framedata } = useContext(Simplecontext)
   const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [framematerial,setframematerial]=useState("CLASSIC")
-  console.log("uploaded images",uploaded_images)
+  // console.log("uploaded images",uploaded_images)
+  let navigate = useNavigate();
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
@@ -27,8 +28,8 @@ export default function Mainframe() {
         window.removeEventListener('beforeunload', handleBeforeUnload);
     }
   }, [])
-  console.log("papervalue", papervalue)
-  console.log("framematerial", framematerial)
+  // console.log("papervalue", papervalue)
+  // console.log("framematerial", framematerial)
   const Upload_Product_Image = () => {
     const options = {
       fromSources: ["local_file_system", "instagram", "facebook"],
@@ -59,10 +60,11 @@ export default function Mainframe() {
   const removeimage =(k)=>{
     let imagelist = uploaded_images
     imagelist.splice(k)
-    console.log("imagelist",imagelist)
+    // console.log("imagelist",imagelist)
     setuploaded_images(()=>[...imagelist])
   }
   const handlerprice=()=>{
+   
     let data = framepricedata.filter(t=>t.frame==="miniframe" )
     .filter(t=>t.price.split("-")[0]==="1")
     // console.log("datdprice",data)
@@ -94,17 +96,27 @@ export default function Mainframe() {
         orientation :"square",
         size :pricetag.split('-')[1],
         // product_type :"",
+        frame_look:framematerial,
         product_name:"Mini Frame",
         frame_type :"",
-        // frame_material : "",
+        frame_image :"/assets/img/photos/canvas.png",
         frame :"",
-        // mount :"",
-        // quantity :"",
+        papper :papervalue,
+        quantity :1,
         vat :"",
         shipping :"",
       }
+      if(window.localStorage.getItem('ffcart')){
+        cart_list = window.localStorage.getItem('ffcart')
+      }
+      if (cart_list.length){
+        cart_list = JSON.parse(cart_list)     
+      }
+      let c_list = cart_list.concat(body)  
+      window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+      return navigate('/carttext')
     } catch (error) {
-      
+      console.log(error)
     }
   } 
   return (
@@ -162,9 +174,9 @@ export default function Mainframe() {
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Frame Material</strong></label><br/>              
                  <div className="switch-field2 ">
-                  <input   value="CLASSIC" />
+                  <input   defaultValue="CLASSIC" />
                   <label className='label1' onClick={()=>setframematerial("CLASSIC")}  style={framematerial==="CLASSIC"?{backgroundColor: "#111111",boxShadow: "none", color: "white"}:{}} >CLASSIC LOOK</label>
-                  <input     value="MODERN" />
+                  <input     defaultValue="MODERN" />
                   <label className='label2' onClick={()=>setframematerial("MODERN")} style={framematerial==="MODERN"?{backgroundColor: "#111111",boxShadow: "none", color: "white"}:{}} >MODERN LOOK</label>
                 </div>
                 <br/>
