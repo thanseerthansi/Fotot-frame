@@ -233,7 +233,41 @@ export default function Carttext() {
       />
     </div>
             </div>
-        :null}
+        :selectitm.product_name==="Canvas"?
+        <>
+            {selectitm.frame? 
+             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
+                <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
+            )):null}
+            </div>
+            :
+            <>
+            {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>( 
+              <div className=" margin-css m-auto" >            
+              <div className=' ' >             
+              <div className='canvas-rotate '>
+                <img src={itm} alt="img" style={{width:"250px "}}   />   
+                <div className='canvas-border '>
+                  
+                <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
+                </div>
+              </div>
+              </div> 
+        
+          </div>   
+              )):null}
+              </>  }</>
+    :selectitm.product_name==="Print"?<>
+    {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
+      <div key={k} className='  ' >             
+      <div className='box-shadow p-1 'style={{width:"50%",margin:"auto"}}>
+        <img src={itm} alt="img" style={{width:"100%"}}   />   
+       
+      </div>
+      </div>    
+ )):null}</>
+    :null}
         
         
        

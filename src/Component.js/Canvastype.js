@@ -33,7 +33,7 @@ export default function Canvastype() {
             </div>  
             <div  className='col-12 col-md-4 '>
             <div className=" margin-csp"  >
-                <Link  to={{pathname: "/canavsframe"}} state={{string: "potrate"}}>
+                <Link  to={{pathname: "/canavsframe"}} state={{string: "portait"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
                 <img src="\assets\img\photos\demo-portrait2.jpg" alt="img" style={{width:"100%"}}   />   

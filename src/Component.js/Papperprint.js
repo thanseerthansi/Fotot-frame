@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { GrPowerReset } from "react-icons/gr";
 import { FaUpload } from "react-icons/fa";
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { apikey } from './filestackapikey';
-
+import { Simplecontext } from './Simplecontext';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
 export default function Papperprint() {
-    const [uploaded_images, setuploaded_images] = useState([]);
+  const { framedata,Getframe,framepricedata } = useContext(Simplecontext)
+  const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState('')
+  const [selectitm,setselectitm]=useState('')
+  const [pricelist,setpricelist]=useState('')
   let location = useLocation();
+  let navigate = useNavigate();
   console.log("satae",location.state.string)
   // let params = useParams()
   // let frametype = params.frametype
@@ -31,7 +37,14 @@ export default function Papperprint() {
         window.removeEventListener('beforeunload', handleBeforeUnload);
     }
   }, [])
- 
+  const notify = (msg) => toast.success(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+const notifyerror = (msg) => toast.error(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
   // console.log("frame canvas", framecanvas)
  
   // console.log("rtio",ratio)
@@ -42,7 +55,7 @@ export default function Papperprint() {
       transformations: {
         
         crop: {
-          aspectRatio:frametype==="landscape"?3/2:frametype==="potrate"?2/3:1/1,
+          aspectRatio:frametype==="landscape"?3/2:frametype==="portait"?2/3:1/1,
           force: true,
         },
       },
@@ -61,11 +74,57 @@ export default function Papperprint() {
     };
     client.picker(options).open();
   };
+  const handlerprice=()=>{
+   
+    let data = framepricedata.filter(t=>t.frame==="print" )
+    .filter(t=>t.orientation===frametype)
+    
+    // console.log("datdprice",data)
+    if (data.length){
+      // console.log("datdprice",data)
+      
+      return data[0].price
+    }
+    return null
+  }
+  const addtocart =(pricetag)=>{
+    try {
+      let cart_list = []
+      let body = {
+        total_price : pricetag.split('-')[2] ,
+        image_url :uploaded_images,
+        orientation :frametype,
+        size :pricetag.split('-')[1],
+        // product_type :"",
+        frame_look:"",
+        product_name:"Print",
+        frame_type :"",
+        frame_image :"/assets/img/photos/print.png",
+        frame :frame?selectitm:"",
+        papper :papervalue,
+        quantity :1,
+        vat :"",
+        shipping :"",
+      }
+      if(window.localStorage.getItem('ffcart')){
+        cart_list = window.localStorage.getItem('ffcart')
+      }
+      if (cart_list.length){
+        cart_list = JSON.parse(cart_list)     
+      }
+      let c_list = cart_list.concat(body)  
+      window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+      return navigate('/carttext')
+    } catch (error) {
+      console.log(error)
+    }
+  } 
 
   return (
     <div>
         <div className=''>
         <div className='row padd' >
+        <ToastContainer/> 
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
@@ -76,7 +135,7 @@ export default function Papperprint() {
             {uploaded_images.length? <>
             {/* <div className="box-shadow p-1" style={{width:"410px",margin:"auto"}} > */}
             {uploaded_images.length?uploaded_images.map((itm,k)=>(               
-                 <div className='  ' >             
+                 <div key={k} className='  ' >             
                  <div className='box-shadow p-1 'style={{width:"50%",margin:"auto"}}>
                    <img src={itm} alt="img" style={{width:"100%"}}   />   
                   
@@ -120,7 +179,7 @@ export default function Papperprint() {
         </div>
             <br/>
             
-            <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
+            {/* <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
             <div className='line-break'/>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
               <div className='d-flex overflowbar'>
@@ -134,16 +193,19 @@ export default function Papperprint() {
                <img className='frameimage' style={frame==="White"?{border:"2px solid black"}:{}} onClick={()=>setframe("White")} src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
               </div>
               </div>
-            </div>
+            </div> */}
                 
                 <div className='line-break'/>
                 <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>Frame Size</strong></label><br/>
               <div className='form-select-wrapper'>
-              <select className="form-select form-select-md ">
-                    <option value={"45 x 30 cm"}  >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
-                    <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
-                    <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
+              <select required onClick={(e)=>setpricelist(e.target.value)} className="form-select form-select-md ">
+                  <option value="" hidden>select size</option>
+                    {handlerprice()?handlerprice().split(',').map((itm,k)=>(
+                    <option key={k} value={itm}  >{itm.split('-')[1]} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{itm.split('-')[2]} AED </option>
+                    )):null}
+                    {/* <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
+                    <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option> */}
                     
                     
                    
@@ -174,7 +236,7 @@ export default function Papperprint() {
                   </div> */}
                   
           </div>
-          <a href="/" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <button onClick={()=>pricelist? addtocart(pricelist):notifyerror("select size")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</button>
 
           </div>
         </div>

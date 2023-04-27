@@ -28,7 +28,7 @@ export default function Papertype() {
             </div>  
             <div  className='col-12 col-md-4 '>
             <div className=" margin-csp"  >
-                <Link  to={{pathname: "/paperprint"}} state={{string: "potrate"}}>
+                <Link  to={{pathname: "/paperprint"}} state={{string: "portait"}}>
               <div className='  ' >             
               <div className=' box-shadow p-1'>
                 <img src="\assets\img\photos\demo-portrait2.jpg" alt="img" style={{width:"100%"}}   />   
