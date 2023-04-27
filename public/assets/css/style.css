@@ -40237,9 +40237,9 @@ button.hamburger:before {
 
 .btn-close:before {
     background: rgba(0, 0, 0, .08);
-    font-family: Unicons;
+    font-family:  sans-serif;
     font-size: 1.05rem;
-    content: "\ed3b";
+    content: "x";
     width: 1.8rem;
     height: 1.8rem;
     line-height: 1.8rem;
@@ -49475,4 +49475,10 @@ footer.bg-dark.angled.upper-start:before {
 }
 .pointerb:hover{
     color: #8f0000;
+}
+.pointerviewb{
+    cursor: pointer;
+}
+.pointerviewb:hover{
+    color:#0057ff;
 }

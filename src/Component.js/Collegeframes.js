@@ -2,19 +2,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { apikey } from './filestackapikey';
 import { Simplecontext } from './Simplecontext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Collegeframes() {
-  const { framedata,Getframe } = useContext(Simplecontext)
+  const { framedata,Getframe,framepricedata } = useContext(Simplecontext)
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState()
   const [selectitm,setselectitm]=useState()
   const [framesize,setframesize]=useState()
+  let navigate = useNavigate();
   console.log("selecrt",selectitm)
   useEffect(() => {
     Upload_Product_Image()
@@ -30,7 +33,14 @@ export default function Collegeframes() {
     // }
   }, [])
  
-  
+  const notify = (msg) => toast.success(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+const notifyerror = (msg) => toast.error(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
  
   const Upload_Product_Image = () => {
     const options = {
@@ -73,24 +83,73 @@ const handleOnDragEnd = (result) => {
 
   setuploaded_images(newItems);
 };
-  const framesizehandler=()=>{
-    let size 
-    if (uploaded_images.length===2){
-      // setframesize("48.5cm x 22cm")
-      size="48.5cm x 22cm"
-    }else if (uploaded_images.length===3) {
-      // setframesize("69cm x 22cm") 
-      size = "69cm x 22cm"
-    } else if(uploaded_images.length===4) {
-      // setframesize("89.5cm x 22cm") 
-      size = "89.5cm x 22cm"
+  // const framesizehandler=()=>{
+  //   let size 
+  //   if (uploaded_images.length===2){
+  //     // setframesize("48.5cm x 22cm")
+  //     size="48.5cm x 22cm"
+  //   }else if (uploaded_images.length===3) {
+  //     // setframesize("69cm x 22cm") 
+  //     size = "69cm x 22cm"
+  //   } else if(uploaded_images.length===4) {
+  //     // setframesize("89.5cm x 22cm") 
+  //     size = "89.5cm x 22cm"
+  //   }
+  //   return size
+  // }
+  const addtocart =(pricetag)=>{
+    try {
+      let cart_list = []
+      let body = {
+        total_price : pricetag.split('-')[2],
+        image_url :uploaded_images,
+        orientation :"LandScape",
+        size :pricetag.split('-')[1],
+        // product_type :"",
+        frame_look:"",
+        product_name:"College",
+        frame_type :"",
+        frame_image :"/assets/img/photos/collage-black.png",
+        frame :selectitm,
+        papper :papervalue,
+        quantity :1,
+        vat :"",
+        shipping :"",
+      }
+      if(window.localStorage.getItem('ffcart')){
+        cart_list = window.localStorage.getItem('ffcart')
+      }
+      if (cart_list.length){
+        cart_list = JSON.parse(cart_list)     
+      }
+      let c_list = cart_list.concat(body)  
+      window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+      return navigate('/carttext')
+    } catch (error) {
+      console.log(error)
     }
-    return size
+  }
+  const handlerprice=()=>{
+    let data = framepricedata.filter(t=>t.frame==="college" )  
+    // console.log("datdprice",data)
+    if (data.length){
+      // console.log("datdprice",data[0].price)
+      let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
+      // console.log("priceno",priceno[0])
+      if (priceno.length){
+        return priceno[0]
+      }else{
+        return null
+      }
+      
+    }
+    return null
   }
   return (
     <div>
         <div className=''>
         <div className='row padd' >
+          <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
@@ -149,7 +208,7 @@ const handleOnDragEnd = (result) => {
         </div> 
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
-        <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
+        <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none '}} >
           <h3 className="mt-4  ">College</h3>
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
@@ -180,7 +239,7 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price">{framesizehandler()}</p>
+                    <p className="price">{uploaded_images.length? framepricedata? handlerprice()?handlerprice().split('-')[1] :null:null:null}</p>
                   </span>
                     </div>
                   </div>
@@ -190,13 +249,13 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price"><span style={{fontSize:"80%"}}>AED</span> 10</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[2] :null:null:null}<span className='aedsize'> AED</span></p>
                   </span>
                     </div>
                   </div>
                   
           </div>
-          <a href="/" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>

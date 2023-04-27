@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { RxCross2 } from "react-icons/rx";
 import { FaUpload } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { apikey } from './filestackapikey';
+import { Simplecontext } from './Simplecontext';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Potratecollege () {
-    const [uploaded_images, setuploaded_images] = useState([]);
+  const { framedata,Getframe,framepricedata } = useContext(Simplecontext)
+  const [uploaded_images, setuploaded_images] = useState([]);
+  const [selectitm,setselectitm]=useState('')
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("Black")
-  
+  let navigate = useNavigate();
+  // console.log("select",selectitm)
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
@@ -25,8 +31,15 @@ export default function Potratecollege () {
         window.removeEventListener('beforeunload', handleBeforeUnload);
     }
   }, [])
- 
-  console.log("uploadeimage", uploaded_images)
+  const notify = (msg) => toast.success(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+const notifyerror = (msg) => toast.error(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+  // console.log("uploadeimage", uploaded_images)
 
   const Upload_Product_Image = () => {
     const options = {
@@ -69,10 +82,61 @@ const handleOnDragEnd = (result) => {
 
   setuploaded_images(newItems);
 };
+const addtocart =(pricetag)=>{
+  try {
+    let cart_list = []
+    let body = {
+      total_price : pricetag.split('-')[2],
+      image_url :uploaded_images,
+      orientation :"Portait",
+      size :pricetag.split('-')[1],
+      // product_type :"",
+      frame_look:"",
+      product_name:"College",
+      frame_type :"",
+      frame_image :"/assets/img/photos/collage-black.png",
+      frame :selectitm,
+      papper :papervalue,
+      quantity :1,
+      vat :"",
+      shipping :"",
+    }
+    if(window.localStorage.getItem('ffcart')){
+      cart_list = window.localStorage.getItem('ffcart')
+    }
+    if (cart_list.length){
+      cart_list = JSON.parse(cart_list)     
+    }
+    let c_list = cart_list.concat(body)  
+    window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+    return navigate('/carttext')
+  } catch (error) {
+    console.log(error)
+  }
+}
+const handlerprice=()=>{
+  let data = framepricedata.filter(t=>t.frame==="college" )  
+  .filter(t=>t.orientation?t.orientation==="portait":"")
+  console.log("datdprice",data)
+  
+  if (data.length){
+    console.log("datdprice",data[0].price)
+    let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
+    console.log("priceno",priceno[0])
+    if (priceno.length){
+      return priceno[0]
+    }else{
+      return null
+    }
+    
+  }
+  return null
+}
   return (
     <div>
         <div className=''>
         <div className='row padd' >
+          <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
@@ -82,7 +146,7 @@ const handleOnDragEnd = (result) => {
           </div>
           
             {uploaded_images.length? 
-            <div className={frame==="Black"?'  border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={{width:"300px",margin:"auto"}}   >
+            <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="uploaded-images" direction='vertical'>
         {(provided) => (
@@ -148,15 +212,15 @@ const handleOnDragEnd = (result) => {
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
               <div className='d-flex'>
-              <div className='ps-2'>
+              {/* <div className='ps-2'>
                <img className='frameimage ' style={frame==="Black"?{border:"2px solid black"}:{}} onClick={()=>setframe("Black")} src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
-              </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="Natural oak"?{border:"2px solid black"}:{}} onClick={()=>setframe("Natural oak")} src="\assets\img\photos\oakH.jpg" width={70} alt="img" />
-              </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="White"?{border:"2px solid black"}:{}} onClick={()=>setframe("White")} src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
-              </div>
+              </div> */}
+              {framedata.map((itm,k)=>(
+                  <div key={k} className='ps-2'>
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                 </div>
+                ))} 
+              
               </div>
             </div>
                 
@@ -167,7 +231,7 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price">89.5cm x 22cm</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[1] :null:null:null}</p>
                   </span>
                     </div>
                   </div>
@@ -177,13 +241,13 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price"><span style={{fontSize:"80%"}}>AED</span> 10</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[2] :null:null:null}<span className='aedsize'> AED</span></p>
                   </span>
                     </div>
                   </div>
                   
           </div>
-          <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>

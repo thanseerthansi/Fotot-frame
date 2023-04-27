@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as filestack from "filestack-js";
 import { FaUpload } from "react-icons/fa";
-import { Link, useLocation, useParams} from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams} from 'react-router-dom';
 import { ListManager } from 'react-beautiful-dnd-grid';
 import { apikey } from './filestackapikey';
-
+import { Simplecontext } from './Simplecontext';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
 export default function Squarecollege () {
+  const { framedata,Getframe,framepricedata } = useContext(Simplecontext)
   // const  urlparam  = useParams()
   // let framesize =  urlparam.framesize
   let location = useLocation();
@@ -13,11 +16,13 @@ export default function Squarecollege () {
   // console.log("locationstate",location.state.number)
 
   let framesize=location.state.number
+  console.log("frameno",framesize)
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
-  const [frame,setframe]=useState("Black")
- 
+  const [frame,setframe]=useState("")
+  const [selectitm,setselectitm]=useState('')
+  let navigate = useNavigate();
   useEffect(() => {
     Upload_Product_Image()
     window.scrollTo(0, 0);
@@ -31,7 +36,14 @@ export default function Squarecollege () {
         window.removeEventListener('beforeunload', handleBeforeUnload);
     }
   }, [])
- 
+  const notify = (msg) => toast.success(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+const notifyerror = (msg) => toast.error(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
   // console.log("urlparam",framesize)
 
   const Upload_Product_Image = () => {
@@ -44,8 +56,8 @@ export default function Squarecollege () {
           force: true,
         },
       },
-      maxFiles:framesize==="2"? 4:framesize==="3"?9:16,
-      minFiles: framesize==="2"? 4:framesize==="3"?9:16,
+      maxFiles:framesize===2? 4:framesize===3?9:16,
+      minFiles: framesize===2? 4:framesize===3?9:16,
       uploadInBackground: false,
       onUploadDone: (res) => {
         if (res.filesUploaded.length !== 0) {
@@ -68,10 +80,61 @@ const handleOnDragEnd = (sourceindex,destinationindex) => {
   newItems.splice(destinationindex, 0, reorderedItem);
   setuploaded_images(newItems);
 };
+const addtocart =(pricetag)=>{
+  try {
+    let cart_list = []
+    let body = {
+      total_price : pricetag.split('-')[2],
+      image_url :uploaded_images,
+      orientation :"Square",
+      size :pricetag.split('-')[1],
+      // product_type :"",
+      frame_look:"",
+      product_name:"College",
+      frame_type :"",
+      frame_image :"/assets/img/photos/collage-black.png",
+      frame :selectitm,
+      papper :papervalue,
+      quantity :1,
+      vat :"",
+      shipping :"",
+    }
+    if(window.localStorage.getItem('ffcart')){
+      cart_list = window.localStorage.getItem('ffcart')
+    }
+    if (cart_list.length){
+      cart_list = JSON.parse(cart_list)     
+    }
+    let c_list = cart_list.concat(body)  
+    window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+    return navigate('/carttext')
+  } catch (error) {
+    console.log(error)
+  }
+}
+const handlerprice=()=>{
+  let data = framepricedata.filter(t=>t.frame==="college" )  
+  .filter(t=>t.orientation?t.orientation==="square":"")
+  // console.log("datdprice",data)
+  
+  if (data.length){
+    // console.log("datdprice",data[0].price)
+    let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
+    console.log("priceno",priceno[0])
+    if (priceno.length){
+      return priceno[0]
+    }else{
+      return null
+    }
+    
+  }
+  return null
+}
   return (
     <div>
         <div className=''>
         <div className='row padd' >
+          <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
@@ -81,14 +144,14 @@ const handleOnDragEnd = (sourceindex,destinationindex) => {
           </div>
           
             {uploaded_images.length? 
-            <div className={frame==="Black"?'  border-cp framebox-shadow':frame==="Natural oak"?"d-flex  border-oak-cp framebox-shadow":"d-flex  border-white-cp framebox-shadow"} style={framesize==="2"? {width:"386px",margin:"auto",padding:"5px"}:framesize==="3"?{width:"505px",margin:"auto",padding:"5px"}:{width:"505px",margin:"auto",padding:"5px"}}   >
+            <div className="border-cp framebox-shadow" style={framesize===2? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:framesize===3?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               
     <div className="App">
       <ListManager
         items={uploaded_images}
         direction="horizontal"
-        maxItems={framesize==="2"? 2:framesize==="3"?3:4}
-        render={item => <img src={item} alt="img" className='square-image' style={framesize==="4"?{width:"120px",height:"100%"}:framesize==="3"?{width:"160px",height:"100%"}:{width:"180px",height:"100%"}}/>}
+        maxItems={framesize===2? 2:framesize===3?3:4}
+        render={item => <img src={item} alt="img" className='square-image' style={framesize===4?{width:"120px",height:"100%"}:framesize===3?{width:"160px",height:"100%"}:{width:"180px",height:"100%"}}/>}
         onDragEnd={handleOnDragEnd}
       />
     </div>
@@ -133,15 +196,16 @@ const handleOnDragEnd = (sourceindex,destinationindex) => {
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
               <div className='d-flex'>
-              <div className='ps-2'>
+
+              {/* <div className='ps-2'>
                <img className='frameimage ' style={frame==="Black"?{border:"2px solid black"}:{}} onClick={()=>setframe("Black")} src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
-              </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="Natural oak"?{border:"2px solid black"}:{}} onClick={()=>setframe("Natural oak")} src="\assets\img\photos\oakH.jpg" width={70} alt="img" />
-              </div>
-              <div className='ps-2'>
-               <img className='frameimage' style={frame==="White"?{border:"2px solid black"}:{}} onClick={()=>setframe("White")} src="\assets\img\photos\whiteH.jpg" width={70} alt="img" />
-              </div>
+              </div> */}
+              {framedata.map((itm,k)=>(
+                  <div key={k} className='ps-2'>
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                 </div>
+                ))} 
+              
               </div>
             </div>
                 
@@ -152,7 +216,7 @@ const handleOnDragEnd = (sourceindex,destinationindex) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price">89.5cm x 22cm</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[1] :null :null:null}</p>
                   </span>
                     </div>
                   </div>
@@ -162,13 +226,13 @@ const handleOnDragEnd = (sourceindex,destinationindex) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price"><span style={{fontSize:"80%"}}>AED</span> 10</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[2] :null :null:null}<span className='aedsize'> AED</span></p>
                   </span>
                     </div>
                   </div>
                   
           </div>
-          <a href="#" className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>

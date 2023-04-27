@@ -75,18 +75,7 @@ export default function Mainframe() {
     }
     return null
   }
-  const Postorder=async(e)=>{
-    e.preventDefault()
-    try {
-      let datalist={
-
-      }
-      let data = await Callaxios("post","order/orders/",datalist)
-
-    } catch (error) {
-      
-    }
-  }
+ 
   const addtocart =(pricetag)=>{
     try {
       let cart_list = []
@@ -99,7 +88,7 @@ export default function Mainframe() {
         frame_look:framematerial,
         product_name:"Mini Frame",
         frame_type :"",
-        frame_image :"/assets/img/photos/canvas.png",
+        frame_image :"/assets/img/photos/mini-frames-black.png",
         frame :"",
         papper :papervalue,
         quantity :1,
