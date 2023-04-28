@@ -40,7 +40,7 @@ function App() {
           <Route path='carttext' element={<Carttext/>} />
           <Route path='checkout' element={<Checkout/>} />
           <Route path='shopping' element={<Shoppinghome/>}/>
-          <Route path='productdetails' element={<Productdetails/>}/>
+          <Route path='productdetails/:prod_id' element={<Productdetails/>}/>
           <Route path='papertype' element={<Papertype/>}/>
           <Route path='paperprint' element={<Papperprint/>}/>
 

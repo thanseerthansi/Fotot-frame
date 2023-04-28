@@ -27,7 +27,7 @@ export default function Simplecontextprovider({children}) {
         try {
           let data = await Callaxios("get","frame/frameprice/")
           if (data.status===200){
-            console.log("data.data ",data.data)
+            // console.log("data.data ",data.data)
             setframepricedata(data.data)
           }
           // console.log("data",data)

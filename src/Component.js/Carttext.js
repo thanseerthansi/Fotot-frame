@@ -76,7 +76,7 @@ export default function Carttext() {
                 {cartdata.length?cartdata.map((citm,ck)=>(
                 <tr key={ck}>
                   <td className="option text-start d-flex flex-row align-items-center ps-0">
-                    <figure className="rounded w-17"><a href="shop-product.html"><img src={citm.frame_image} alt="" /></a></figure>
+                    <figure className="rounded w-17"><img src={citm.frame_image} alt="" /></figure>
                     <div className="w-100 ms-4">
                       <h3 className="post-title h6 lh-xs mb-1">{citm.product_name} </h3>
                       <div className="small">Papper Type: {citm.papper} </div>
@@ -267,6 +267,10 @@ export default function Carttext() {
       </div>
       </div>    
  )):null}</>
+    :selectitm.product?
+    <div className={selectitm.frame?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frame?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
+    <img src={selectitm.product.length?selectitm.product[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    </div>
     :null}
         
         

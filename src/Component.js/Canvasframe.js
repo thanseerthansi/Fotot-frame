@@ -18,8 +18,8 @@ export default function Canvasframe() {
   const [pricelist,setpricelist]=useState('')
   let location = useLocation();
   let navigate = useNavigate();
-  console.log("satae",location.state.string)
-  console.log("swlwtcitm",selectitm)
+  // console.log("satae",location.state.string)
+  // console.log("swlwtcitm",selectitm)
   // let params = useParams()
   // let frametype = params.frametype
   let frametype = location.state?location.state.string:""
