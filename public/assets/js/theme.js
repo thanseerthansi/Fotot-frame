@@ -32,7 +32,7 @@ var theme = {
     theme.bsModal();
     theme.iTooltip();
     theme.forms();
-    theme.passVisibility();
+    // theme.passVisibility();
     theme.pricingSwitcher();
     theme.textRotator();
     theme.codeSnippet();

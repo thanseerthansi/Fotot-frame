@@ -82,7 +82,7 @@ export default function Carttext() {
                       <div className="small">Papper Type: {citm.papper} </div>
                       <div className="small">Size: {citm.size}</div>
                       <div className="small">Orientation: {citm.orientation}</div>
-                      <div className="small  " ><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
+                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
                       
                     </div>
                   </td>
@@ -103,14 +103,13 @@ export default function Carttext() {
           </div>
           {/* /.table-responsive */}
           <div className="row mt-0 gy-4">
-            <div className="col-md-8 col-lg-7">
+            {/* <div className="col-md-8 col-lg-7">
               <div className="form-floating input-group">
                 <input type="url" className="form-control" placeholder="Enter promo code" id="seo-check" />
                 <label htmlFor="seo-check">Enter promo code</label>
                 <button className="btn btn-primary" type="button">Apply</button>
               </div>
-              {/* /.input-group */}
-            </div>
+            </div> */}
             {/* /column */}
             <div className="col-md-4 col-lg-5 ms-auto ms-lg-0 text-md-end">
               <Link to="/" className="btn btn-primary rounded">Update Cart</Link>

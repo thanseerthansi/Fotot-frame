@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaTwitter,FaInstagram,FaFacebookF,FaYoutube,FaArrowUp } from "react-icons/fa";
+import { AiOutlineArrowUp } from "react-icons/ai";
 export default function Footer() {
     return (
         <div>
@@ -80,7 +81,7 @@ export default function Footer() {
                 {/* /.container */}
             </footer>
             <div className="progress-wrap">
-
+                {/* <AiOutlineArrowUp/> */}
                 <svg className="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                     
                     <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />

@@ -40176,7 +40176,7 @@ button.hamburger:before {
 .progress-wrap:after {
     position: absolute;
     font-family: Unicons;
-    content: "\e951";
+    content: "⇧";
     text-align: center;
     line-height: 2.3rem;
     font-size: 1.2rem;
@@ -49482,3 +49482,16 @@ footer.bg-dark.angled.upper-start:before {
 .pointerviewb:hover{
     color:#0057ff;
 }
+
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(40 38 38 / 91%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
