@@ -30,6 +30,11 @@ export default function Mainframe() {
   }, [])
   // console.log("papervalue", papervalue)
   // console.log("framematerial", framematerial)
+  const frameselect =()=>{
+    let data = framedata.filter(t=>t.framename.toLowerCase().includes("black"))
+    // console.log("frameitm",data)
+    return data[0]
+  }
   const Upload_Product_Image = () => {
     const options = {
       fromSources: ["local_file_system", "instagram", "facebook"],
@@ -77,6 +82,8 @@ export default function Mainframe() {
   }
  
   const addtocart =(pricetag)=>{
+    console.log('frame',frameselect()?frameselect():"no")
+    console.log("frameselect()",frameselect())
     try {
       let cart_list = []
       let body = {
@@ -89,7 +96,7 @@ export default function Mainframe() {
         product_name:"Mini Frame",
         frame_type :"",
         frame_image :"/assets/img/photos/mini-frames-black.png",
-        frame :"",
+        frame :frameselect()?frameselect():"",
         papper :papervalue,
         quantity :1,
         vat :"",
@@ -113,6 +120,7 @@ export default function Mainframe() {
       <div className=''>
         <div className='row padd' >
           <div className='col-12 col-md-8 col-lg-8'>
+           
         <div className=' photocard_style '  >
         <div className="card-body minibackgound "  >   
         <div className='row col-12'>

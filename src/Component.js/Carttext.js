@@ -24,7 +24,7 @@ export default function Carttext() {
       if (cart_list.length){
         // console.log("cart",cart_list)
         cart_list = JSON.parse(cart_list)   
-        // console.log("cart",cart_list)  
+        console.log("cart",cart_list)  
         setcartdata(cart_list)
       }
     }

@@ -81,6 +81,7 @@ const notifyerror = (msg) => toast.error(msg, {
         let body=[]
         // console.log("cartdata",cartdata)
         cartdata.forEach(element => {
+          // console.log("element fraem",element.frame )
           // console.log("element fraem",element.frame?element.frame.id:"no frame present" )
           let data={
             status:"new",
@@ -97,6 +98,7 @@ const notifyerror = (msg) => toast.error(msg, {
           if(element.product){
             data.productid=element.product[0].id
           }
+          // console.log("frameelements",element.frame)
           if(element.frame){
             data.frameid=element.frame.id
           }
@@ -122,17 +124,25 @@ const notifyerror = (msg) => toast.error(msg, {
         console.log("dataaxios",data)
         if (data.data.Status===200){
           notify("ordered Successfully")
-        }
+          setbillnull()
+
+        }else{
+          notifyerror("Something went wrong")}
 
       }else{
         setmodal1(!modal1)
-      }
-      
-      
-      
+      } 
     } catch (error) {
       
     }
+  }
+  const setbillnull=()=>{
+    setcustomername('')
+    setcontact('')
+    setemail('')
+    setplace('')
+    setaddress('')
+    window.localStorage.removeItem("ffcart")
   }
   const login=async()=>{
     try {
