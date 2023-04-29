@@ -79,17 +79,17 @@ const notifyerror = (msg) => toast.error(msg, {
             //  console.log("data",data)
       if( !window.localStorage.getItem("fotoframe_usertoken")){
         let body=[]
-        console.log("cartdata",cartdata)
+        // console.log("cartdata",cartdata)
         cartdata.forEach(element => {
-          console.log("element fraem",element.frame?element.frame.id:"no frame present" )
+          // console.log("element fraem",element.frame?element.frame.id:"no frame present" )
           let data={
             status:"new",
             // product:element.product?element.product[0].id:null,
-            image_url:element.image_url?element.image_url.join(','):null,
+            image_url:element.image_url?element.image_url.join(','):"",
             orientation:element.orientation,
             size:element.size,
             product_type:"",
-            frame_type:element.frame_type?element.frame_type.frame_type:null,
+            frame_type:element.frame_type?element.frame_type.frame_type:"",
             // frame:element.frame?element.frame.id:null,
             price:element.total_price,
             papper:element.papper,
@@ -100,11 +100,11 @@ const notifyerror = (msg) => toast.error(msg, {
           if(element.frame){
             data.frameid=element.frame.id
           }
-          console.log("dataelement",data)
+          // console.log("dataelement",data)
         body.push(data)
         
         });
-        console.log("body",body)
+        // console.log("body",body)
         let datalist = {
           Customer_name:customername,
           email:email,
