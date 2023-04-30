@@ -76,62 +76,69 @@ const notifyerror = (msg) => toast.error(msg, {
   }
   const postorder=async()=>{
     try {
-            //  console.log("data",data)
-      if( !window.localStorage.getItem("fotoframe_usertoken")){
-        let body=[]
-        // console.log("cartdata",cartdata)
-        cartdata.forEach(element => {
-          // console.log("element fraem",element.frame )
-          // console.log("element fraem",element.frame?element.frame.id:"no frame present" )
-          let data={
+      console.log("customername",customername)
+      console.log("contact",contact)
+      console.log("place",place)
+      console.log("address",address)
+      if(customername && contact && place && address ){
+        if( !window.localStorage.getItem("fotoframe_usertoken")){
+          let body=[]
+          // console.log("cartdata",cartdata)
+          cartdata.forEach(element => {
+            // console.log("element fraem",element.frame )
+            // console.log("element fraem",element.frame?element.frame.id:"no frame present" )
+            let data={
+              status:"new",
+              // product:element.product?element.product[0].id:null,
+              image_url:element.image_url?element.image_url.join(','):"",
+              orientation:element.orientation,
+              size:element.size,
+              product_type:element.product_name,
+              frame_type:element.frame_type?element.frame_type.frame_type:"",
+              // frame:element.frame?element.frame.id:null,
+              price:element.total_price,
+              papper:element.papper,
+            }
+            if(element.product){
+              data.productid=element.product[0].id
+            }
+            // console.log("frameelements",element.frame)
+            if(element.frame){
+              data.frameid=element.frame.id
+            }
+            // console.log("dataelement",data)
+          body.push(data)
+          
+          });
+          // console.log("body",body)
+          let datalist = {
+            Customer_name:customername,
+            email:email,
+            contact:contact,
+            address:address,
+            // house:"",
+            city:place,
+            total_price:cartdata?cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery:0,
+            shipping:delivery,
+            product_list:body,
             status:"new",
-            // product:element.product?element.product[0].id:null,
-            image_url:element.image_url?element.image_url.join(','):"",
-            orientation:element.orientation,
-            size:element.size,
-            product_type:"",
-            frame_type:element.frame_type?element.frame_type.frame_type:"",
-            // frame:element.frame?element.frame.id:null,
-            price:element.total_price,
-            papper:element.papper,
           }
-          if(element.product){
-            data.productid=element.product[0].id
-          }
-          // console.log("frameelements",element.frame)
-          if(element.frame){
-            data.frameid=element.frame.id
-          }
-          // console.log("dataelement",data)
-        body.push(data)
-        
-        });
-        // console.log("body",body)
-        let datalist = {
-          Customer_name:customername,
-          email:email,
-          contact:contact,
-          address:address,
-          // house:"",
-          city:place,
-          total_price:cartdata?cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery:0,
-          shipping:delivery,
-          product_list:body,
-          status:"new",
-        }
-        console.log("daatalist",datalist)
-        let data = await Callaxios("post","order/orders/",datalist)
-        console.log("dataaxios",data)
-        if (data.data.Status===200){
-          notify("ordered Successfully")
-          setbillnull()
-
+          console.log("daatalist",datalist)
+          let data = await Callaxios("post","order/orders/",datalist)
+          console.log("dataaxios",data)
+          if (data.data.Status===200){
+            notify("ordered Successfully")
+            setbillnull()
+  
+          }else{
+            notifyerror("Something went wrong")}
+  
         }else{
-          notifyerror("Something went wrong")}
-
-      }else{
-        setmodal1(!modal1)
-      } 
+          setmodal1(!modal1)
+        }
+      }else(notifyerror("Fill All Billing Address"))
+            //  console.log("data",data)
+      
     } catch (error) {
       
     }
@@ -143,6 +150,7 @@ const notifyerror = (msg) => toast.error(msg, {
     setplace('')
     setaddress('')
     window.localStorage.removeItem("ffcart")
+    setcartdata([])
   }
   const login=async()=>{
     try {
@@ -176,6 +184,7 @@ const notifyerror = (msg) => toast.error(msg, {
     <div>
        <section className="wrapper bg-light">
   <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
+    <ToastContainer/>
     <div className="row gx-md-8 gx-xl-12 gy-12">
       <div className="col-lg-8">
         <div className="alert alert-blue alert-icon mb-6" role="alert">
@@ -283,6 +292,7 @@ const notifyerror = (msg) => toast.error(msg, {
         </form>
       </div>
       {/* /column */}
+      {cartdata.length?
       <div className="col-lg-4">
         <h3 className="mb-4">Order Summary {"("+cartdata.length+")"}</h3>
         {/* /.shopping-cart*/}
@@ -332,6 +342,7 @@ const notifyerror = (msg) => toast.error(msg, {
         </div>
         <button onClick={()=>postorder()}  className="btn btn-primary rounded w-100 mt-4">Place Order</button>
       </div>
+      :null}
       {/* /column */}
     </div>
     {/* /.row */}

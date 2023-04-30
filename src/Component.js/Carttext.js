@@ -119,6 +119,7 @@ export default function Carttext() {
           {/* /.row */}
         </div>
         {/* /column */}
+        {cartdata.length?
         <div className="col-lg-4">
           <h3 className="mb-4">Order Summary {"("+cartdata.length+")"}</h3>
           <div className="table-responsive">
@@ -153,6 +154,7 @@ export default function Carttext() {
           </div>
           <Link to="/checkout" className="btn btn-primary rounded w-100 mt-4">Proceed to Checkout</Link>
         </div>
+        :null}
         {/* /column */}
       </div>
       {/* /.row */}
@@ -206,7 +208,7 @@ export default function Carttext() {
                   className="image-pcp pcpwidth "
                   
                     
-                    ref={provided.innerRef}
+                    // ref={provided.innerRef}
                   />
                 )}
               </Draggable>
@@ -232,7 +234,7 @@ export default function Carttext() {
       />
     </div>
             </div>
-        :selectitm.product_name==="Canvas"?
+        :selectitm.product_name==="Canvas" & selectitm.product?
         <>
             {selectitm.frame? 
              <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
@@ -243,7 +245,7 @@ export default function Carttext() {
             :
             <>
             {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>( 
-              <div className=" margin-css m-auto" >            
+              <div key={k} className=" margin-css m-auto" >            
               <div className=' ' >             
               <div className='canvas-rotate '>
                 <img src={itm} alt="img" style={{width:"250px "}}   />   
@@ -257,6 +259,31 @@ export default function Carttext() {
           </div>   
               )):null}
               </>  }</>
+    :selectitm.product_name==="Canvas" & !selectitm.product?
+    <>
+        {selectitm.frame? 
+         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+        {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
+            <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
+        )):null}
+        </div>
+        :
+        <>
+        {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>( 
+          <div key={k} className=" margin-css m-auto" >            
+          <div className=' ' >             
+          <div className='canvas-rotate '>
+            <img src={itm} alt="img" style={{width:"250px "}}   />   
+            <div className='canvas-border '>
+              
+            <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
+            </div>
+          </div>
+          </div> 
+    
+      </div>   
+          )):null}
+          </>  }</>
     :selectitm.product_name==="Print"?<>
     {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
       <div key={k} className='  ' >             

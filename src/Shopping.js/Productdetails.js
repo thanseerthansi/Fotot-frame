@@ -87,7 +87,7 @@ export default function Productdetails() {
           size :frameprice.split('-')[0],
           product :productdata,
           frame_look:framemodel,
-          product_name:productdata[0].product_name +" "+ framemodel,
+          product_name:productdata[0].product_name +" "+ framemodel?framemodel:"",
           frame_type :frametype,
           frame_image :productdata[0].product_image ,
           frame :frame?selectitm:"",

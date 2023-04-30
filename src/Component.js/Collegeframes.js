@@ -130,12 +130,14 @@ const handleOnDragEnd = (result) => {
     }
   }
   const handlerprice=()=>{
-    let data = framepricedata.filter(t=>t.frame==="college" )  
+    // console.log("uploaded_images.length",uploaded_images.length.toString())
+    let data = framepricedata.filter(t=>t.frame==="college" ) 
+    .filter(t=>t.orientation?t.orientation==="landscape":"")
     // console.log("datdprice",data)
     if (data.length){
       // console.log("datdprice",data[0].price)
       let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
-      // console.log("priceno",priceno[0])
+      // console.log("priceno",priceno)
       if (priceno.length){
         return priceno[0]
       }else{
@@ -239,7 +241,7 @@ const handleOnDragEnd = (result) => {
                     </div>
                     <div className='col-6'>
                     <span className="pe-0 text-end">
-                    <p className="price">{uploaded_images.length? framepricedata? handlerprice()?handlerprice().split('-')[1] :null:null:null}</p>
+                    <p className="price">{uploaded_images.length?framepricedata? handlerprice()?handlerprice().split('-')[1] :null:null:null}</p>
                   </span>
                     </div>
                   </div>
