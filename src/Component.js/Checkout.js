@@ -21,6 +21,8 @@ export default function Checkout() {
   const [signrepassword,setsignrepassword]=useState('')
   const [modal2,setmodal2]=useState(false)
   const [modal1,setmodal1]=useState(false)
+  const [load,setload]=useState(false)
+
   useEffect(() => {
     GetCart()
     Getshipping()
@@ -76,12 +78,9 @@ const notifyerror = (msg) => toast.error(msg, {
   }
   const postorder=async()=>{
     try {
-      console.log("customername",customername)
-      console.log("contact",contact)
-      console.log("place",place)
-      console.log("address",address)
+     
       if(customername && contact && place && address ){
-        if( !window.localStorage.getItem("fotoframe_usertoken")){
+        if( window.localStorage.getItem("fotoframe_usertoken")){
           let body=[]
           // console.log("cartdata",cartdata)
           cartdata.forEach(element => {
@@ -143,6 +142,7 @@ const notifyerror = (msg) => toast.error(msg, {
       
     }
   }
+  
   const setbillnull=()=>{
     setcustomername('')
     setcontact('')
@@ -152,7 +152,8 @@ const notifyerror = (msg) => toast.error(msg, {
     window.localStorage.removeItem("ffcart")
     setcartdata([])
   }
-  const login=async()=>{
+  const login=async(e)=>{
+    e.preventDefault()
     try {
       let body = {
         method:"post",
@@ -163,6 +164,7 @@ const notifyerror = (msg) => toast.error(msg, {
       // console.log("data",data)
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
+        postorder()
       }else{
         notifyerror("invalid Username or password")
       }
@@ -172,24 +174,96 @@ const notifyerror = (msg) => toast.error(msg, {
     }
       
   }
-  const postuser=async()=>{
+  const postuser=async(e)=>{
+    console.log("postuser")
+    e.preventDefault()
     try {
+      if(signpassword===signrepassword){
+        let data =await Callaxios("post","user/user/",{username:signusername,password:signpassword})
+        console.log("data",data)
+        if (data.data.Status===200){
+          notify("Successfully registered")
+          setmodal2(false)
+          setmodal1(true)
+          setsignnull()
+        }else{
+          notifyerror("something went wrong")
+        }
+      }else{
+        notifyerror("Password and repassword are different")
+      }
       
-      let data =await Callaxios("post","user/user/",{username:"",password:""})
     } catch (error) {
       
     }
   }
+  const setsignnull=()=>{
+    setusername('')
+    setpassword('')
+    setsignusername('')
+    setsignpassword('')
+    setsignrepassword('')
+  }
+  const Payment_Page = (order_id) => {
+    setload(true)
+    var data = {
+        'product_name' : 'check_out',
+        'unit_amount' : Math.round (cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery) ,
+        'currency' : 'AED',
+        'site' : window.origin,
+        'order_id' : order_id
+        
+    }
+    axios.post(`${BaseUrl}/order/create-checkout-session/`,data,{
+      headers : {
+        Authorization : window.localStorage.getItem("fotoframe_usertoken")
+      }
+    })
+    .then((res) => {
+      console.log("response",res)
+        if (res.data.Status === 200){        
+          window.location.assign(res.data.Message.url); 
+          setload(false)
+        }
+        else{
+            // setalert({ open : true , msg: "Something Went Wrong",severity:"error"})
+            notifyerror("Something Went Wrong")
+            setload(false)
+        }
+      })
+      .catch((error) => {
+        setload(false)
+        if (error.response.request.status === 401) {
+          // setalert({ open : true , msg: "Un Authorized request",severity:"error"})
+          notifyerror("Un Authorized request")
+
+        }
+        else{
+          // setalert({ open : true , msg: "Something Went Wrong",severity:"error"})
+          notifyerror("Something Went Wrong")
+
+        }
+      })
+
+}
   return (
     <div>
        <section className="wrapper bg-light">
   <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
     <ToastContainer/>
+    <div>
+      <button onClick={()=>Payment_Page(123)}>click</button>
+    </div>
+    {load?
+      <div className='spinner-containerload'>
+        <div className='spinner'></div>
+      </div>    
+    :null}
     <div className="row gx-md-8 gx-xl-12 gy-12">
       <div className="col-lg-8">
-        <div className="alert alert-blue alert-icon mb-6" role="alert">
+        {/* <div className="alert alert-blue alert-icon mb-6" role="alert">
           <i className="uil uil-exclamation-circle" /> Already have an account? <a href="#" data-bs-target="#modal-signin" data-bs-toggle="modal" data-bs-dismiss="modal" className="alert-link hover">Sign in</a> for faster checkout experience.
-        </div>
+        </div> */}
         
         <h3 className="mb-4">Billing address</h3>
         <form className="needs-validation" noValidate>
@@ -410,24 +484,24 @@ const notifyerror = (msg) => toast.error(msg, {
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal1(!modal1)} className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        <button type="button" onClick={()=>setmodal1(!modal1)&&setsignnull()} className="btn-close"  />
         <h2 className="mb-3 text-start">{modal1?"Signin to Order":"Welcome Back"}</h2>
         <p className="lead mb-6 text-start">Fill your email and password to sign in.</p>
-        <form className="text-start mb-3">
+        <form onSubmit={(e)=>login(e)} className="mb-3">
           <div className="form-floating mb-4">
-            <input onChange={(e)=>setusername(e.target.value)} value={username} type="email" className="form-control" placeholder="Email"  />
+            <input required onChange={(e)=>setusername(e.target.value)} value={username} type="emaillogin" className="form-control" placeholder="Email"  />
             <label  htmlFor="loginEmail">Email</label>
           </div>
-          <div className="form-floating password-field mb-4">
-            <input onChange={(e)=>setpassword(e.target.value)} value={password} type="password" className="form-control" placeholder="Password"  />
+          <div className="form-floating  mb-4">
+            <input required onChange={(e)=>setpassword(e.target.value)} value={password} type="password" className="form-control" placeholder="Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="loginPassword">Password</label>
           </div>
-          <a className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign In</a>
+          <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign In</button>
         </form>
         {/* /form */}
         {/* <p className="mb-1"><a href="#" className="hover">Forgot Password?</a></p> */}
-        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal1(false)}  data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal" className="hover">Sign up</a></p>
+        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal1(false) & setmodal2(true) & setsignnull()}  className="hover">Sign up</a></p>
       
         {/*/.social */}
       </div>
@@ -442,29 +516,29 @@ const notifyerror = (msg) => toast.error(msg, {
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal2(!modal2)} className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        <button type="button" onClick={()=>setmodal2(!modal2)} className="btn-close"  />
         <h2 className="mb-3 text-start">Sign up to FotoFrame</h2>
         <p className="lead mb-6 text-start">Registration takes less than a minute.</p>
-        <form className="text-start mb-3">
+        <form onSubmit={(e)=>postuser(e)} className="text-start mb-3">
           
           <div className="form-floating mb-4">
-            <input onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
+            <input required onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
             <label htmlFor="loginEmail">Email</label>
           </div>
           <div className="form-floating password-field mb-4">
-            <input onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
+            <input required onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="loginPassword">Password</label>
           </div>
           <div className="form-floating password-field mb-4">
-            <input onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
+            <input required onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="loginPasswordConfirm">Confirm Password</label>
           </div>
-          <button className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
+          <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
         </form>
         {/* /form */}
-        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal2(false)} data-bs-target="#modal-signin" data-bs-toggle="modal" data-bs-dismiss="modal" className="hover">Sign in</a></p>
+        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal2(false) & setmodal1(true)} className="hover">Sign in</a></p>
         
         {/*/.social */}
       </div>

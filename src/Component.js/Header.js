@@ -92,7 +92,7 @@ export default function Header() {
                     {/*/.dropdown-menu */}
                   </li>
                   <li className="nav-item dropdown">
-                    <Link className="nav-link" to="/shopping" >Paintings</Link>
+                    <Link className="nav-link" to="/shopping" >Our Store</Link>
                     
                   </li>
                   
