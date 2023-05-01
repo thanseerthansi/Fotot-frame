@@ -16,6 +16,7 @@ export default function Checkout() {
   const [address,setaddress]=useState('')
   const [username,setusername]=useState('')
   const [password,setpassword]=useState('')
+  const [firstname,setfirstname]=useState('')
   const [signusername,setsignusername]=useState('')
   const [signpassword,setsignpassword]=useState('')
   const [signrepassword,setsignrepassword]=useState('')
@@ -78,7 +79,7 @@ const notifyerror = (msg) => toast.error(msg, {
   }
   const postorder=async()=>{
     try {
-     
+     setload(true)
       if(customername && contact && place && address ){
         if( window.localStorage.getItem("fotoframe_usertoken")){
           let body=[]
@@ -122,24 +123,28 @@ const notifyerror = (msg) => toast.error(msg, {
             product_list:body,
             status:"new",
           }
-          console.log("daatalist",datalist)
+          // console.log("daatalist",datalist)
           let data = await Callaxios("post","order/orders/",datalist)
-          console.log("dataaxios",data)
+          // console.log("dataaxios",data)
           if (data.data.Status===200){
-            notify("ordered Successfully")
+            Payment_Page(data.data.order_id)
+            setload(true)
+            // notify("ordered Successfully")
             setbillnull()
   
           }else{
             notifyerror("Something went wrong")}
-  
+            setload(false)
         }else{
           setmodal1(!modal1)
+          setload(false)
         }
       }else(notifyerror("Fill All Billing Address"))
             //  console.log("data",data)
+          setload(false)
       
     } catch (error) {
-      
+      setload(false)
     }
   }
   
@@ -179,7 +184,7 @@ const notifyerror = (msg) => toast.error(msg, {
     e.preventDefault()
     try {
       if(signpassword===signrepassword){
-        let data =await Callaxios("post","user/user/",{username:signusername,password:signpassword})
+        let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
         console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
@@ -188,9 +193,11 @@ const notifyerror = (msg) => toast.error(msg, {
           setsignnull()
         }else{
           notifyerror("something went wrong")
+         
         }
       }else{
         notifyerror("Password and repassword are different")
+        
       }
       
     } catch (error) {
@@ -251,9 +258,9 @@ const notifyerror = (msg) => toast.error(msg, {
        <section className="wrapper bg-light">
   <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
     <ToastContainer/>
-    <div>
+    {/* <div>
       <button onClick={()=>Payment_Page(123)}>click</button>
-    </div>
+    </div> */}
     {load?
       <div className='spinner-containerload'>
         <div className='spinner'></div>
@@ -313,7 +320,7 @@ const notifyerror = (msg) => toast.error(msg, {
             
             
           </div>
-          <hr className="mt-7 mb-6" />
+          {/* <hr className="mt-7 mb-6" />
           <h3 className="mb-4">Payment</h3>
           <div className="mt-3 mb-6">
             <div className="form-check">
@@ -362,7 +369,7 @@ const notifyerror = (msg) => toast.error(msg, {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
       {/* /column */}
@@ -522,18 +529,22 @@ const notifyerror = (msg) => toast.error(msg, {
         <form onSubmit={(e)=>postuser(e)} className="text-start mb-3">
           
           <div className="form-floating mb-4">
+            <input required onChange={(e)=>setfirstname(e.target.value)} value={firstname} type="Firstname" className="form-control" placeholder="Email"  />
+            <label htmlFor="">Name</label>
+          </div>
+          <div className="form-floating mb-4">
             <input required onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
-            <label htmlFor="loginEmail">Email</label>
+            <label htmlFor="">Email</label>
           </div>
           <div className="form-floating password-field mb-4">
             <input required onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
-            <label htmlFor="loginPassword">Password</label>
+            <label htmlFor="">Password</label>
           </div>
           <div className="form-floating password-field mb-4">
             <input required onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
-            <label htmlFor="loginPasswordConfirm">Confirm Password</label>
+            <label htmlFor="">Confirm Password</label>
           </div>
           <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
         </form>

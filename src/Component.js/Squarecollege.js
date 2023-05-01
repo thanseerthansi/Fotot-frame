@@ -13,15 +13,16 @@ export default function Squarecollege () {
   // let framesize =  urlparam.framesize
   let location = useLocation();
   // console.log("location",location)
-  // console.log("locationstate",location.state.number)
+  console.log("locationstate",location.state.number)
 
-  let framesize=location.state.number
+  let framesize=location.state?location.state.number:""
   console.log("frameno",framesize)
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("")
   const [selectitm,setselectitm]=useState('')
+  console.log("sleetcitm",selectitm)
   let navigate = useNavigate();
   useEffect(() => {
     Upload_Product_Image()
@@ -93,7 +94,7 @@ const addtocart =(pricetag)=>{
       product_name:"College",
       frame_type :"",
       frame_image :"/assets/img/photos/collage-black.png",
-      frame :selectitm,
+      frame :selectitm?selectitm:frameselect(),
       papper :papervalue,
       quantity :1,
       vat :"",
@@ -111,6 +112,11 @@ const addtocart =(pricetag)=>{
   } catch (error) {
     console.log(error)
   }
+}
+const frameselect =()=>{
+  let data = framedata.filter(t=>t.framename.toLowerCase().includes("black"))
+  // console.log("frameitm",data)
+  return data[0]
 }
 const handlerprice=()=>{
   let data = framepricedata.filter(t=>t.frame==="college" )  
@@ -232,7 +238,7 @@ const handlerprice=()=>{
                   </div>
                   
           </div>
-          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <button onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</button>
 
           </div>
         </div>

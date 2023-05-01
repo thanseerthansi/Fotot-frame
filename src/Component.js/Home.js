@@ -19,10 +19,10 @@ export default function Home() {
           <div className="col-md-10 offset-md-1 offset-lg-0 col-lg-5 text-center text-lg-start order-2 order-lg-0" data-cues="slideInDown" data-group="page-title" data-delay={600}>
             <h1 className="display-1 mb-5 mx-md-n5 mx-lg-0">Creative. Smart. Awesome.</h1>
             <p className="lead fs-lg mb-7">We specialize in web, mobile and identity design. We love to turn ideas into beautiful things.</p>
-            <div className="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown" data-group="page-title-buttons" data-delay={900}>
+            {/* <div className="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown" data-group="page-title-buttons" data-delay={900}>
               <span><Link className="btn btn-primary rounded me-2">See Projects</Link></span>
               <span><Link className="btn btn-yellow rounded">Learn More</Link></span>
-            </div>
+            </div> */}
           </div>
           {/* /column */}
           <div className="col-lg-7" data-cue="slideInDown">
