@@ -154,7 +154,7 @@ const notifyerror = (msg) => toast.error(msg, {
     setemail('')
     setplace('')
     setaddress('')
-    window.localStorage.removeItem("ffcart")
+    // window.localStorage.removeItem("ffcart")
     setcartdata([])
   }
   const login=async(e)=>{
@@ -536,12 +536,12 @@ const notifyerror = (msg) => toast.error(msg, {
             <input required onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
             <label htmlFor="">Email</label>
           </div>
-          <div className="form-floating password-field mb-4">
+          <div className="form-floating mb-4">
             <input required onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="">Password</label>
           </div>
-          <div className="form-floating password-field mb-4">
+          <div className="form-floating  mb-4">
             <input required onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="">Confirm Password</label>

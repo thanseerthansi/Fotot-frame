@@ -11,7 +11,7 @@ export default function Failure() {
     }, [])
     const fail=async()=>{
         try {
-            console.log("id",order_id)
+            // console.log("id",order_id)
             let data = await Callaxios("delete","order/orders/",{id:order_id})
             console.log("dat",data)
             if (data.data.Status===200){

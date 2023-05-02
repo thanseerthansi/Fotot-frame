@@ -129,7 +129,7 @@ export default function Carttext() {
     <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
       <div className="row gx-md-8 gx-xl-12 gy-12">
          <div className="alert alert-blue alert-icon mb-6" role="alert">
-          <i className="uil uil-exclamation-circle" /> To Get Cart data !<a href="#" data-bs-target="#modal-signin" data-bs-toggle="modal" data-bs-dismiss="modal" className="alert-link hover">Sign in</a> for Betters experience.
+          <i className="uil uil-exclamation-circle" /> Not showing Your Cart? <a href="#" data-bs-target="#modal-signin" data-bs-toggle="modal" data-bs-dismiss="modal" className="alert-link hover">Sign in</a> for Betters experience.
         </div>
         <div className="col-lg-8"> 
           <div className="table-responsive">
@@ -437,12 +437,12 @@ export default function Carttext() {
             <input required onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
             <label htmlFor="">Email</label>
           </div>
-          <div className="form-floating password-field mb-4">
+          <div className="form-floating  mb-4">
             <input required onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="">Password</label>
           </div>
-          <div className="form-floating password-field mb-4">
+          <div className="form-floating  mb-4">
             <input required onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
             {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
             <label htmlFor="">Confirm Password</label>

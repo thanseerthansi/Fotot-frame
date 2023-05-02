@@ -21,6 +21,11 @@ import Papperprint from './Component.js/Papperprint';
 import Simplecontextprovider from './Component.js/Simplecontext';
 import Success from './Shopping.js/Success';
 import Failure from './Shopping.js/Failure';
+import Profilepage from './Profilepages.js/Profilepage';
+import Userorders from './Profilepages.js/Userorders';
+
+
+
 
 function App() {
   return (
@@ -30,7 +35,7 @@ function App() {
       <Routes>
         <Route exact path='text' element={<Text/>} />
         {/* http://localhost:3000/success=true&session_id=cs_test_a1YiEzo9jP8OjjuLVmFy6kvBle9PU71D1bmh8pL3Pwo6mKBKTHWBPxAYM2 */}
-        <Route  path="/success=true&session_id=/:id" element={<Success/>} />  
+        <Route  path="/success=true&session_id=/:id/:order_id" element={<Success/>} />  
         <Route  path={`/canceled=true&order_id=/:order_id` } element={<Failure/>} />
         <Route exact path='text' element={<Text/>} />
         <Route path='/' element={<Outlethome/>}>
@@ -49,10 +54,8 @@ function App() {
           <Route path='productdetails/:prod_id' element={<Productdetails/>}/>
           <Route path='papertype' element={<Papertype/>}/>
           <Route path='paperprint' element={<Papperprint/>}/>
-          {/* <Route path="/success=true&session_id=:id" element={<Success/>}/> */}
-          {/* <Route path="/canceled=true&order_id=:id" element={<Failure/>}/> */}
-          {/* {`/success=true&session_id=:id` } */}
-          {/* success=true&session_id=cs_test_a1Toh8cJyM3A4cC0N0WMyCkmZc5l7M481G143SgLOGfouYQ8AJiNOAkWEl */}
+          <Route path='profile' element={<Profilepage/>}/>
+          <Route path='userorder' element={<Userorders/>}/>
           
         </Route>
       </Routes>
