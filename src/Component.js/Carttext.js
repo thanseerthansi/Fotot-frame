@@ -7,7 +7,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ListManager } from 'react-beautiful-dnd-grid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { BaseUrl } from './Url';
+import { BaseUrl, imgUrl } from './Url';
 import axios from 'axios';
 export default function Carttext() {
   const [cartdata,setcartdata]=useState([])
@@ -21,7 +21,7 @@ export default function Carttext() {
   const [signrepassword,setsignrepassword]=useState('')
   const [modal22,setmodal22]=useState(false)
   const [modal112,setmodal112]=useState(false)
-  console.log("cartdata",cartdata)
+  console.log("selectitm",selectitm)
     useEffect(() => {
       GetCart()
       Getshipping()
@@ -56,7 +56,7 @@ export default function Carttext() {
             });
         }
         setcartdata([...cart_list])
-        postcartdata()
+        postcartdata(cart_list)
       }
     }else{
       Getcartproduct()
@@ -74,12 +74,28 @@ export default function Carttext() {
       
     }
   }
-  const removecarthandler=(ck)=>{
-    // console.log("cartdata",cartdata)
+  const removecarthandler=(ck,id)=>{
+    if (window.localStorage.getItem("ffcart")){
+       // console.log("cartdata",cartdata)
     let c_list =cartdata.filter((number, index) => index !== ck)
     // console.log("removedata",c_list)
     setcartdata(c_list)
     window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+    }else{
+      deletecart(id)
+    }
+   
+  }
+  const deletecart=async(id)=>{
+    try {
+      let data = await Callaxios("delete","order/cart/",{id:(JSON.stringify(id))},"token")
+      console.log("deletedata",data)
+      if (data.data.Status===200){
+        Getcartproduct()
+      }
+    } catch (error) {
+      
+    }
   }
   const setsignnull=()=>{
     setusername('')
@@ -163,18 +179,37 @@ export default function Carttext() {
 
     }
   }
-  const postcartdata=async()=>{
+  const postcartdata=async(cart_list)=>{
     console.log("postcartdata....")
     try {
       if(window.localStorage.getItem("fotoframe_usertoken")){
-        let postcart = cartdata 
-        console.log("havecartdata in postcart")
+        let postcart = cart_list 
+        console.log("havecartdata in postcart",postcart)
         postcart.forEach(element=>{
-          if (element.frame){
-            delete element['frame']
-          }
-          if(element.product){
-            delete element['product']
+          console.log("element",element)
+          // if (element.frame){
+          //   delete element['frame']
+          // }
+          // if(element.product){
+          //   delete element['product']
+          // } 
+          if(element.frameid){
+            // console.log("framepresent")
+            element['frameid']=parseInt(element.frameid.id)
+            // console.log("framepresentafter....")
+          }else{
+            delete element.frame
+            delete element.frameid
+          }       
+          if(element.productid){
+            element['productid']=parseInt(element.product.id) 
+          }else{
+            delete element.product
+            delete element.productid
+          } 
+          if(element.image_url){
+            // console.log("image_url",element.image_url)
+            element['image_url']=element.image_url.join(',')
           }         
         });
         console.log("cartpost",postcart)
@@ -241,7 +276,7 @@ export default function Carttext() {
                     <p className="price"><span className="amount">AED {citm.total_price}</span></p>
                   </td>
                   <td className="pe-0">
-                    <RiDeleteBin6Fill className='pointerb'onClick={()=>removecarthandler(ck)} />
+                    <RiDeleteBin6Fill className='pointerb'onClick={()=>removecarthandler(ck,citm.id)} />
                   </td>
                 </tr>
                 )) : <tr><td>Your Cart is Empty!</td></tr>}
@@ -332,10 +367,10 @@ export default function Carttext() {
             :selectitm.product_name==="College" & selectitm.orientation==="LandScape"?
             <div className="overflowbar " >  
             {selectitm.image_url.length ? 
-            <div className={"d-flex border-cp framebox-shadow"} style={selectitm.image_url.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+            <div className={"d-flex border-cp framebox-shadow"} style={selectitm.image_url.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               
             {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
-                <img src={itm} alt="img" className={selectitm.image_url.length===2?"image-lcp1 imagelcp_width2":"image-lcp1 imagelcp_width"}    />     
+                <img key={k} src={itm} alt="img" className={selectitm.image_url.length===2?"image-lcp1 imagelcp_width2":"image-lcp1 imagelcp_width"}    />     
             )):null}
             </div>  
             :null}     
@@ -367,7 +402,7 @@ export default function Carttext() {
     </DragDropContext>
             </div> 
         :selectitm.product_name==="College" & selectitm.orientation==="Square"?
-        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               
     <div className="App">
       <ListManager
@@ -384,7 +419,7 @@ export default function Carttext() {
         :selectitm.product_name==="Canvas" & selectitm.product?
         <>
             {selectitm.frame? 
-             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
             {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
                 <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
             )):null}
@@ -409,7 +444,7 @@ export default function Carttext() {
     :selectitm.product_name==="Canvas" & !selectitm.product?
     <>
         {selectitm.frame? 
-         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
         {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
             <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
         )):null}
@@ -440,9 +475,9 @@ export default function Carttext() {
       </div>
       </div>    
  )):null}</>
-    :selectitm.product?
-    <div className={selectitm.frame?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frame?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
-    <img src={selectitm.product.length?selectitm.product[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    :selectitm.productid?
+    <div className={selectitm.frameid?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frameid?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
+    <img src={selectitm.productid.length?imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
     </div>
     :null}
         
