@@ -2,17 +2,28 @@ import React from 'react'
 import { BaseUrl } from './Url'
 import axios from 'axios'
 
-export default async function Callaxios(method,url,datalist) {
+export default async function Callaxios(method,url,datalist,token) {
     // let token =localStorage.getItem('fotoframe_token');
     let body = {
         method:method,
         url:BaseUrl+url,
-        // headers:{"Authorization" : token},
+        // headers:{"Authorization" : window.localStorage.getItem('fotoframe_usertoken')},
         data: datalist
+    }
+    if (token)
+    {
+        body = {
+            method:method,
+            url:BaseUrl+url,
+            headers:{"Authorization" : window.localStorage.getItem('fotoframe_usertoken')},
+            data: datalist
+        }
     }
     try {
         if(method==="get"){
-            let data = await axios.get(BaseUrl+url,{params:datalist})
+            let data = await axios.get(BaseUrl+url,{params:datalist,headers: {
+                'Authorization':window.localStorage.getItem("fotoframe_usertoken")
+              }})
             return data
         }else{
             let data = await  axios(body)

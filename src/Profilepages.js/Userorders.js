@@ -65,13 +65,13 @@ export default function Userorders() {
                 {cartdata.length?cartdata.map((citm,ck)=>(
                 <tr key={ck}>
                   <td className="option text-start d-flex flex-row align-items-center ps-0">
-                    <figure className="rounded w-17"><img src={citm.product_type===("Mini Frame")?"/assets/img/photos/mini-frames-black.png":citm.product_type==="College"?"/assets/img/photos/collage-black.png":citm.product_type==="Canvas"?"/assets/img/photos/canvas.png":citm.product_type==="Print"?"/assets/img/photos/print.png":imgUrl+citm.product[0].product_image} alt="" /></figure>
+                    <figure className="rounded w-17"><img src={citm.product?imgUrl+citm.product[0].product_image: citm.product_type===("Mini Frame")?"/assets/img/photos/mini-frames-black.png":citm.product_type==="College"?"/assets/img/photos/collage-black.png":citm.product_type==="Canvas"?"/assets/img/photos/canvas.png":citm.product_type==="Print"?"/assets/img/photos/print.png":imgUrl+citm.product[0].product_image} alt="" /></figure>
                     <div className="w-100 ms-4">
                       <h3 className="post-title h6 lh-xs mb-1">{citm.product?citm.product.length?citm.product[0].product_name:citm.product_type:citm.product_type} </h3>
                       <div className="small">Papper Type: {citm.papper} </div>
                       <div className="small">Size: {citm.size}</div>
                       <div className="small">Orientation: {citm.orientation}</div>
-                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
+                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-order" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
                       
                     </div>
                   </td>
@@ -112,7 +112,7 @@ export default function Userorders() {
   </section>
   {/* /section */}
  {/*/.modal */}
-<div className="modal fade" id="modal-signup" tabIndex={-1}>
+<div className="modal fade" id="modal-order" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm" style={selectitm.product_type==="College"& selectitm.orientation!=="Portait"?{maxWidth:"900px"}:{}}>
     <div className="modal-content text-center">
       <div className="modal-body">

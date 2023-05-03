@@ -6,13 +6,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import moment from 'moment';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { ListManager } from 'react-beautiful-dnd-grid';
 import { BaseUrl, imgUrl } from '../Component.js/Url';
 export default function Profilepage() {
   const [cartdata,setcartdata]=useState([])
   const [userdata,setuserdata]=useState([])
   const [selectitm,setselectitm]=useState('')
   let navigate = useNavigate();
-  console.log("cartdata",cartdata)
+  // console.log("cartdata",cartdata)
     useEffect(() => {
       GetUser()
       Getuserorder()
@@ -36,7 +38,7 @@ export default function Profilepage() {
           'Authorization':  window.localStorage.getItem("fotoframe_usertoken")
         }
       })
-      console.log("userdata",data)
+      // console.log("userdata",data)
       if(data.status===200){
         setuserdata(data.data)
       }
@@ -123,13 +125,13 @@ export default function Profilepage() {
                 {cartdata.length?cartdata.map((citm,ck)=>(
                 <tr key={ck}>
                   <td className="option text-start d-flex flex-row align-items-center ps-0">
-                    <figure className="rounded w-17"><img src={citm.product_type===("Mini Frame")?"/assets/img/photos/mini-frames-black.png":citm.product_type==="College"?"/assets/img/photos/collage-black.png":citm.product_type==="Canvas"?"/assets/img/photos/canvas.png":citm.product_type==="Print"?"/assets/img/photos/print.png":imgUrl+citm.product[0].product_image} alt="" /></figure>
+                    <figure className="rounded w-17"><img src={citm.product?imgUrl+citm.product[0].product_image: citm.product_type===("Mini Frame")?"/assets/img/photos/mini-frames-black.png":citm.product_type==="College"?"/assets/img/photos/collage-black.png":citm.product_type==="Canvas"?"/assets/img/photos/canvas.png":citm.product_type==="Print"?"/assets/img/photos/print.png":imgUrl+citm.product[0].product_image} alt="" /></figure>
                     <div className="w-100 ms-4">
                       <h3 className="post-title h6 lh-xs mb-1">{citm.product?citm.product.length?citm.product[0].product_name:citm.product_type:citm.product_type} </h3>
                       <div className="small">Papper Type: {citm.papper} </div>
                       <div className="small">Size: {citm.size}</div>
                       <div className="small">Orientation: {citm.orientation}</div>
-                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
+                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-order" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
                       
                     </div>
                   </td>
@@ -164,7 +166,163 @@ export default function Profilepage() {
   </section>
   {/* /section */}
  {/*/.modal */}
-
+ <div className="modal fade" id="modal-order" tabIndex={-1}>
+  <div className="modal-dialog modal-dialog-centered modal-sm" style={selectitm.product_type==="College"& selectitm.orientation!=="Portait"?{maxWidth:"900px"}:{}}>
+    <div className="modal-content text-center">
+      <div className="modal-body">
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        <div className="modal-body">
+        {selectitm?<>  
+        {selectitm.product_type==="Mini Frame"?
+        <div className='row'>
+        {selectitm? selectitm.image_url.split(',').map((itm,k)=>(
+            <div key={k} className='col-12 col-md-6 '>
+            {/* <div className="mt-2 item">
+              <figure className='framebox-shadow' >
+              <img src="\assets\images\black-frame.png" alt="example"  style={{width:"100%"}} /> 
+              <img src={itm} alt="img" className='minimage' style={selectitm.frame_look==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
+               
+              </figure>
+            </div> */}
+            <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??+imgUrl+"/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
+                <img src={itm} key={k} alt="img" className='' style={selectitm.frame_look==="MODERN"?{width:"250px"}:{width:"250px",padding:"10px"}}    />     
+            )):null}
+            </div>
+            </div>
+            ))
+            :null}</div>
+            :selectitm.product_type==="College" & selectitm.orientation==="LandScape"?
+            <div className="overflowbar " >  
+            {selectitm.image_url ? 
+            <div className={"d-flex border-cp framebox-shadow"} style={selectitm.image_url.split(',').length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.split(',').length===3?{width:"780px",height:"200px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+              
+            {selectitm.image_url?selectitm.image_url.split(',').map((itm,k)=>(               
+                <img src={itm} key={k} alt="img" className={selectitm.image_url.split(',').length===2?"image-lcp1 imagelcp_width2":"image-lcp1 imagelcp_width"}    />     
+            )):null}
+            </div>  
+            :null}     
+        </div>
+          :selectitm.product_type==="College" & selectitm.orientation==="Portait"?
+          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+              <DragDropContext >
+      <Droppable droppableId="uploaded-images" direction='vertical'>
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef} >
+            {selectitm.image_url.split(',').map((image, index) => (
+              <Draggable key={index} draggableId={index.toString()} index={index}>
+                {(provided) => (
+                  <img
+                  src={image}
+                  alt="img"
+                  className="image-pcp pcpwidth "
+                  
+                    
+                    ref={provided.innerRef}
+                  />
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+            </div> 
+        :selectitm.product_type==="College" & selectitm.orientation==="Square"?
+        <div className="border-cp framebox-shadow" style={selectitm.image_url.split(',').length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.split(',').length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+              
+    <div className="App">
+      <ListManager
+        items={selectitm.image_url.split(',')}
+        direction="horizontal"
+        maxItems={selectitm.image_url.split(',').length===4? 2:selectitm.image_url.split(',').length===9?3:4}
+        render={item => <img src={item} alt="img" className='square-image' style={selectitm.image_url.split(',').length===12?{width:"120px",height:"100%"}:selectitm.image_url.split(',').length===9?{width:"160px",height:"100%"}:{width:"180px",height:"100%"}}/>}
+        onDragEnd={() => {}}
+        dragEnabled={false}
+       
+      />
+    </div>
+            </div>
+        :selectitm.product_type==="Canvas" & selectitm.product?
+        <>
+            {selectitm.frame? 
+             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
+                <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
+            )):null}
+            </div>
+            :
+            <>
+            {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>( 
+              <div className=" margin-css m-auto" >            
+              <div className=' ' >             
+              <div className='canvas-rotate '>
+                <img src={itm} alt="img" style={{width:"250px "}}   />   
+                <div className='canvas-border '>
+                  
+                <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
+                </div>
+              </div>
+              </div> 
+        
+          </div>   
+              )):null}
+              </>  }</>
+    :selectitm.product_type==="Canvas" & !selectitm.product?
+    <>
+        {selectitm.frame? 
+         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+        {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
+            <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
+        )):null}
+        </div>
+        :
+        <>
+        {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>( 
+          <div key={k} className=" margin-css m-auto" >            
+          <div className=' ' >             
+          <div className='canvas-rotate '>
+            <img src={itm} alt="img" style={{width:"250px "}}   />   
+            <div className='canvas-border '>
+              
+            <img src={itm} alt="img" style={{maxWidth:"none",height:"100%"}}   /> 
+            </div>
+          </div>
+          </div> 
+    
+      </div>   
+          )):null}
+          </>  }</>
+    :selectitm.product_type==="Print"?<>
+    {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
+      <div key={k} className='  ' >             
+      <div className='box-shadow p-1 'style={{width:"50%",margin:"auto"}}>
+        <img src={itm} alt="img" style={{width:"100%"}}   />   
+       
+      </div>
+      </div>    
+ )):null}</>
+    :selectitm.product?
+    <div className={selectitm.frame?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frame?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
+    <img src={selectitm.product.length?imgUrl+selectitm.product[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    </div>
+    :null}
+    </>:null}
+       
+        <div />
+        </div>
+        
+       
+        {/*/.social */}
+      </div>
+      {/*/.modal-content */}
+    </div>
+    {/*/.modal-body */}
+  </div>
+  {/*/.modal-dialog */}
+</div>
+  
 {/* modal1start */}
 {/* modal check */}
 

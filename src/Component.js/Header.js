@@ -14,8 +14,8 @@ export default function Header() {
   const [signusername,setsignusername]=useState('')
   const [signpassword,setsignpassword]=useState('')
   const [signrepassword,setsignrepassword]=useState('')
-  const [modal2,setmodal2]=useState(false)
-  const [modal1,setmodal1]=useState(false)
+  const [modal21,setmodal21]=useState(false)
+  const [modal11,setmodal11]=useState(false)
   let navigate = useNavigate();
   useEffect(() => {
     
@@ -41,8 +41,8 @@ const notifyerror = (msg) => toast.error(msg, {
       console.log("data",data)
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
-        setmodal1(false)
-        setmodal2(false)
+        setmodal11(false)
+        setmodal21(false)
         setsignnull()
         return navigate("/profile")
       }else{
@@ -71,8 +71,8 @@ const notifyerror = (msg) => toast.error(msg, {
         console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
-          setmodal2(false)
-          setmodal1(true)
+          setmodal21(false)
+          setmodal11(true)
           setsignnull()
         }else{
           notifyerror("something went wrong")
@@ -91,7 +91,7 @@ const notifyerror = (msg) => toast.error(msg, {
     if(window.localStorage.getItem("fotoframe_usertoken")){
       return navigate("/profile")
     }else{
-      setmodal1(true)
+      setmodal11(true)
     }
   }
   return (
@@ -268,12 +268,12 @@ const notifyerror = (msg) => toast.error(msg, {
         {/* /.offcanvas-body */}
       </div>
       {/* /.offcanvas */}
-      <div className={modal1?"modal fade show spinner-container":"modal fade"} style={modal1?{display:"block"}:{display:"none"}} id="modal-signin" tabIndex={-1}>
+      <div className={modal11?"modal fade show spinner-container":"modal fade"} style={modal11?{display:"block"}:{display:"none"}} id="modal-signin" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal1(!modal1)&&setsignnull()} className="btn-close"  />
-        <h2 className="mb-3 text-start">{modal1?"Signin to Order":"Welcome Back"}</h2>
+        <button type="button" onClick={()=>setmodal11(!modal11)&&setsignnull()} className="btn-close"  />
+        <h2 className="mb-3 text-start">{modal11?"Signin to Order":"Welcome Back"}</h2>
         <p className="lead mb-6 text-start">Fill your email and password to sign in.</p>
         <form onSubmit={(e)=>login(e)} className="mb-3">
           <div className="form-floating mb-4">
@@ -289,7 +289,7 @@ const notifyerror = (msg) => toast.error(msg, {
         </form>
         {/* /form */}
         {/* <p className="mb-1"><a href="#" className="hover">Forgot Password?</a></p> */}
-        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal1(false) & setmodal2(true) & setsignnull()}  className="hover">Sign up</a></p>
+        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal11(false) & setmodal21(true) & setsignnull()}  className="hover">Sign up</a></p>
       
         {/*/.social */}
       </div>
@@ -300,11 +300,11 @@ const notifyerror = (msg) => toast.error(msg, {
   {/*/.modal-dialog */}
 </div>
 {/*/.modal */}
-<div className={modal2?"modal fade show spinner-container":"modal fade"} style={modal2?{display:"block"}:{display:"none"}} id="modal-signup" tabIndex={-1}>
+<div className={modal21?"modal fade show spinner-container":"modal fade"} style={modal21?{display:"block"}:{display:"none"}} id="modal-signup" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal2(!modal2)} className="btn-close"  />
+        <button type="button" onClick={()=>setmodal21(!modal21)} className="btn-close"  />
         <h2 className="mb-3 text-start">Sign up to FotoFrame</h2>
         <p className="lead mb-6 text-start">Registration takes less than a minute.</p>
         <form onSubmit={(e)=>postuser(e)} className="text-start mb-3">
@@ -330,7 +330,7 @@ const notifyerror = (msg) => toast.error(msg, {
           <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
         </form>
         {/* /form */}
-        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal2(false) & setmodal1(true)} className="hover">Sign in</a></p>
+        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal21(false) & setmodal11(true)} className="hover">Sign in</a></p>
         
         {/*/.social */}
       </div>

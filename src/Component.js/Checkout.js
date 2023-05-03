@@ -124,12 +124,13 @@ const notifyerror = (msg) => toast.error(msg, {
             status:"new",
           }
           // console.log("daatalist",datalist)
-          let data = await Callaxios("post","order/orders/",datalist)
+          let data = await Callaxios("post","order/orders/",datalist,"token")
           // console.log("dataaxios",data)
           if (data.data.Status===200){
             Payment_Page(data.data.order_id)
             setload(true)
             // notify("ordered Successfully")
+            
             setbillnull()
   
           }else{
@@ -166,7 +167,7 @@ const notifyerror = (msg) => toast.error(msg, {
         data: {"username":username,"password":password}
       }
       let data = await axios(body)
-      // console.log("data",data)
+      // console.log("datalogin",data)
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
         postorder()
@@ -213,6 +214,7 @@ const notifyerror = (msg) => toast.error(msg, {
   }
   const Payment_Page = (order_id) => {
     setload(true)
+    window.localStorage.removeItem("ffcart")
     var data = {
         'product_name' : 'check_out',
         'unit_amount' : Math.round (cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery) ,
@@ -228,9 +230,10 @@ const notifyerror = (msg) => toast.error(msg, {
     })
     .then((res) => {
       console.log("response",res)
-        if (res.data.Status === 200){        
+        if (res.data.Status === 200){
+          setload(true)  
           window.location.assign(res.data.Message.url); 
-          setload(false)
+          
         }
         else{
             // setalert({ open : true , msg: "Something Went Wrong",severity:"error"})

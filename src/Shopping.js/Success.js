@@ -6,6 +6,8 @@ import Callaxios from '../Component.js/Callaxios';
 
 export default function Success() {
   const { id,order_id } = useParams();
+  // console.log("id,",id)
+  // console.log("orderid",order_id)
     useEffect(() => {
       changestatus()
     }, [])

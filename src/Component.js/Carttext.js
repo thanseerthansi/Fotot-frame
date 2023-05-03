@@ -19,12 +19,13 @@ export default function Carttext() {
   const [signusername,setsignusername]=useState('')
   const [signpassword,setsignpassword]=useState('')
   const [signrepassword,setsignrepassword]=useState('')
-  const [modal2,setmodal2]=useState(false)
-  const [modal1,setmodal1]=useState(false)
+  const [modal22,setmodal22]=useState(false)
+  const [modal112,setmodal112]=useState(false)
   console.log("cartdata",cartdata)
     useEffect(() => {
       GetCart()
       Getshipping()
+      
       window.scrollTo(0, 0);
      
     }, [])
@@ -44,8 +45,21 @@ export default function Carttext() {
         // console.log("cart",cart_list)
         cart_list = JSON.parse(cart_list)   
         console.log("cart",cart_list)  
-        setcartdata(cart_list)
+        if (cart_list.length){
+            cart_list.forEach(element => {
+              if(element.frame){
+                element["frameid"]=element.frame
+            }
+              if(element.product){
+                element["productid"]=element.product
+            }
+            });
+        }
+        setcartdata([...cart_list])
+        postcartdata()
       }
+    }else{
+      Getcartproduct()
     }
     
   }
@@ -88,6 +102,7 @@ export default function Carttext() {
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
         notify("Successfully login")
+        GetCart()
       }else{
         notifyerror("invalid Username or password")
       }
@@ -103,11 +118,11 @@ export default function Carttext() {
     try {
       if(signpassword===signrepassword){
         let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        console.log("data",data)
+        // console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
-          setmodal2(false)
-          setmodal1(true)
+          setmodal22(false)
+          setmodal112(true)
           setsignnull()
         }else{
           notifyerror("something went wrong")
@@ -122,15 +137,70 @@ export default function Carttext() {
       
     }
   }
+  const Getcartproduct=async()=>{
+    console.log("getcartproduct....")
+    try{
+      let data = await Callaxios("get","order/cart/")
+      console.log("datacart",data)
+      if(data.status===200){
+        if (data.data.length){
+          console.log("havegetcart")
+          let cart =data.data
+          cart.forEach(element => {           
+            if (element.image_url){
+              let image=[]
+              element.image_url.split(',').forEach(url=>{
+                image.push(url)
+              });
+              element['image_url']=image
+            }
+            console.log("afteraddimage",cart)
+          });
+          setcartdata(cart)
+        }
+      }
+    }catch{
+
+    }
+  }
+  const postcartdata=async()=>{
+    console.log("postcartdata....")
+    try {
+      if(window.localStorage.getItem("fotoframe_usertoken")){
+        let postcart = cartdata 
+        console.log("havecartdata in postcart")
+        postcart.forEach(element=>{
+          if (element.frame){
+            delete element['frame']
+          }
+          if(element.product){
+            delete element['product']
+          }         
+        });
+        console.log("cartpost",postcart)
+        let data = await Callaxios("post","order/cart/",postcart,"token")
+        console.log("postcartdata",data)
+        if(data.data.Status===200){
+          window.localStorage.removeItem("ffcart")
+          Getcartproduct()
+        }
+      }
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <div>
         <div>
   <section className="wrapper bg-light">
     <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
       <div className="row gx-md-8 gx-xl-12 gy-12">
+        {window.localStorage.getItem("fotoframe_usertoken")?null:
          <div className="alert alert-blue alert-icon mb-6" role="alert">
-          <i className="uil uil-exclamation-circle" /> Not showing Your Cart? <a href="#" data-bs-target="#modal-signin" data-bs-toggle="modal" data-bs-dismiss="modal" className="alert-link hover">Sign in</a> for Betters experience.
+          <i className="uil uil-exclamation-circle" /> Not showing Your Cart? <a href="#" onClick={()=>setmodal112(!modal112)} className="alert-link hover">Sign in</a> for Betters experience.
         </div>
+        }
         <div className="col-lg-8"> 
           <div className="table-responsive">
             <table className="table text-center shopping-cart">
@@ -159,7 +229,7 @@ export default function Carttext() {
                       <div className="small">Papper Type: {citm.papper} </div>
                       <div className="small">Size: {citm.size}</div>
                       <div className="small">Orientation: {citm.orientation}</div>
-                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-signup" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
+                      <div className="small"><u className='hover pointerviewb' onClick={()=>setselectitm(citm)} data-bs-target="#modal-cart" data-bs-toggle="modal" data-bs-dismiss="modal"><AiOutlineEye size={15} /> Preview</u></div>
                       
                     </div>
                   </td>
@@ -240,7 +310,7 @@ export default function Carttext() {
   </section>
   {/* /section */}
  {/*/.modal */}
-<div className="modal fade" id="modal-signup" tabIndex={-1}>
+<div className="modal fade" id="modal-cart" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm" style={selectitm.product_name==="College"& selectitm.orientation!="Portait"?{maxWidth:"900px"}:{}}>
     <div className="modal-content text-center">
       <div className="modal-body">
@@ -271,7 +341,7 @@ export default function Carttext() {
             :null}     
         </div>
           :selectitm.product_name==="College" & selectitm.orientation==="Portait"?
-          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frame?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
               <DragDropContext >
       <Droppable droppableId="uploaded-images" direction='vertical'>
         {(provided) => (
@@ -386,14 +456,14 @@ export default function Carttext() {
   </div>
   {/*/.modal-dialog */}
 </div>
-{/* modal1start */}
+{/* modal112start */}
 {/* modal check */}
-<div className={modal1?"modal fade show spinner-container":"modal fade"} style={modal1?{display:"block"}:{display:"none"}} id="modal-signin" tabIndex={-1}>
+<div className={modal112?"modal fade show spinner-container":"modal fade"} style={modal112?{display:"block"}:{display:"none"}}  tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal1(!modal1)&&setsignnull()} className="btn-close"  />
-        <h2 className="mb-3 text-start">{modal1?"Signin to Order":"Welcome Back"}</h2>
+        <button type="button" onClick={()=>setmodal112(false) & setsignnull()} className="btn-close"  />
+        <h2 className="mb-3 text-start">{modal112?"Signin to Order":"Welcome Back"}</h2>
         <p className="lead mb-6 text-start">Fill your email and password to sign in.</p>
         <form onSubmit={(e)=>login(e)} className="mb-3">
           <div className="form-floating mb-4">
@@ -409,7 +479,7 @@ export default function Carttext() {
         </form>
         {/* /form */}
         {/* <p className="mb-1"><a href="#" className="hover">Forgot Password?</a></p> */}
-        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal1(false) & setmodal2(true) & setsignnull()}  className="hover">Sign up</a></p>
+        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal112(false) & setmodal22(true) & setsignnull()}  className="hover">Sign up</a></p>
       
         {/*/.social */}
       </div>
@@ -420,11 +490,11 @@ export default function Carttext() {
   {/*/.modal-dialog */}
 </div>
 {/*/.modal */}
-<div className={modal2?"modal fade show spinner-container":"modal fade"} style={modal2?{display:"block"}:{display:"none"}} id="modal-signup" tabIndex={-1}>
+<div className={modal22?"modal fade show spinner-container":"modal fade"} style={modal22?{display:"block"}:{display:"none"}}  tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
-        <button type="button" onClick={()=>setmodal2(!modal2)} className="btn-close"  />
+        <button type="button" onClick={()=>setmodal22(false)} className="btn-close"  />
         <h2 className="mb-3 text-start">Sign up to FotoFrame</h2>
         <p className="lead mb-6 text-start">Registration takes less than a minute.</p>
         <form onSubmit={(e)=>postuser(e)} className="text-start mb-3">
@@ -450,7 +520,7 @@ export default function Carttext() {
           <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
         </form>
         {/* /form */}
-        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal2(false) & setmodal1(true)} className="hover">Sign in</a></p>
+        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal22(false) & setmodal112(true)} className="hover">Sign in</a></p>
         
         {/*/.social */}
       </div>
