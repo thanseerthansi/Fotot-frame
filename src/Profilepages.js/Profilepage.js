@@ -58,7 +58,7 @@ export default function Profilepage() {
           'Authorization':window.localStorage.getItem("fotoframe_usertoken")
         }
       })
-      console.log("orderdata",data)
+      // console.log("orderdata",data)
       if (data.status===200){
         setcartdata(data.data)
       }

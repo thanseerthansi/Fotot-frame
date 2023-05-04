@@ -22,8 +22,8 @@ export default function Productdetails() {
     const [frameprice,setframeprice]=useState('')
     const [framemodel,setframemodel]=useState('')
     let navigate = useNavigate();
-    console.log("frameprice",frameprice)
-    console.log("selectitm",selectitm)
+    // console.log("frameprice",frameprice)
+    // console.log("selectitm",selectitm)
     useEffect(() => {
         window.scrollTo(0, 0);     
         Getproduct()  
@@ -40,8 +40,8 @@ export default function Productdetails() {
     const Getproduct=async()=>{
       try {
         let data = await Callaxios("get","product/product/",{id:prod_id})
-        console.log("datda",data)
-        console.log("data",data)
+        // console.log("datda",data)
+        // console.log("data",data)
         if(data.status===200){
           setproductdata(data.data)       
         }
@@ -53,7 +53,7 @@ export default function Productdetails() {
       try {
         let data = await Callaxios("get","frame/frametype/")
         if (data.status===200){
-          console.log("dataframe",data.data)
+          // console.log("dataframe",data.data)
           setframetypedata(data.data)
         }
         // console.log("data",data)
@@ -62,9 +62,9 @@ export default function Productdetails() {
       }
     } 
     const frametypehandler=(value)=>{
-      console.log("value",value)
+      // console.log("value",value)
       let data = frametypedata.filter(t=>t.frame_type===value)
-      console.log("frametypedtafilter",data)
+      // console.log("frametypedtafilter",data)
       if(data.length){
         setframetype(data[0])
         setframe('')

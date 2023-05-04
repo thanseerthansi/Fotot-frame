@@ -23,7 +23,7 @@ export default function Checkout() {
   const [modal2,setmodal2]=useState(false)
   const [modal1,setmodal1]=useState(false)
   const [load,setload]=useState(false)
-
+  // console.log("cartdatamaindaa",cartdata)
   useEffect(() => {
     GetCart()
     Getshipping()
@@ -48,10 +48,48 @@ const notifyerror = (msg) => toast.error(msg, {
         // console.log("cart",cart_list)
         cart_list = JSON.parse(cart_list)   
         // console.log("cart",cart_list)  
+        if (cart_list.length){
+          cart_list.forEach(element => {
+            if(element.frame){
+              element["frameid"]=element.frame.id
+          }
+            if(element.product){
+              element["productid"]=element.product[0].id
+          }
+          });
+      }
         setcartdata(cart_list)
       }
+    }else{
+      Getcartdata()
     }
     
+  }
+  const Getcartdata=async()=>{
+    // console.log("getcartproduct....")
+    try{
+      let data = await Callaxios("get","order/cart/")
+      // console.log("datacart",data)
+      if(data.status===200){
+        if (data.data.length){
+          // console.log("havegetcart")
+          let cart =data.data
+          cart.forEach(element => {           
+            if (element.image_url){
+              let image=[]
+              element.image_url.split(',').forEach(url=>{
+                image.push(url)
+              });
+              element['image_url']=image
+            }
+            // console.log("afteraddimage",cart)
+          });
+          setcartdata([...cart])
+        }
+      }
+    }catch{
+
+    }
   }
   const Getshipping=async()=>{
     try {
@@ -100,11 +138,11 @@ const notifyerror = (msg) => toast.error(msg, {
               papper:element.papper,
             }
             if(element.product){
-              data.productid=element.product[0].id
+              data.productid=element.productid
             }
             // console.log("frameelements",element.frame)
             if(element.frame){
-              data.frameid=element.frame.id
+              data.frameid=element.frameid
             }
             // console.log("dataelement",data)
           body.push(data)
@@ -125,13 +163,14 @@ const notifyerror = (msg) => toast.error(msg, {
           }
           // console.log("daatalist",datalist)
           let data = await Callaxios("post","order/orders/",datalist,"token")
-          // console.log("dataaxios",data)
+          // console.log("dataaxiospost",data)
           if (data.data.Status===200){
             Payment_Page(data.data.order_id)
             setload(true)
             // notify("ordered Successfully")
             
             setbillnull()
+            
   
           }else{
             notifyerror("Something went wrong")}
@@ -181,12 +220,12 @@ const notifyerror = (msg) => toast.error(msg, {
       
   }
   const postuser=async(e)=>{
-    console.log("postuser")
+    // console.log("postuser")
     e.preventDefault()
     try {
       if(signpassword===signrepassword){
         let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        console.log("data",data)
+        // console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
           setmodal2(false)
@@ -212,9 +251,30 @@ const notifyerror = (msg) => toast.error(msg, {
     setsignpassword('')
     setsignrepassword('')
   }
+  const deletecart=async(id)=>{
+    try {
+      // console.log("ids",id)
+      let data = await Callaxios("delete","order/cart/",{id:JSON.stringify(id)},"token")
+      // console.log("deletedata",data)
+      if (data.data.Status===200){
+        
+      }
+    } catch (error) {
+      
+    }
+  }
   const Payment_Page = (order_id) => {
     setload(true)
-    window.localStorage.removeItem("ffcart")
+    if(window.localStorage.getItem("ffcart")){
+      window.localStorage.removeItem("ffcart")
+    }else{
+      let ids =[]
+      cartdata.forEach(element=>{
+        ids.push(element.id)
+      })
+      deletecart(ids)
+    }
+    
     var data = {
         'product_name' : 'check_out',
         'unit_amount' : Math.round (cartdata.reduce((n, {total_price}) => n + parseInt(total_price), 0)+delivery) ,
@@ -229,7 +289,7 @@ const notifyerror = (msg) => toast.error(msg, {
       }
     })
     .then((res) => {
-      console.log("response",res)
+      // console.log("response",res)
         if (res.data.Status === 200){
           setload(true)  
           window.location.assign(res.data.Message.url); 

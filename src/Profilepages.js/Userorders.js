@@ -13,7 +13,7 @@ export default function Userorders() {
     const [cartdata,setcartdata]=useState([])
     // const [delivery,setdelivery]=useState('')
     const [selectitm,setselectitm]=useState('')
-    console.log("selectitm",selectitm)
+    // console.log("selectitm",selectitm)
     useEffect(() => {
         Getuserorder()
     }, [])
@@ -25,7 +25,8 @@ export default function Userorders() {
               'Authorization':window.localStorage.getItem("fotoframe_usertoken")
             }
           })
-          console.log("orderdata",data)
+          // 
+          ("orderdata",data)
           if (data.status===200){
             setcartdata(data.data)
           }

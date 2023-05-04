@@ -17,7 +17,7 @@ export default function Shoppinghome() {
   const Getproduct=async()=>{
     try {
       let data = await Callaxios("get","product/product/")
-      console.log("data",data)
+      // console.log("data",data)
       if(data.status===200){
         setproductdata(data.data)       
       }

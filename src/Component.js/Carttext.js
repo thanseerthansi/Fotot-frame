@@ -21,7 +21,7 @@ export default function Carttext() {
   const [signrepassword,setsignrepassword]=useState('')
   const [modal22,setmodal22]=useState(false)
   const [modal112,setmodal112]=useState(false)
-  console.log("selectitm",selectitm)
+  // console.log("selectitm",selectitm)
     useEffect(() => {
       GetCart()
       Getshipping()
@@ -44,7 +44,7 @@ export default function Carttext() {
       if (cart_list.length){
         // console.log("cart",cart_list)
         cart_list = JSON.parse(cart_list)   
-        console.log("cart",cart_list)  
+        // console.log("cart",cart_list)  
         if (cart_list.length){
             cart_list.forEach(element => {
               if(element.frame){
@@ -66,7 +66,7 @@ export default function Carttext() {
   const Getshipping=async()=>{
     try {
       let data = await Callaxios("get","product/delivery/")
-      console.log("delsi",data)
+      // console.log("delsi",data)
       if (data.status===200){
         setdelivery(data.data[0].delivery_charge)
       }
@@ -88,8 +88,8 @@ export default function Carttext() {
   }
   const deletecart=async(id)=>{
     try {
-      let data = await Callaxios("delete","order/cart/",{id:(JSON.stringify(id))},"token")
-      console.log("deletedata",data)
+      let data = await Callaxios("delete","order/cart/",{id:JSON.stringify([id])},"token")
+      // console.log("deletedata",data)
       if (data.data.Status===200){
         Getcartproduct()
       }
@@ -118,6 +118,7 @@ export default function Carttext() {
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
         notify("Successfully login")
+        setmodal112(false)
         GetCart()
       }else{
         notifyerror("invalid Username or password")
@@ -129,7 +130,7 @@ export default function Carttext() {
       
   }
   const postuser=async(e)=>{
-    console.log("postuser")
+    // console.log("postuser")
     e.preventDefault()
     try {
       if(signpassword===signrepassword){
@@ -154,13 +155,13 @@ export default function Carttext() {
     }
   }
   const Getcartproduct=async()=>{
-    console.log("getcartproduct....")
+    // console.log("getcartproduct....")
     try{
       let data = await Callaxios("get","order/cart/")
-      console.log("datacart",data)
+      // console.log("datacart",data)
       if(data.status===200){
         if (data.data.length){
-          console.log("havegetcart")
+          // console.log("havegetcart")
           let cart =data.data
           cart.forEach(element => {           
             if (element.image_url){
@@ -170,7 +171,7 @@ export default function Carttext() {
               });
               element['image_url']=image
             }
-            console.log("afteraddimage",cart)
+            // console.log("afteraddimage",cart)
           });
           setcartdata(cart)
         }
@@ -180,13 +181,13 @@ export default function Carttext() {
     }
   }
   const postcartdata=async(cart_list)=>{
-    console.log("postcartdata....")
+    // console.log("postcartdata....")
     try {
       if(window.localStorage.getItem("fotoframe_usertoken")){
         let postcart = cart_list 
-        console.log("havecartdata in postcart",postcart)
+        // console.log("havecartdata in postcart",postcart)
         postcart.forEach(element=>{
-          console.log("element",element)
+          // console.log("element",element)
           // if (element.frame){
           //   delete element['frame']
           // }
@@ -212,9 +213,9 @@ export default function Carttext() {
             element['image_url']=element.image_url.join(',')
           }         
         });
-        console.log("cartpost",postcart)
+        // console.log("cartpost",postcart)
         let data = await Callaxios("post","order/cart/",postcart,"token")
-        console.log("postcartdata",data)
+        // console.log("postcartdata",data)
         if(data.data.Status===200){
           window.localStorage.removeItem("ffcart")
           Getcartproduct()
@@ -477,7 +478,7 @@ export default function Carttext() {
  )):null}</>
     :selectitm.productid?
     <div className={selectitm.frameid?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frameid?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
-    <img src={selectitm.productid.length?imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    <img src={selectitm.productid.length?window.localStorage.getItem("ffcart")?selectitm.productid[0].product_image:imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
     </div>
     :null}
         

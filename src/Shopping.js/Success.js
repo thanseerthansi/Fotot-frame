@@ -17,7 +17,7 @@ export default function Success() {
         // console.log("datastatu",data)
         if (data.data.Status===200){
           // notify("status changed")
-          console.log("ststus",data)
+          // console.log("ststus",data)
        
         }
       } catch (error) {

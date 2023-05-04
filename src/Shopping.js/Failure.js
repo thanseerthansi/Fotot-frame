@@ -13,7 +13,7 @@ export default function Failure() {
         try {
             // console.log("id",order_id)
             let data = await Callaxios("delete","order/orders/",{id:order_id})
-            console.log("dat",data)
+            // console.log("dat",data)
             if (data.data.Status===200){
                 console.log("deleted")
             }
