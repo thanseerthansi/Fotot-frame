@@ -123,7 +123,7 @@ const notifyerror = (msg) => toast.error(msg, {
           let body=[]
           // console.log("cartdata",cartdata)
           cartdata.forEach(element => {
-            // console.log("element fraem",element.frame )
+            // console.log("element ",element )
             // console.log("element fraem",element.frame?element.frame.id:"no frame present" )
             let data={
               status:"new",
@@ -137,12 +137,12 @@ const notifyerror = (msg) => toast.error(msg, {
               price:element.total_price,
               papper:element.papper,
             }
-            if(element.product){
-              data.productid=element.productid
+            if(element.product || element.productid){
+              console.log("have prodiuct")
+              data.productid= Array.isArray(element.productid)?element.productid[0].id:typeof(element.productid)==="object"?element.productid.id:element.productid
             }
-            // console.log("frameelements",element.frame)
             if(element.frame){
-              data.frameid=element.frameid
+              data.frameid= typeof(element.frameid)==="object"?element.frameid[0].id:element.frameid
             }
             // console.log("dataelement",data)
           body.push(data)
@@ -162,6 +162,7 @@ const notifyerror = (msg) => toast.error(msg, {
             status:"new",
           }
           // console.log("daatalist",datalist)
+          // return
           let data = await Callaxios("post","order/orders/",datalist,"token")
           // console.log("dataaxiospost",data)
           if (data.data.Status===200){
@@ -225,7 +226,7 @@ const notifyerror = (msg) => toast.error(msg, {
     try {
       if(signpassword===signrepassword){
         let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        // console.log("data",data)
+        console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
           setmodal2(false)
@@ -255,7 +256,7 @@ const notifyerror = (msg) => toast.error(msg, {
     try {
       // console.log("ids",id)
       let data = await Callaxios("delete","order/cart/",{id:JSON.stringify(id)},"token")
-      // console.log("deletedata",data)
+      console.log("deletedata",data)
       if (data.data.Status===200){
         
       }
@@ -289,7 +290,7 @@ const notifyerror = (msg) => toast.error(msg, {
       }
     })
     .then((res) => {
-      // console.log("response",res)
+      console.log("response",res)
         if (res.data.Status === 200){
           setload(true)  
           window.location.assign(res.data.Message.url); 

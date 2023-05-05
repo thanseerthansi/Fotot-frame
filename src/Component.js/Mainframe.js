@@ -6,14 +6,18 @@ import { FaUpload } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { apikey } from './filestackapikey';
 import { Simplecontext } from './Simplecontext';
-import Callaxios from './Callaxios';
+// import Callaxios from './Callaxios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 export default function Mainframe() {
   const { framepricedata,Getframeprice,framedata } = useContext(Simplecontext)
   const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [framematerial,setframematerial]=useState("CLASSIC")
-  // console.log("uploaded images",uploaded_images)
+  const [frame,setframe]=useState()
+  const [selectitm,setselectitm]=useState()
+  // console.log("selectitm ",selectitm)
   let navigate = useNavigate();
   useEffect(() => {
     Upload_Product_Image()
@@ -28,6 +32,14 @@ export default function Mainframe() {
         window.removeEventListener('beforeunload', handleBeforeUnload);
     }
   }, [])
+  const notify = (msg) => toast.success(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
+const notifyerror = (msg) => toast.error(msg, {
+    position: "top-left",
+    theme: "dark",
+    });
   // console.log("papervalue", papervalue)
   // console.log("framematerial", framematerial)
   const frameselect =()=>{
@@ -96,7 +108,7 @@ export default function Mainframe() {
         product_name:"Mini Frame",
         frame_type :"",
         frame_image :"/assets/img/photos/mini-frames-black.png",
-        frame :frameselect()?frameselect():"",
+        frame :selectitm,
         papper :papervalue,
         quantity :1,
         vat :"",
@@ -119,6 +131,7 @@ export default function Mainframe() {
     <div>
       <div className=''>
         <div className='row padd' >
+          <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
            
         <div className=' photocard_style '  >
@@ -126,9 +139,14 @@ export default function Mainframe() {
         <div className='row col-12'>
           {uploaded_images.map((itm,k)=>(
             <div key={k} className='col-6 col-md-4 '>
+            {/* <div className="d-flex border-cp framebox-shadow" style={selectitm?{width:"416px",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{borderImage:`url("http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {uploaded_images.length?uploaded_images.map((itm,k)=>(               
+                <img src={itm} key={k} alt="img" className='' style={{width:"400px"}}    />     
+            )):null}
+            </div> */}
             <div className="mt-2 item">
               <figure className='framebox-shadow' >
-              <img src="/assets/img/photos/black-frame.png" alt="example"  style={{width:"100%"}} /> 
+              <img src={selectitm?selectitm?.image??"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
               <img src={itm} alt="img" className='minimage' style={framematerial==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                 <button onClick={()=>removeimage(k)} className="item-cart"><RxCross2 className='mt-1'/> remove</button>
               </figure>
@@ -178,6 +196,17 @@ export default function Mainframe() {
                 </div>
                 <br/>
                 <div className='line-break'/>
+            <div className='mb-3'>
+              <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
+              <div className='d-flex'>
+                {framedata.map((itm,k)=>(
+                  <div key={k} className='ps-2'>
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                 </div>
+                ))}              
+              </div>
+            </div> 
+                <div className='line-break'/>
                   <div className='row'>
                     <div className='col-8'>
                     <label className="ps-0"><strong className="text-dark">Size</strong></label>
@@ -200,7 +229,7 @@ export default function Mainframe() {
                   </div>
                   
           </div>
-          <a href="#" onClick={()=>addtocart(handlerprice())} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
 
           </div>
         </div>

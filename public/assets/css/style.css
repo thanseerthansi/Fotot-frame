@@ -5773,7 +5773,7 @@ fieldset:disabled .btn {
     font-weight: 700 !important;
     content: "";
     border: 0;
-    content: "\e92d"
+    content: "˅"
 }
 
 .dropdown-toggle:empty::after {
@@ -9791,7 +9791,7 @@ fieldset:disabled .btn {
 }
 
 .offcanvas-backdrop.show {
-    opacity: 1
+    /* opacity: 1 */
 }
 
 .offcanvas-header {
@@ -40214,12 +40214,14 @@ button.hamburger:before {
     }
 }
 
-@media (min-width:576px) {
+/* @media (min-width:576px) {
     .progress-wrap.active-progress {
         opacity: 1
     }
+} */
+.progress-wrap.active-progress {
+    opacity: 1
 }
-
 .btn-close {
     padding: 0 0;
     color: #343f52;
@@ -43403,7 +43405,7 @@ img.svg-inject {
 }
 
 .uil-exclamation-circle:before {
-    content: "\ead0"
+    content: "ⓘ"
 }
 
 .uil-exclamation-octagon:before {

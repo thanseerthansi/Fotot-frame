@@ -150,7 +150,7 @@ export default function Profilepage() {
                 )) : <tr><td> No Orders!</td></tr>}
               </tbody>
             </table>
-        <div className="col-md-4 col-lg-5 ms-auto ms-lg-0 text-md-end">
+        <div  className="col-md-4 col-lg-5 ms-auto ms-lg-0 text-md-end">
         <Link to="/userorder" className="btn btn-primary rounded">View All Orders</Link>
             </div>
           </div>

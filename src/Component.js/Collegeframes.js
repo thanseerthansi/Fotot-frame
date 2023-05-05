@@ -137,7 +137,7 @@ const handleOnDragEnd = (result) => {
     if (data.length){
       // console.log("datdprice",data[0].price)
       let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
-      // console.log("priceno",priceno)
+      console.log("priceno",priceno)
       if (priceno.length){
         return priceno[0]
       }else{

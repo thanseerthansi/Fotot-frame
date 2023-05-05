@@ -88,7 +88,7 @@ export default function Productdetails() {
           product :productdata,
           frame_look:framemodel,
           product_name:productdata[0].product_name +" "+ framemodel?framemodel:"",
-          frame_type :frametype,
+          frame_type :frametype.id,
           frame_image :productdata[0].product_image ,
           frame :frame?selectitm:"",
           papper :"MATTE",

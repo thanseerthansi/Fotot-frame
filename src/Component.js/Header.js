@@ -38,7 +38,7 @@ const notifyerror = (msg) => toast.error(msg, {
         data: {"username":username,"password":password}
       }
       let data = await axios(body)
-      console.log("data",data)
+      // console.log("data",data)
       if(data.data.Status===200){       
         window.localStorage.setItem("fotoframe_usertoken",data.data.token)
         setmodal11(false)
@@ -68,7 +68,7 @@ const notifyerror = (msg) => toast.error(msg, {
     try {
       if(signpassword===signrepassword){
         let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        console.log("data",data)
+        // console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
           setmodal21(false)
@@ -88,6 +88,7 @@ const notifyerror = (msg) => toast.error(msg, {
     }
   }
   const profilehandler=()=>{
+    console.log("profileclicked")
     if(window.localStorage.getItem("fotoframe_usertoken")){
       return navigate("/profile")
     }else{
@@ -193,7 +194,7 @@ const notifyerror = (msg) => toast.error(msg, {
                   
                 </ul>
                 {/* /.navbar-nav */}
-                <div className="offcanvas-footer d-lg-none">
+                {/* <div className="offcanvas-footer d-lg-none">
                   <div>
                     <a href="cdn-cgi/l/email-protection.html#6f09061d1c1b41030e1c1b2f0a020e0603410c0002" className="link-inverse"><span className="__cf_email__" data-cfemail="fd94939b92bd98909c9491d39e9290">[email&nbsp;protected]</span></a>
                     <br /> 00 (123) 456 78 90 <br />
@@ -204,9 +205,9 @@ const notifyerror = (msg) => toast.error(msg, {
                       <a href="/"><FaInstagram color='white' /></a>
                       
                     </nav>
-                    {/* /.social */}
+                  
                   </div>
-                </div>
+                </div> */}
                 {/* /.offcanvas-footer */}
               </div>
             </div>
@@ -268,7 +269,7 @@ const notifyerror = (msg) => toast.error(msg, {
         {/* /.offcanvas-body */}
       </div>
       {/* /.offcanvas */}
-      <div className={modal11?"modal fade show spinner-container":"modal fade"} style={modal11?{display:"block"}:{display:"none"}} id="modal-signin" tabIndex={-1}>
+      <div className={modal11?"modal fade show spinner-container":""} style={modal11?{display:"block"}:{display:"none"}} tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">
@@ -300,7 +301,7 @@ const notifyerror = (msg) => toast.error(msg, {
   {/*/.modal-dialog */}
 </div>
 {/*/.modal */}
-<div className={modal21?"modal fade show spinner-container":"modal fade"} style={modal21?{display:"block"}:{display:"none"}} id="modal-signup" tabIndex={-1}>
+<div className={modal21?"modal fade show spinner-container":""} style={modal21?{display:"block"}:{display:"none"}}  tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm">
     <div className="modal-content text-center">
       <div className="modal-body">

@@ -40,6 +40,7 @@ export default function Carttext() {
   const GetCart=()=>{
     let cart_list
     if(window.localStorage.getItem('ffcart')){
+      // console.log("getitm")
       cart_list = window.localStorage.getItem('ffcart')     
       if (cart_list.length){
         // console.log("cart",cart_list)
@@ -50,9 +51,9 @@ export default function Carttext() {
               if(element.frame){
                 element["frameid"]=element.frame
             }
-              if(element.product){
-                element["productid"]=element.product
-            }
+            if(element.product){
+              element["productid"]=element.product[0].id
+          }
             });
         }
         setcartdata([...cart_list])
@@ -195,15 +196,15 @@ export default function Carttext() {
           //   delete element['product']
           // } 
           if(element.frameid){
-            // console.log("framepresent")
-            element['frameid']=parseInt(element.frameid.id)
+            // console.log("framepresent",typeof(element.frameid))
+            element['frameid']=typeof(element.frameid)==="object"?element.frameid.id: Array.isArray(element.frameid)?element.frameid[0].id:parseInt(element.frameid.id)
             // console.log("framepresentafter....")
           }else{
             delete element.frame
             delete element.frameid
           }       
           if(element.productid){
-            element['productid']=parseInt(element.product.id) 
+            element['productid']=Array.isArray(element.product)?parseInt(element.product[0].id):typeof(element.product)==="object"?element.product.id:element.product
           }else{
             delete element.product
             delete element.productid
@@ -213,7 +214,7 @@ export default function Carttext() {
             element['image_url']=element.image_url.join(',')
           }         
         });
-        // console.log("cartpost",postcart)
+        // console.log("cartpostafretfroeach",postcart)
         let data = await Callaxios("post","order/cart/",postcart,"token")
         // console.log("postcartdata",data)
         if(data.data.Status===200){
@@ -357,7 +358,7 @@ export default function Carttext() {
             <div key={k} className='col-12 col-md-6 '>
             <div className="mt-2 item">
               <figure className='framebox-shadow' >
-              <img src="/assets/img/photos/black-frame.png" alt="example"  style={{width:"100%"}} /> 
+              <img src={selectitm?typeof(selectitm.frame)==="object"?selectitm.frame.image:imgUrl+selectitm.frame[0]?.image??"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
               <img src={itm} alt="img" className='minimage' style={selectitm.frame_look==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                
               </figure>
@@ -478,7 +479,8 @@ export default function Carttext() {
  )):null}</>
     :selectitm.productid?
     <div className={selectitm.frameid?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frameid?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
-    <img src={selectitm.productid.length?window.localStorage.getItem("ffcart")?selectitm.productid[0].product_image:imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    <img src={window.localStorage.getItem("ffcart")?selectitm.product[0].product_image:selectitm? imgUrl+selectitm.productid[0].product_image:""} alt="img" className='' style={{width:"100%",height:"100%"}}    />
+    {/* <img src={selectitm.productid.length?window.localStorage.getItem("ffcart")?selectitm.productid[0].product_image:imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    /> */}
     </div>
     :null}
         

@@ -17,7 +17,7 @@ export default function Footer() {
                                     <a href="/"><FaInstagram color='#d53581'/></a>
                                     <a href="/"><FaYoutube color='#c8312b' /></a>
                                 </nav>
-                                {/* /.social */}
+                                
                             </div>
                             {/* /.widget */}
                         </div>
@@ -52,12 +52,13 @@ export default function Footer() {
                                 <div className="newsletter-wrapper">
                                     {/* Begin Mailchimp Signup Form */}
                                     <div id="mc_embed_signup2">
-                                        <form action="https://elemisfreebies.us20.list-manage.com/subscribe/post?u=aa4947f70a475ce162057838d&id=b49ef47a9a" method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" className="validate " target="_blank" noValidate>
+                                        {/* <form action="https://elemisfreebies.us20.list-manage.com/subscribe/post?u=aa4947f70a475ce162057838d&id=b49ef47a9a" method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" className="validate " target="_blank" noValidate> */}
+                                        <form  method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" className="validate " target="_blank" noValidate>
                                             <div id="mc_embed_signup_scroll2">
-                                                <div className="mc-field-group input-group form-floating">
-                                                    <input type="email" defaultValue name="EMAIL" className="required email form-control" placeholder="Email Address" id="mce-EMAIL2" />
+                                                <div className=" input-group form-floating">
+                                                    <input type="email"  className="required email form-control" placeholder="Email Address" id="mce-EMAIL2" />
                                                     <label htmlFor="mce-EMAIL2">Email Address</label>
-                                                    <input type="submit" defaultValue="Join" name="subscribe" id="mc-embedded-subscribe2" className="btn btn-primary " />
+                                                    <input type="submit"  className="btn btn-primary " />
                                                 </div>
                                                 <div id="mce-responses2" className="clear">
                                                     <div className="response" id="mce-error-response2" style={{ display: 'none' }} />
