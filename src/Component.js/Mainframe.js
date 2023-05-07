@@ -139,7 +139,7 @@ const notifyerror = (msg) => toast.error(msg, {
         <div className='row col-12'>
           {uploaded_images.map((itm,k)=>(
             <div key={k} className='col-6 col-md-4 '>
-            {/* <div className="d-flex border-cp framebox-shadow" style={selectitm?{width:"416px",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{borderImage:`url("http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {/* <div className="d-flex border-cp framebox-shadow" style={selectitm?{width:"416px",margin:"auto",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{borderImage:`url("/assets/img/photos/collage-black.png"})1%  stretch repeat`}} >
             {uploaded_images.length?uploaded_images.map((itm,k)=>(               
                 <img src={itm} key={k} alt="img" className='' style={{width:"400px"}}    />     
             )):null}

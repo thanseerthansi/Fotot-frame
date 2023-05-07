@@ -49533,4 +49533,8 @@ footer.bg-dark.angled.upper-start:before {
         height: 50px;
         animation: spin 1s linear infinite;
       }
-    
+.visible {
+    height: 3em;
+    width: 10em;
+    background: yellow;
+    }

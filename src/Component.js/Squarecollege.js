@@ -13,16 +13,16 @@ export default function Squarecollege () {
   // let framesize =  urlparam.framesize
   let location = useLocation();
   // console.log("location",location)
-  console.log("locationstate",location.state.number)
+  // console.log("locationstate",location.state.number)
 
   let framesize=location.state?location.state.number:""
-  console.log("frameno",framesize)
+  // console.log("frameno",framesize)
     const [uploaded_images, setuploaded_images] = useState([]);
   var client = filestack.init(apikey);
   const [papervalue,setpapervalue]=useState("MATTE")
   const [frame,setframe]=useState("")
   const [selectitm,setselectitm]=useState('')
-  console.log("sleetcitm",selectitm)
+  // console.log("sleetcitm",selectitm)
   let navigate = useNavigate();
   useEffect(() => {
     Upload_Product_Image()
@@ -108,6 +108,7 @@ const addtocart =(pricetag)=>{
     }
     let c_list = cart_list.concat(body)  
     window.localStorage.setItem('ffcart',JSON.stringify(c_list))
+    // console.log("cartlist",c_list)
     return navigate('/carttext')
   } catch (error) {
     console.log(error)
@@ -126,7 +127,7 @@ const handlerprice=()=>{
   if (data.length){
     // console.log("datdprice",data[0].price)
     let priceno = data[0].price.split(',').filter(t=>t.split("-")[0]===uploaded_images.length.toString())
-    console.log("priceno",priceno[0])
+    // console.log("priceno",priceno[0])
     if (priceno.length){
       return priceno[0]
     }else{
@@ -150,7 +151,7 @@ const handlerprice=()=>{
           </div>
           
             {uploaded_images.length? 
-            <div className="border-cp framebox-shadow" style={framesize===2? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:framesize===3?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+            <div className="border-cp framebox-shadow" style={framesize===2? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:framesize===3?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               
     <div className="App">
       <ListManager

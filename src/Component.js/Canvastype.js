@@ -16,7 +16,7 @@ export default function Canvastype() {
            
             
             <div  className='col-12 col-md-4 '>
-            <div className=" margin-csl"  >
+            <div className=" margin-csl" title="Landscape" >
                 <Link to={{pathname: "/canavsframe"}} state={{string: "landscape"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
@@ -32,7 +32,7 @@ export default function Canvastype() {
             </div>
             </div>  
             <div  className='col-12 col-md-4 '>
-            <div className=" margin-csp"  >
+            <div className=" margin-csp" title="portait" >
                 <Link  to={{pathname: "/canavsframe"}} state={{string: "portait"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>
@@ -46,7 +46,7 @@ export default function Canvastype() {
             </div>
             </div>  
             <div  className='col-12 col-md-4 '>
-            <div className=" margin-css" >
+            <div className=" margin-css" title="Square" >
                 <Link  to={{pathname: "/canavsframe"}} state={{string: "square"}}>
               <div className='  ' >             
               <div className='canvas-rotate '>

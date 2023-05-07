@@ -226,7 +226,7 @@ const notifyerror = (msg) => toast.error(msg, {
     try {
       if(signpassword===signrepassword){
         let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        console.log("data",data)
+        // console.log("data",data)
         if (data.data.Status===200){
           notify("Successfully registered")
           setmodal2(false)
@@ -256,7 +256,7 @@ const notifyerror = (msg) => toast.error(msg, {
     try {
       // console.log("ids",id)
       let data = await Callaxios("delete","order/cart/",{id:JSON.stringify(id)},"token")
-      console.log("deletedata",data)
+      // console.log("deletedata",data)
       if (data.data.Status===200){
         
       }
@@ -284,13 +284,13 @@ const notifyerror = (msg) => toast.error(msg, {
         'order_id' : order_id
         
     }
-    axios.post(`${BaseUrl}/order/create-checkout-session/`,data,{
+    axios.post(`${BaseUrl}order/create-checkout-session/`,data,{
       headers : {
         Authorization : window.localStorage.getItem("fotoframe_usertoken")
       }
     })
     .then((res) => {
-      console.log("response",res)
+      // console.log("response",res)
         if (res.data.Status === 200){
           setload(true)  
           window.location.assign(res.data.Message.url); 

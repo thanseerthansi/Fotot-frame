@@ -40,7 +40,8 @@ export default function Carttext() {
   const GetCart=()=>{
     let cart_list
     if(window.localStorage.getItem('ffcart')){
-      // console.log("getitm")
+      // console.log("getitmwindow",window.localStorage.removeItem('ffcart'))
+      // window.localStorage.removeItem('ffcart')
       cart_list = window.localStorage.getItem('ffcart')     
       if (cart_list.length){
         // console.log("cart",cart_list)
@@ -185,7 +186,7 @@ export default function Carttext() {
     // console.log("postcartdata....")
     try {
       if(window.localStorage.getItem("fotoframe_usertoken")){
-        let postcart = cart_list 
+        let postcart =[...cart_list]  
         // console.log("havecartdata in postcart",postcart)
         postcart.forEach(element=>{
           // console.log("element",element)
@@ -220,6 +221,15 @@ export default function Carttext() {
         if(data.data.Status===200){
           window.localStorage.removeItem("ffcart")
           Getcartproduct()
+        }else{
+          // array.forEach(element => {
+            
+          // });
+          // if(element.image_url){
+
+          //   // console.log("image_url",element.image_url)
+          //   element['image_url']=element.image_url.join(',')
+          // }
         }
       }
       
@@ -369,7 +379,7 @@ export default function Carttext() {
             :selectitm.product_name==="College" & selectitm.orientation==="LandScape"?
             <div className="overflowbar " >  
             {selectitm.image_url.length ? 
-            <div className={"d-flex border-cp framebox-shadow"} style={selectitm.image_url.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+            <div className={"d-flex border-cp framebox-shadow"} style={selectitm.image_url.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               
             {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
                 <img key={k} src={itm} alt="img" className={selectitm.image_url.length===2?"image-lcp1 imagelcp_width2":"image-lcp1 imagelcp_width"}    />     
@@ -378,7 +388,7 @@ export default function Carttext() {
             :null}     
         </div>
           :selectitm.product_name==="College" & selectitm.orientation==="Portait"?
-          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               <DragDropContext >
       <Droppable droppableId="uploaded-images" direction='vertical'>
         {(provided) => (
@@ -404,7 +414,7 @@ export default function Carttext() {
     </DragDropContext>
             </div> 
         :selectitm.product_name==="College" & selectitm.orientation==="Square"?
-        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               
     <div className="App">
       <ListManager
@@ -421,7 +431,7 @@ export default function Carttext() {
         :selectitm.product_name==="Canvas" & selectitm.product?
         <>
             {selectitm.frame? 
-             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+             <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}} >
             {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
                 <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
             )):null}
@@ -446,7 +456,7 @@ export default function Carttext() {
     :selectitm.product_name==="Canvas" & !selectitm.product?
     <>
         {selectitm.frame? 
-         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+         <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}} >
         {selectitm.image_url.length?selectitm.image_url.map((itm,k)=>(               
             <img src={itm} key={k} alt="img" className='' style={{width:"250px"}}    />     
         )):null}
@@ -478,7 +488,7 @@ export default function Carttext() {
       </div>    
  )):null}</>
     :selectitm.productid?
-    <div className={selectitm.frameid?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frameid?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
+    <div className={selectitm.frameid?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm.frameid?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
     <img src={window.localStorage.getItem("ffcart")?selectitm.product[0].product_image:selectitm? imgUrl+selectitm.productid[0].product_image:""} alt="img" className='' style={{width:"100%",height:"100%"}}    />
     {/* <img src={selectitm.productid.length?window.localStorage.getItem("ffcart")?selectitm.productid[0].product_image:imgUrl+selectitm.productid[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    /> */}
     </div>

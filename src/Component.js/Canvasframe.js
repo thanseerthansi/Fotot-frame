@@ -7,6 +7,7 @@ import { apikey } from './filestackapikey';
 import { Simplecontext } from './Simplecontext';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify';
+import { imgUrl } from './Url';
 
 export default function Canvasframe() {
   const { framedata,Getframe,framepricedata } = useContext(Simplecontext)
@@ -134,7 +135,7 @@ const notifyerror = (msg) => toast.error(msg, {
           </div>
         <div className="overflowbar m-auto" >       
             {uploaded_images.length? <>
-            {framecanvas?  <div className="d-flex border-cp framebox-shadow" style={{width:"416px",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}} >
+            {framecanvas?  <div className="d-flex border-cp framebox-shadow" style={{width:"416px",margin:"auto",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}} >
             {uploaded_images.length?uploaded_images.map((itm,k)=>(               
                 <img src={itm} key={k} alt="img" className='' style={{width:"400px"}}    />     
             )):null}

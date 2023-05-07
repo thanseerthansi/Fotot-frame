@@ -17,7 +17,7 @@ export default function Collage() {
             <div  className='col-12 col-md-4 '>
               {/* <div><p>You can add 2, 3, or 4 images</p></div> */}
             
-            <div className="card-bodyframe " >
+            <div className="card-bodyframe " title="Landscape frame with 2,3 or 4 images" >
                 <Link to="/Collegeframe">
               <div className=' d-flex border-cp' >
               <div className='image_cp'>
@@ -32,7 +32,7 @@ export default function Collage() {
             
             </div>
             <div  className='col-12 col-md-4 '>
-            <div className="card-bodyframe"style={{marginLeft:"20%",marginRight:"20%"}} >
+            <div className="card-bodyframe"style={{marginLeft:"20%",marginRight:"20%"}} title="Portait frame with 2,3 or 4 images" >
               <Link to="/potratecollege">
               <div className=' border-cp' >
               <div className='image_cl'>
@@ -49,7 +49,7 @@ export default function Collage() {
             </div>
             </div>
             <div  className='col-12 col-md-4 '>
-            <div className="card-bodyframe" >
+            <div className="card-bodyframe" title="Square frame with 4,9 or 16 images">
               <Link to="/squareframes">
               <div className='  border-cp ' >
               <div className='d-flex'>

@@ -160,7 +160,7 @@ const handleOnDragEnd = (result) => {
           </div>
         <div className="overflowbar " >  
             {uploaded_images.length ? 
-            <div className={"d-flex border-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:uploaded_images.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}}   >
+            <div className={"d-flex border-cp framebox-shadow"} style={uploaded_images.length===2?{width:"500px",height:"100%",margin:"auto",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:uploaded_images.length===3?{width:"780px",height:"200px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"1049px",height:"200px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="uploaded-images" direction='horizontal'>
         {(provided) => (
