@@ -360,7 +360,7 @@ export default function Carttext() {
 <div className="modal fade" id="modal-cart" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm" style={selectitm.product_name==="College"& selectitm.orientation!="Portait"?{maxWidth:"900px"}:{}}>
     <div className="modal-content text-center">
-      <div className="modal-body overflowbar">
+      <div className="modal-body ">
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         {selectitm.product_name==="Mini Frame"?
         <div className='row '>
@@ -368,7 +368,8 @@ export default function Carttext() {
             <div key={k} className='col-12 col-md-6 '>
             <div className="mt-2 item">
               <figure className='framebox-shadow' >
-              <img src={selectitm?typeof(selectitm.frame)==="object"?selectitm.frame.image:imgUrl+selectitm.frame[0]?.image??"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
+               
+              <img src={selectitm? Array.isArray(selectitm.frameid)?imgUrl+selectitm.frameid[0]?.image??"/assets/img/photos/black-frame.png":typeof(selectitm.frameid)==="object"? selectitm.frameid.image:"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
               <img src={itm} alt="img" className='minimage' style={selectitm.frame_look==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                
               </figure>

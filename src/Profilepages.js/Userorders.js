@@ -118,23 +118,19 @@ export default function Userorders() {
     <div className="modal-content text-center">
       <div className="modal-body">
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-        <div className="modal-body overflowbar">
+        <div className="modal-body ">
         {selectitm?<>  
         {selectitm.product_type==="Mini Frame"?
-        <div className='row'>
+        <div className='row '>
         {selectitm? selectitm.image_url.split(',').map((itm,k)=>(
             <div key={k} className='col-12 col-md-6 '>
-            {/* <div className="mt-2 item">
+            <div className="mt-2 item">
               <figure className='framebox-shadow' >
-              <img src="\assets\images\black-frame.png" alt="example"  style={{width:"100%"}} /> 
+               
+              <img src={selectitm? Array.isArray(selectitm.frameid)?imgUrl+selectitm.frameid[0]?.image??"/assets/img/photos/black-frame.png":typeof(selectitm.frameid)==="object"? selectitm.frameid.image:"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
               <img src={itm} alt="img" className='minimage' style={selectitm.frame_look==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                
               </figure>
-            </div> */}
-            <div className="d-flex border-cp framebox-shadow" style={{width:"266px",margin:"auto",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??+imgUrl+"/media/Image/black-frame.png"})1%  stretch repeat`}} >
-            {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
-                <img src={itm} key={k} alt="img" className='' style={selectitm.frame_look==="MODERN"?{width:"250px"}:{width:"250px",padding:"10px"}}    />     
-            )):null}
             </div>
             </div>
             ))
