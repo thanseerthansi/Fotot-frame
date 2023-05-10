@@ -112,7 +112,7 @@ export default function Shoppinghome() {
           {/* /nav */}
         </div>
         {/* /column */}
-        <aside className="col-lg-3 sidebar" style={{paddingLeft:"0px"}}>
+        <aside className="col-lg-3 sidebar" >
           <div className="widget">
             <h4 className="widget-title mb-3">Theme</h4>
             <div className='row col-12 overflowx-theme'>
