@@ -121,7 +121,7 @@ export default function Userorders() {
         <div className="modal-body ">
         {selectitm?<>  
         {selectitm.product_type==="Mini Frame"?
-        <div className='row '>
+        <div className='row overflowbar'>
         {selectitm? selectitm.image_url.split(',').map((itm,k)=>(
             <div key={k} className='col-12 col-md-6 '>
             <div className="mt-2 item">

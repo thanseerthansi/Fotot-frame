@@ -363,7 +363,7 @@ export default function Carttext() {
       <div className="modal-body ">
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         {selectitm.product_name==="Mini Frame"?
-        <div className='row '>
+        <div className='row overflowbar'>
         {selectitm? selectitm.image_url.map((itm,k)=>(
             <div key={k} className='col-12 col-md-6 '>
             <div className="mt-2 item">
