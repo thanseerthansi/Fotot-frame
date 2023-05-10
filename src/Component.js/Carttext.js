@@ -418,7 +418,7 @@ export default function Carttext() {
             </div>
         :selectitm.product_name==="College" & selectitm.orientation==="Square"?
         <div className='overflowbar'>
-        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
+        <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"746px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               
     <div className="App">
       <ListManager
