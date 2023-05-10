@@ -360,10 +360,10 @@ export default function Carttext() {
 <div className="modal fade" id="modal-cart" tabIndex={-1}>
   <div className="modal-dialog modal-dialog-centered modal-sm" style={selectitm.product_name==="College"& selectitm.orientation!="Portait"?{maxWidth:"900px"}:{}}>
     <div className="modal-content text-center">
-      <div className="modal-body">
+      <div className="modal-body overflowbar">
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         {selectitm.product_name==="Mini Frame"?
-        <div className='row'>
+        <div className='row '>
         {selectitm? selectitm.image_url.map((itm,k)=>(
             <div key={k} className='col-12 col-md-6 '>
             <div className="mt-2 item">
@@ -388,7 +388,8 @@ export default function Carttext() {
             :null}     
         </div>
           :selectitm.product_name==="College" & selectitm.orientation==="Portait"?
-          <div className=" border-cp framebox-shadow" style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
+          <div className='overflowbar'>
+          <div className=" border-cp framebox-shadow "  style={{width:"300px",margin:"auto",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               <DragDropContext >
       <Droppable droppableId="uploaded-images" direction='vertical'>
         {(provided) => (
@@ -413,6 +414,7 @@ export default function Carttext() {
       </Droppable>
     </DragDropContext>
             </div> 
+            </div>
         :selectitm.product_name==="College" & selectitm.orientation==="Square"?
         <div className='overflowbar'>
         <div className="border-cp framebox-shadow" style={selectitm.image_url.length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm.frameid?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${selectitm?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >

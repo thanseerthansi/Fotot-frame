@@ -118,7 +118,7 @@ export default function Userorders() {
     <div className="modal-content text-center">
       <div className="modal-body">
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-        <div className="modal-body">
+        <div className="modal-body overflowbar">
         {selectitm?<>  
         {selectitm.product_type==="Mini Frame"?
         <div className='row'>
