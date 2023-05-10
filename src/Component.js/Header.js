@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaTwitter,FaInstagram,FaFacebookF } from "react-icons/fa";
 import { BsHandbag } from "react-icons/bs";
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,92 +7,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import { BaseUrl } from './Url';
 import axios from 'axios';
 import Callaxios from './Callaxios';
+import { Simplecontext } from './Simplecontext';
 export default function Header() {
-  const [username,setusername]=useState('')
-  const [password,setpassword]=useState('')
-  const [firstname,setfirstname]=useState('')
-  const [signusername,setsignusername]=useState('')
-  const [signpassword,setsignpassword]=useState('')
-  const [signrepassword,setsignrepassword]=useState('')
-  const [modal21,setmodal21]=useState(false)
-  const [modal11,setmodal11]=useState(false)
+  const {setpromodal1 } = useContext(Simplecontext)
   let navigate = useNavigate();
-  useEffect(() => {
-    
-  }, [])
-  const notify = (msg) => toast.success(msg, {
-    position: "top-left",
-    theme: "dark",
-    });
-const notifyerror = (msg) => toast.error(msg, {
-    position: "top-left",
-    theme: "dark",
-    });
- 
-  const login=async(e)=>{
-    e.preventDefault()
-    try {
-      let body = {
-        method:"post",
-        url:BaseUrl+"user/login/",
-        data: {"username":username,"password":password}
-      }
-      let data = await axios(body)
-      // console.log("data",data)
-      if(data.data.Status===200){       
-        window.localStorage.setItem("fotoframe_usertoken",data.data.token)
-        setmodal11(false)
-        setmodal21(false)
-        setsignnull()
-        return navigate("/profile")
-      }else{
-        notifyerror("invalid Username or password")
-      }
-    } catch (error) {
-      console.log(error) 
-      notifyerror("invalid Username or password")
-    }
-      
-  }
-  const setsignnull=()=>{
-    setfirstname('')
-    setusername('')
-    setsignpassword('')
-    setsignrepassword('')
-    setsignusername('')
-    setpassword('')
-  }
-  const postuser=async(e)=>{
-    // console.log("postuser")
-    e.preventDefault()
-    try {
-      if(signpassword===signrepassword){
-        let data =await Callaxios("post","user/user/",{username:signusername,first_name:firstname,password:signpassword})
-        // console.log("data",data)
-        if (data.data.Status===200){
-          notify("Successfully registered")
-          setmodal21(false)
-          setmodal11(true)
-          setsignnull()
-        }else{
-          notifyerror("something went wrong")
-         
-        }
-      }else{
-        notifyerror("Password and repassword are different")
-        
-      }
-      
-    } catch (error) {
-      
-    }
-  }
   const profilehandler=()=>{
     console.log("profileclicked")
     if(window.localStorage.getItem("fotoframe_usertoken")){
       return navigate("/profile")
     }else{
-      setmodal11(true)
+      setpromodal1(true)
     }
   }
   return (
@@ -184,11 +108,11 @@ const notifyerror = (msg) => toast.error(msg, {
                     {/*/.dropdown-menu */}
                   </li>
                   <li className="nav-item dropdown">
-                    <Link className="nav-link" to="/shopping" >Our Store</Link>
+                    <Link className="nav-link" to="/shopping"  >Our Store</Link>
                     
                   </li>
                   <li className="nav-item dropdown">
-                    <ul onClick={()=>profilehandler()} className="nav-link" style={{cursor:'pointer'}} >Profile</ul>
+                    <ul onClick={()=>profilehandler()} className="nav-link" data-bs-dismiss="offcanvas" aria-label="Close" style={{cursor:'pointer'}} >Profile</ul>
                     
                   </li>
                   
@@ -269,78 +193,9 @@ const notifyerror = (msg) => toast.error(msg, {
         {/* /.offcanvas-body */}
       </div>
       {/* /.offcanvas */}
-      <div className={modal11?"modal fade show spinner-container":""} style={modal11?{display:"block"}:{display:"none"}} tabIndex={-1}>
-  <div className="modal-dialog modal-dialog-centered modal-sm">
-    <div className="modal-content text-center">
-      <div className="modal-body">
-        <button type="button" onClick={()=>setmodal11(!modal11)&&setsignnull()} className="btn-close"  />
-        <h2 className="mb-3 text-start">{modal11?"Signin to Order":"Welcome Back"}</h2>
-        <p className="lead mb-6 text-start">Fill your email and password to sign in.</p>
-        <form onSubmit={(e)=>login(e)} className="mb-3">
-          <div className="form-floating mb-4">
-            <input required onChange={(e)=>setusername(e.target.value)} value={username} type="emaillogin" className="form-control" placeholder="Email"  />
-            <label  htmlFor="loginEmail">Email</label>
-          </div>
-          <div className="form-floating  mb-4">
-            <input required onChange={(e)=>setpassword(e.target.value)} value={password} type="password" className="form-control" placeholder="Password"  />
-            {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
-            <label htmlFor="loginPassword">Password</label>
-          </div>
-          <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign In</button>
-        </form>
-        {/* /form */}
-        {/* <p className="mb-1"><a href="#" className="hover">Forgot Password?</a></p> */}
-        <p className="mb-0">Don't have an account? <a href="#" onClick={()=>setmodal11(false) & setmodal21(true) & setsignnull()}  className="hover">Sign up</a></p>
-      
-        {/*/.social */}
-      </div>
-      {/*/.modal-content */}
-    </div>
-    {/*/.modal-body */}
-  </div>
-  {/*/.modal-dialog */}
-</div>
+    
 {/*/.modal */}
-<div className={modal21?"modal fade show spinner-container":""} style={modal21?{display:"block"}:{display:"none"}}  tabIndex={-1}>
-  <div className="modal-dialog modal-dialog-centered modal-sm">
-    <div className="modal-content text-center">
-      <div className="modal-body">
-        <button type="button" onClick={()=>setmodal21(!modal21)} className="btn-close"  />
-        <h2 className="mb-3 text-start">Sign up to FotoFrame</h2>
-        <p className="lead mb-6 text-start">Registration takes less than a minute.</p>
-        <form onSubmit={(e)=>postuser(e)} className="text-start mb-3">
-          
-          <div className="form-floating mb-4">
-            <input required onChange={(e)=>setfirstname(e.target.value)} value={firstname} type="Firstname" className="form-control" placeholder="Email"  />
-            <label htmlFor="">Name</label>
-          </div>
-          <div className="form-floating mb-4">
-            <input required onChange={(e)=>setsignusername(e.target.value)} value={signusername} type="email" className="form-control" placeholder="Email"  />
-            <label htmlFor="">Email</label>
-          </div>
-          <div className="form-floating mb-4">
-            <input required onChange={(e)=>setsignpassword(e.target.value)} value={signpassword} type="password" className="form-control" placeholder="Password"  />
-            {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
-            <label htmlFor="">Password</label>
-          </div>
-          <div className="form-floating  mb-4">
-            <input required onChange={(e)=>setsignrepassword(e.target.value)} value={signrepassword} type="password" className="form-control" placeholder="Confirm Password"  />
-            {/* <span className="password-toggle"><i className="uil uil-eye" /></span> */}
-            <label htmlFor="">Confirm Password</label>
-          </div>
-          <button type='submit' className="btn btn-primary rounded-pill btn-login w-100 mb-2">Sign Up</button>
-        </form>
-        {/* /form */}
-        <p className="mb-0">Already have an account? <a href="#" onClick={()=>setmodal21(false) & setmodal11(true)} className="hover">Sign in</a></p>
-        
-        {/*/.social */}
-      </div>
-      {/*/.modal-content */}
-    </div>
-    {/*/.modal-body */}
-  </div>
-  {/*/.modal-dialog */}
-</div>
+
     </header>
     </div>
   )

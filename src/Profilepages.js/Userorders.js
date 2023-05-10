@@ -177,6 +177,7 @@ export default function Userorders() {
     </DragDropContext>
             </div> 
         :selectitm.product_type==="College" & selectitm.orientation==="Square"?
+        <div className='overflowbar'>
         <div className="border-cp framebox-shadow" style={selectitm.image_url.split(',').length===4? {width:"386px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:selectitm.image_url.split(',').length===9?{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}:{width:"505px",margin:"auto",padding:"5px",borderImage:`url(${imgUrl+selectitm.frame[0]?.image??"/assets/img/photos/collage-black.png"})1%  stretch repeat`}}   >
               
     <div className="App">
@@ -190,6 +191,7 @@ export default function Userorders() {
        
       />
     </div>
+            </div>
             </div>
         :selectitm.product_type==="Canvas" & selectitm.product?
         <>

@@ -5,6 +5,8 @@ export const Simplecontext = createContext();
 export default function Simplecontextprovider({children}) {
     const [framedata,setframedata]=useState([])
     const [framepricedata,setframepricedata]=useState([])
+    const [promodal2,setpromodal2]=useState(false)
+    const [promodal1,setpromodal1]=useState(false)
     useEffect(() => {
       Getframe()
       Getframeprice()
@@ -39,7 +41,7 @@ export default function Simplecontextprovider({children}) {
      
   return (
     <Simplecontext.Provider value={{
-        framedata,Getframe,framepricedata,Getframeprice
+        framedata,Getframe,framepricedata,Getframeprice,setpromodal1,setpromodal2,promodal1,promodal2
     }}>{children}</Simplecontext.Provider>
   )
 }

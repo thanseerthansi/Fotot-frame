@@ -202,7 +202,7 @@ const notifyerror = (msg) => toast.error(msg, {
               <select required onClick={(e)=>setpricelist(e.target.value)} className="form-select form-select-md ">
                   <option value="" hidden>select size</option>
                     {handlerprice()?handlerprice().split(',').map((itm,k)=>(
-                    <option key={k} value={itm}  >{itm.split('-')[1]} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{itm.split('-')[2]} AED </option>
+                    <option key={k} value={itm}  >{itm.split('-')[1]} &emsp;&emsp;&emsp;&emsp;{itm.split('-')[2]} AED </option>
                     )):null}
                     {/* <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option>
                     <option value={"45 x 30 cm"} >45 x 30 cm &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AED 150</option> */}
