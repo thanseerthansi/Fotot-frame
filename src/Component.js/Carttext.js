@@ -175,8 +175,9 @@ export default function Carttext() {
             }
             // console.log("afteraddimage",cart)
           });
-          setcartdata(cart)
+          setcartdata(()=>[...cart])
         }
+        setcartdata(()=>[...data.data])
       }
     }catch{
 
