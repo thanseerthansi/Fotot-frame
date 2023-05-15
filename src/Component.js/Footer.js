@@ -1,6 +1,6 @@
 import React from 'react'
-import { FaTwitter,FaInstagram,FaFacebookF,FaYoutube,FaArrowUp } from "react-icons/fa";
-import { AiOutlineArrowUp } from "react-icons/ai";
+// import { FaTwitter,FaInstagram,FaFacebookF,FaYoutube,FaArrowUp } from "react-icons/fa";
+// import { AiOutlineArrowUp } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 export default function Footer() {
     return (
@@ -12,12 +12,12 @@ export default function Footer() {
                             <div className="widget">
                                 <img className="mb-4" src="\assets\img\photos\logo-fotoframe.png"  height={70} alt="img"/>
                                 <p className="mb-4">© 2023 Foxiom Leads. <br className="d-none d-lg-block" />All rights reserved.</p>
-                                <nav className="nav social ">
+                                {/* <nav className="nav social ">
                                     <a href="/"><FaTwitter size={18} color=" #5daed5" /></a>
                                     <a href="/"><FaFacebookF size={15} color="#4470cf" /></a>
                                     <a href="/"><FaInstagram color='#d53581'/></a>
                                     <a href="/"><FaYoutube color='#c8312b' /></a>
-                                </nav>
+                                </nav> */}
                                 
                             </div>
                             {/* /.widget */}
@@ -26,8 +26,9 @@ export default function Footer() {
                         <div className="col-md-4 col-lg-3">
                             <div className="widget">
                                 <h4 className="widget-title  mb-3">Get in Touch</h4>
-                                <address className="pe-xl-15 pe-xxl-17">Dubai , UAE , al qusais manzil bldg</address>
-                                <a href="cdn-cgi/l/email-protection.html#2b08" className="link-body"><span className="__cf_email__" data-cfemail="aac3c4ccc5eacfc7cbc3c684c9c5c7">[email&nbsp;protected]</span></a><br />04-451 9623
+                                <address className="pe-xl-15 pe-xxl-17 mb-1">Dubai , UAE , al qusais manzil bldg</address>
+                                {/* <a href="mailto:email@example.com">Send Email</a> */}
+                               <span className="" data-cfemail="aac3c4ccc5eacfc7cbc3c684c9c5c7"><a href="mailto:email@example.com">FotoFrame@gmail.com</a></span><br />04-451 9623
                             </div>
                             {/* /.widget */}
                         </div>
@@ -38,7 +39,7 @@ export default function Footer() {
                                 <ul className="list-unstyled text-reset mb-0">
                                     <li><Link to="/">About Us</Link></li>
                                     {/* <li><a href="/">Our Story</a></li> */}
-                                    <li><Link to="/">Projects</Link></li>
+                                    {/* <li><Link to="/">Projects</Link></li> */}
                                     <li><Link to="/terms">Terms of Use</Link></li>
                                     <li><Link to="/privacypolicy">Privacy Policy</Link></li>
                                 </ul>
@@ -48,15 +49,15 @@ export default function Footer() {
 
                         <div className="col-md-12 col-lg-3">
                             <div className="widget">
-                                <h4 className="widget-title  mb-3">Quick Links</h4>
+                                <h4 className="widget-title  mb-3">Frames</h4>
                                 <div className="widget">
                                 <ul className="list-unstyled text-reset mb-0">
                     
-                                    <li><Link to="/shopping">Our Store</Link></li>
+                                    {/* <li><Link to="/shopping">Our Store</Link></li> */}
                                     <li><Link to="/miniframe">MiniFrame</Link></li>
                                     <li><Link to="/college">College</Link></li>
                                     <li><Link to="/canavstype">Canvas</Link></li>
-                                    <li><Link to="/papertype">Print</Link></li>
+                                    {/* <li><Link to="/papertype">Print</Link></li> */}
                                 </ul>
                             </div>
                                

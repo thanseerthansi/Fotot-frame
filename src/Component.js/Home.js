@@ -17,8 +17,8 @@ export default function Home() {
       <div className="container pt-10 pb-15 pt-md-14 pb-md-20">
         <div className="row gx-lg-8 gx-xl-12 gy-10 mb-5 align-items-center">
           <div className="col-md-10 offset-md-1 offset-lg-0 col-lg-5 text-center text-lg-start order-2 order-lg-0" data-cues="slideInDown" data-group="page-title" data-delay={600}>
-            <h1 className="display-1 mb-5 mx-md-n5 mx-lg-0">Creative. Smart. Awesome.</h1>
-            <p className="lead fs-lg mb-7">We specialize in web, mobile and identity design. We love to turn ideas into beautiful things.</p>
+            <h1 className="display-1 mb-5 mx-md-n5 mx-lg-0">Frame Your Travel Adventures</h1>
+            <p className="lead fs-lg mb-7">Celebrate your travel stories and create a visual narrative with framed travel memories.</p>
             {/* <div className="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown" data-group="page-title-buttons" data-delay={900}>
               <span><Link className="btn btn-primary rounded me-2">See Projects</Link></span>
               <span><Link className="btn btn-yellow rounded">Learn More</Link></span>
