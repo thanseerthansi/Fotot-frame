@@ -197,7 +197,7 @@ export default function Home() {
               </div>
               <div>
                 <h5 className="mb-1">Address</h5>
-                <address>Moonshine St. 14/05 Light City, London</address>
+                <address>Dubai , UAE , Al Qusais Manzil bldg</address>
               </div>
             </div>
             <div className="d-flex flex-row">
@@ -206,7 +206,7 @@ export default function Home() {
               </div>
               <div>
                 <h5 className="mb-1">Phone</h5>
-                <p>00 (123) 456 78 90</p>
+                <p>04-451 9623</p>
               </div>
             </div>
             <div className="d-flex flex-row">
@@ -215,7 +215,8 @@ export default function Home() {
               </div>
               <div>
                 <h5 className="mb-1">E-mail</h5>
-                <p className="mb-0"><a href="cdn-cgi/l/email-protection.html#e99a88878d8b8691a98c84888085c78a8684" className="link-body"><span className="__cf_email__" data-cfemail="661507080204091e26030b070f0a4805090b">[email&nbsp;protected]</span></a></p>
+                <p className="mb-0"><a href="mailto:email@example.com">FotoFrame@gmail.com</a></p>
+                {/* <p className="mb-0"><a href="cdn-cgi/l/email-protection.html#e99a88878d8b8691a98c84888085c78a8684" className="link-body"><span className="__cf_email__" data-cfemail="661507080204091e26030b070f0a4805090b">[email&nbsp;protected]</span></a></p> */}
               </div>
             </div>
           </div>
