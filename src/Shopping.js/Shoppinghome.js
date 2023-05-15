@@ -10,6 +10,7 @@ export default function Shoppinghome() {
   const [themesearch,setthemesearch]=useState([])
   // console.log("listtheme",themesearch)
   useEffect(() => {
+    window.scrollTo(0,0)
     Getproduct()
     Gettheme()
   }, [])

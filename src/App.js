@@ -23,6 +23,8 @@ import Success from './Shopping.js/Success';
 import Failure from './Shopping.js/Failure';
 import Profilepage from './Profilepages.js/Profilepage';
 import Userorders from './Profilepages.js/Userorders';
+import Privacy from './Aboutpages.js/Privacy';
+import Terms from './Aboutpages.js/Terms';
 
 
 
@@ -56,6 +58,8 @@ function App() {
           <Route path='paperprint' element={<Papperprint/>}/>
           <Route path='profile' element={<Profilepage/>}/>
           <Route path='userorder' element={<Userorders/>}/>
+          <Route path='privacypolicy' element={<Privacy/>}/>
+          <Route path='terms' element={<Terms/>}/>
           
         </Route>
       </Routes>

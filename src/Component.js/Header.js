@@ -170,10 +170,11 @@ export default function Header() {
           <div className="widget mb-8">
             <h4 className="widget-title text-white mb-3">Learn More</h4>
             <ul className="list-unstyled">
-              <li><a href="/">Our Story</a></li>
-              <li><a href="/">Terms of Use</a></li>
-              <li><a href="/">Privacy Policy</a></li>
-              <li><a href="/">Contact Us</a></li>
+            <li><Link to="/">Home</Link></li>
+            {/* <li><a href="/">Our Story</a></li> */}
+            <li><Link to="/">Projects</Link></li>
+            <li><Link to="/terms">Terms of Use</Link></li>
+            <li><Link to="/privacypolicy">Privacy Policy</Link></li>
             </ul>
           </div>
           {/* /.widget */}
