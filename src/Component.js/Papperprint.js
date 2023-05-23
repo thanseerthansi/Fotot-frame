@@ -169,16 +169,16 @@ const notifyerror = (msg) => toast.error(msg, {
           
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
-          <div><h3 className="pb-2 ">Print</h3></div>
+          <div><h3 className="pb-1 ">Print</h3></div>
           <div className='line-break'/>
-          <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
+          <label className="ps-0"><strong className="text-dark">Papper</strong></label>            
             <div className="switch-field ">
             <input type="radio" id="radio-one" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("MATTE"):""} value="true" defaultChecked/>
             <label className='label1' htmlFor="radio-one">MATTE</label>
             <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
             <label className='label2' htmlFor="radio-two">GLOSS</label>
         </div>
-            <br/>
+            
             
             {/* <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
             <div className='line-break'/>
@@ -197,7 +197,7 @@ const notifyerror = (msg) => toast.error(msg, {
             </div> */}
                 
                 <div className='line-break'/>
-                <div className='mb-3'>
+                <div className='mb-2'>
               <label className='ps-0 mb-2'><strong className='text-dark'>Frame Size</strong></label><br/>
               <div className='form-select-wrapper'>
               <select required onClick={(e)=>setpricelist(e.target.value)} className="form-select form-select-md ">
@@ -237,8 +237,9 @@ const notifyerror = (msg) => toast.error(msg, {
                   </div> */}
                   
           </div>
-          <button onClick={()=>pricelist? addtocart(pricelist):notifyerror("select size")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</button>
-
+            <div className='container'>
+              <button onClick={()=>pricelist? addtocart(pricelist):notifyerror("select size")} className="btn btn-primary rounded w-100 mt-0">ADD TO CART</button>
+            </div>
           </div>
         </div>
         </div>       

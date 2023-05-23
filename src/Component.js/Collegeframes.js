@@ -223,11 +223,11 @@ const handleOnDragEnd = (result) => {
               <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
               <label className='label2' htmlFor="radio-two">GLOSS</label>
             </div>
-            <br/>
+            
             <div className='line-break '/>
             <div className='mb-3 '>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex table-responsive pb-2'>
+              <div className='d-flex table-responsive pb-1'>
                 {framedata.map((itm,k)=>(
                   <div key={k} className='ps-2'>
                   <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} height={47} alt="img" />
@@ -258,7 +258,9 @@ const handleOnDragEnd = (result) => {
                   </div>
                   
           </div>
-          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <div className='container'>
+          <button  onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 ">ADD TO CART</button>
+          </div>
 
           </div>
         </div>

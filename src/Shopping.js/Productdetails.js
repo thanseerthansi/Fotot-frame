@@ -122,7 +122,7 @@ export default function Productdetails() {
         <div className="overflowbar " >
             <div  className='col-6 col-md-4 '>
            
-             <div className={selectitm?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm?.image??"http://127.0.0.1:8000/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
+             <div className={selectitm?' d-flex border-cp framebox-shadow':'d-flex framebox-shadow'} style={selectitm?{width:"335px",height:"100%",margin:"auto",borderImage:`url(${selectitm?.image??"/media/Image/black-frame.png"})1%  stretch repeat`}:{width:"335px",height:"100%",margin:"auto"}}   >
             <img src={productdata.length?productdata[0].product_image:null} alt="img" className='' style={{width:"100%",height:"100%"}}    />
             </div>
             </div>
@@ -149,7 +149,7 @@ export default function Productdetails() {
                 
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Frame Type</strong></label><br/>              
-                  <div className='d-flex table-responsive pb-2'>
+                  <div className='d-flex table-responsive pb-1'>
                   <select required onChange={(e)=>frametypehandler(e.target.value)} className="form-select form-select-md ">
                   {/* <option value="" hidden>select frame type</option> */}
                   <option value="" >PRINT ONLY</option>
@@ -170,7 +170,7 @@ export default function Productdetails() {
                  </div>
                 )):null}
               </div>
-                <br/>
+             
                 </>:null}
                 
                 <div className='line-break'/>
@@ -184,7 +184,7 @@ export default function Productdetails() {
                     
                   </select>
               </div>
-                <br/>
+               
                 <div className='line-break'/>
                   <div className='row'>
                     <div className='col-8'>
@@ -197,7 +197,7 @@ export default function Productdetails() {
                     </div>
                   </div>                  
           </div>
-          <button onClick={()=>frameprice? addtocart():notifyerror("select size")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</button>
+          <div className='container'><button onClick={()=>frameprice? addtocart():notifyerror("select size")} className="btn btn-primary rounded w-100 mt-0">ADD TO CART</button></div>
           </div>
         </div>
         </div>       

@@ -84,6 +84,7 @@ export default function Shoppinghome() {
               {Searchhandling().map((itm,k)=>(
                 <div key={k} className="project item col-6 col-md-3 col-xl-3">
                 <figure className="rounded mb-6 card_style">
+                {/* <img src={"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%",height:''}} />  */}
                   <img src={itm.product_image} alt=""/>
                   
                   <Link to={`/productdetails/${itm.id}`} className="item-cart"> Add to Cart</Link>
@@ -119,7 +120,7 @@ export default function Shoppinghome() {
             <div className='row col-12 overflowx-theme'>
               {themedata.map((titm,tk)=>(
                  <div key={tk} className="form-check  col-6">           
-                 <input onChange={(e)=>e.target.checked? handlecheckadd(titm.id):handlecheckdelete(titm.id)} className="form-check-input" type="checkbox" id="xs"  />
+                 <input onChange={(e)=>e.target.checked? handlecheckadd(titm.id):handlecheckdelete(titm.id)} className="form-check-input checkbox_form" type="checkbox" id="xs"  />
                  <label className="form-check-label" htmlFor="xs">{titm.theme_name}</label>           
                </div>
               ))}

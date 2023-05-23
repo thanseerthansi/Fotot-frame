@@ -215,7 +215,7 @@ export default function Home() {
               </div>
               <div>
                 <h5 className="mb-1">E-mail</h5>
-                <p className="mb-0"><a href="mailto:email@example.com">FotoFrame@gmail.com</a></p>
+                <p className="mb-0"><a href="mailto:email@example.com">fotoframe@gmail.com</a></p>
                 {/* <p className="mb-0"><a href="cdn-cgi/l/email-protection.html#e99a88878d8b8691a98c84888085c78a8684" className="link-body"><span className="__cf_email__" data-cfemail="661507080204091e26030b070f0a4805090b">[email&nbsp;protected]</span></a></p> */}
               </div>
             </div>

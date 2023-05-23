@@ -11,7 +11,7 @@ export default function Footer() {
                         <div className="col-md-4 col-lg-3">
                             <div className="widget">
                                 <img className="mb-4" src="\assets\img\photos\logo-fotoframe.png"  height={70} alt="img"/>
-                                <p className="mb-4">© 2023 Foxiom Leads. <br className="d-none d-lg-block" />All rights reserved.</p>
+                                <p className="mb-4">© 2023 FotoFrame. <br className="d-none d-lg-block" />All rights reserved.</p>
                                 {/* <nav className="nav social ">
                                     <a href="/"><FaTwitter size={18} color=" #5daed5" /></a>
                                     <a href="/"><FaFacebookF size={15} color="#4470cf" /></a>
@@ -26,9 +26,9 @@ export default function Footer() {
                         <div className="col-md-4 col-lg-3">
                             <div className="widget">
                                 <h4 className="widget-title  mb-3">Get in Touch</h4>
-                                <address className="pe-xl-15 pe-xxl-17 mb-1">Dubai , UAE , al qusais manzil bldg</address>
+                                <address className="pe-xl-15 pe-xxl-17 mb-1">Dubai,UAE,al-qusais manzil bldg</address>
                                 {/* <a href="mailto:email@example.com">Send Email</a> */}
-                               <span className="" data-cfemail="aac3c4ccc5eacfc7cbc3c684c9c5c7"><a href="mailto:email@example.com">FotoFrame@gmail.com</a></span><br />04-451 9623
+                               <span className="" data-cfemail="aac3c4ccc5eacfc7cbc3c684c9c5c7"><a href="mailto:email@example.com">fotoframe@gmail.com</a></span><br />04-451 9623
                             </div>
                             {/* /.widget */}
                         </div>

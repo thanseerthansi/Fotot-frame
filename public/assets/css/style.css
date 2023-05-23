@@ -4047,6 +4047,7 @@ textarea.form-control-lg {
 .form-check .form-check-input {
     float: left;
     margin-left: -1.55rem
+    
 }
 
 .form-check-reverse {
@@ -4101,6 +4102,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked[type=checkbox] {
+    border:1px solid grey;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e")
 }
 
@@ -48856,7 +48858,7 @@ footer.bg-dark.angled.upper-start:before {
 }
 
 .frame_card:hover {
-    box-shadow: 1px 8px 20px grey;   
+    box-shadow: 0px 0px 7px 0px grey;  ;   
 }
 /* .minibackgound{
     background-image: url('data:img/photos/black-frame.png');
@@ -48888,7 +48890,7 @@ footer.bg-dark.angled.upper-start:before {
 @media screen and (min-width:768px) {
     .photocard_style{
         margin-top: 20px;
-        margin-left:100px;
+        /* margin-left:100px; */
     }
     .padd {
         padding: 10px;
@@ -48896,16 +48898,16 @@ footer.bg-dark.angled.upper-start:before {
     }
     .margin-css{
         margin-top: 30%;
-        width: 55%;
+        width: 60%;
 
     }
     .margin-csl{
         margin-top: 46%;
         margin-left: 50px;
-        width: 60%;
+        width: 67%;
     }
     .margin-csp{
-        width:50%;
+        width:53%;
         margin:11%;
     }
 }
@@ -49098,10 +49100,10 @@ footer.bg-dark.angled.upper-start:before {
 }
 
 .card-bodyframe{
-    margin: 20%;
+    margin: 15%;
 }
 .card-bodyframe:hover{
-    box-shadow: 1px 8px 20px grey;  
+    box-shadow: 0px 0px 8px 2px grey;  
     cursor: pointer;
 }
 
@@ -49326,30 +49328,30 @@ footer.bg-dark.angled.upper-start:before {
     display: none;  
 } */
 .margin1-csq:hover{
-    box-shadow: 1px 8px 20px grey;  
+    box-shadow: 0px 0px 10px 1px grey;  
     cursor: pointer;
 }
 .margin2-csq:hover{
-    box-shadow: 1px 8px 20px grey;  
+    box-shadow:  0px 0px 10px 1px grey;  
     cursor: pointer;
 }
 .margin3-csq:hover{
-    box-shadow: 1px 8px 20px grey;  
+    box-shadow:  0px 0px 10px 1px grey;  
     cursor: pointer;
 }
 
 @media only screen and (min-width:944px){
     .margin1-csq{
-        width: 241px;
+        width: 222px;
         margin-top: 145px;
-        margin-left: 79px;
+        margin-left: 60px;
     }
     .margin2-csq{
-        width: 320px;
+        width: 300px;
         margin-top: 67px;
     }
     .margin3-csq{
-        width: 376px;
+        width: 356px;
         margin-top: 10px;
     }
 }
@@ -49391,7 +49393,7 @@ footer.bg-dark.angled.upper-start:before {
     rotateX(0deg) 
     rotateY(6deg) 
     rotateZ(0deg);
-    box-shadow: 24px 16px 64px 0 rgba(0, 0, 0, 0.08);
+    /* box-shadow: 24px 16px 64px 0 rgba(0, 0, 0, 0.08); */
     border-radius: 2px;
     
 }
@@ -49539,3 +49541,7 @@ footer.bg-dark.angled.upper-start:before {
     width: 10em;
     background: yellow;
     }
+
+.checkbox_form{
+    border:1px solid grey;
+}

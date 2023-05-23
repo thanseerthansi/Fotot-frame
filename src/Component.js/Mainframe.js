@@ -177,7 +177,7 @@ const notifyerror = (msg) => toast.error(msg, {
           
           {/* <div className='line-break'/> */}
           <div className=" p-2">
-          <div><h3 className=" pb-2 ">Mini Frames</h3></div>
+          <div><h3 className=" pb-1 ">Mini Frames</h3></div>
           <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
                  <div className="switch-field ">
@@ -186,7 +186,7 @@ const notifyerror = (msg) => toast.error(msg, {
                   <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
                   <label className='label2' htmlFor="radio-two">GLOSS</label>
                 </div>
-                <br/>
+              
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Frame Material</strong></label><br/>              
                  <div className="switch-field2 ">
@@ -195,11 +195,11 @@ const notifyerror = (msg) => toast.error(msg, {
                   <input     defaultValue="MODERN" />
                   <label className='label2' onClick={()=>setframematerial("MODERN")} style={framematerial==="MODERN"?{backgroundColor: "#111111",boxShadow: "none", color: "white"}:{}} >MODERN LOOK</label>
                 </div>
-                <br/>
+              
                 <div className='line-break'/>
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex table-responsive pb-2'>
+              <div className='d-flex table-responsive pb-1'>
                 {framedata.map((itm,k)=>(
                   <div key={k} className='ps-2'>
                   <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} height={47} alt="img" />
@@ -230,7 +230,7 @@ const notifyerror = (msg) => toast.error(msg, {
                   </div>
                   
           </div>
-          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <div className='container'><button  onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 ">ADD TO CART</button></div>
 
           </div>
         </div>

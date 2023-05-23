@@ -8,7 +8,7 @@ export default function Collage() {
     
   return (
     <div>
-          <div className=''>
+          <div className='container'>
         <div className=' '  >
         <div className="card-body minibackgound "  >   
         <div className='row col-12'>
@@ -32,7 +32,7 @@ export default function Collage() {
             
             </div>
             <div  className='col-12 col-md-4 '>
-            <div className="card-bodyframe"style={{marginLeft:"20%",marginRight:"20%"}} title="Portait frame with 2,3 or 4 images" >
+            <div className="card-bodyframe"style={{marginLeft:"18%",marginRight:"18%"}} title="Portait frame with 2,3 or 4 images" >
               <Link to="/potratecollege">
               <div className=' border-cp' >
               <div className='image_cl'>

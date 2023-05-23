@@ -179,9 +179,10 @@ const notifyerror = (msg) => toast.error(msg, {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <div><h3 className="mt-4  ">Canvas</h3></div>
+          
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
+          <div><h3 className="pb-1  ">Canvas</h3></div>
           <div className='line-break'/>
               {/* <label className="ps-0"><strong className="text-dark">Streched</strong></label><br/>               */}
               <div className="switch-field ">
@@ -190,7 +191,7 @@ const notifyerror = (msg) => toast.error(msg, {
               <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setframecanvas(true)&setframe("Black"):""} defaultValue="GLOSS" />
               <label className='label2' htmlFor="radio-two">Framed</label>
             </div>
-            <br/>
+            
             
             <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
             <div className='line-break'/>
@@ -248,7 +249,9 @@ const notifyerror = (msg) => toast.error(msg, {
                   </div> */}
                   
           </div>
-          <button onClick={()=>pricelist? addtocart(pricelist):notifyerror("select size")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</button>
+          <div className='container'>
+          <button onClick={()=>pricelist? addtocart(pricelist):notifyerror("select size")} className="btn btn-primary rounded w-100 mt-0">ADD TO CART</button>
+          </div>
 
           </div>
         </div>

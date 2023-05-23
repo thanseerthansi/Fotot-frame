@@ -199,7 +199,7 @@ const handlerprice=()=>{
           
           {/* <div className='line-break'/> */}
           <div className=" p-3">
-          <div><h3 className="pb-2  ">College</h3></div>
+          <div><h3 className="pb-1  ">College</h3></div>
           <div className='line-break'/>
               <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
               <div className="switch-field ">
@@ -208,7 +208,7 @@ const handlerprice=()=>{
               <input type="radio" id="radio-two" name="switch-one" onClick={(e)=>e.target.value?setpapervalue("GLOSS"):""} defaultValue="GLOSS" />
               <label className='label2' htmlFor="radio-two">GLOSS</label>
             </div>
-            <br/>
+           
             <div className='line-break'/>
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
@@ -248,7 +248,9 @@ const handlerprice=()=>{
                   </div>
                   
           </div>
-          <a href="#" onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-4">ADD TO CART</a>
+          <div className='container'>
+            <button onClick={()=>selectitm? addtocart(handlerprice()):notifyerror("Select Frame")} className="btn btn-primary rounded w-100 mt-0">ADD TO CART</button>
+            </div>
 
           </div>
         </div>

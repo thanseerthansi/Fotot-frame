@@ -9,13 +9,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios';
 import moment from 'moment';
 import { BaseUrl, imgUrl } from '../Component.js/Url';
+import Scripts from '../Component.js/Scripts';
 export default function Userorders() {
     const [cartdata,setcartdata]=useState([])
     // const [delivery,setdelivery]=useState('')
     const [selectitm,setselectitm]=useState('')
     // console.log("selectitm",selectitm)
     useEffect(() => {
+        // Scripts()
         Getuserorder()
+        window.scrollTo(0, 0);
     }, [])
     
     const Getuserorder=async()=>{

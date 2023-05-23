@@ -8,7 +8,7 @@ export default function Canvastype() {
     
   return (
     <div>
-          <div className=''>
+          <div className='container'>
         <div className=' '  >
         <div className="card-body minibackgound "  >   
         <div className='row col-12 '>

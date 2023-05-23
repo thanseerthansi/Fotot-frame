@@ -86,7 +86,7 @@ export default function Header() {
                           </li>
                           <li className="col"><Link className="dropdown-item"  to="/miniframe">
                               <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2"><img className="rounded-0" src="\assets\img\photos\miniframes-622.jpg" width={107} alt="img"/></div>
-                              <span>Mini Frame</span>
+                              <span>MiniFrame</span>
                             </Link>
                           </li>
                           <li className="col"><Link className="dropdown-item" to='/college'>
