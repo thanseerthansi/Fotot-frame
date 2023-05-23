@@ -48892,6 +48892,7 @@ footer.bg-dark.angled.upper-start:before {
     }
     .padd {
         padding: 10px;
+        /* padding-right: 6%; */
     }
     .margin-css{
         margin-top: 30%;
@@ -48924,7 +48925,7 @@ footer.bg-dark.angled.upper-start:before {
 .switch-field {
 	display: flex;
 	/* margin-bottom: 36px; */
-    margin-left: 17px;
+    /* margin-left: 17px; */
     margin-top: 10px;
 	overflow: hidden;
 }
@@ -48946,7 +48947,7 @@ footer.bg-dark.angled.upper-start:before {
 	text-align: center;
 	padding: 8px 16px;
 	margin-right: -1px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	/* border: 1px solid rgba(0, 0, 0, 0.2); */
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
 	transition: all 0.1s ease-in-out;
 }
@@ -48963,7 +48964,7 @@ footer.bg-dark.angled.upper-start:before {
 .switch-field2 {
 	display: flex;
 	/* margin-bottom: 36px; */
-    margin-left: 17px;
+    /* margin-left: 17px; */
     margin-top: 10px;
 	overflow: hidden;
 }
@@ -49007,12 +49008,12 @@ footer.bg-dark.angled.upper-start:before {
 .switch-field2 label:last-of-type {
 	border-radius: 0 4px 4px 0;
 } */
-.label1{
+/* .label1{
     border-radius: 16px 0 0 16px;
 }
 .label2{
     border-radius: 0 16px 16px 0; 
-}
+} */
 /* This is just for CodePen. */
 .line-break {
     
@@ -49024,11 +49025,11 @@ footer.bg-dark.angled.upper-start:before {
   }
 
 .border-cart{
-    border: 1px solid #e2e0e0;
+    /* border: 1px solid #e2e0e0;
     border-radius: 24px;
     margin-left: 15px;
-    margin-right: 5px;
-    box-shadow: 1px 2px 7px grey
+    margin-right: 5px; */
+    box-shadow: 0px 0px 21px -14px grey
 }
 .border-cp{
     border-style: solid;

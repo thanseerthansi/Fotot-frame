@@ -129,7 +129,7 @@ const notifyerror = (msg) => toast.error(msg, {
   } 
   return (
     <div>
-      <div className=''>
+      <div className='container'>
         <div className='row padd' >
           <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
@@ -146,7 +146,7 @@ const notifyerror = (msg) => toast.error(msg, {
             </div> */}
             <div className="mt-2 item">
               <figure className='framebox-shadow' >
-              <img src={selectitm?selectitm?.image??"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%"}} /> 
+              <img src={selectitm?selectitm?.image??"/assets/img/photos/black-frame.png":"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%",height:''}} /> 
               <img src={itm} alt="img" className='minimage' style={framematerial==="MODERN"?{width:"94%"}:{width:"94%",padding:"10px"}} />             
                 <button onClick={()=>removeimage(k)} className="item-cart"><RxCross2 className='mt-1'/> remove</button>
               </figure>
@@ -174,9 +174,10 @@ const notifyerror = (msg) => toast.error(msg, {
         </div>
         <div className=' col-12 col-md-4 col-lg-4'>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <h3 className="mt-4  ">Mini Frames</h3>
+          
           {/* <div className='line-break'/> */}
-          <div className="table-responsive p-3">
+          <div className=" p-2">
+          <div><h3 className=" pb-2 ">Mini Frames</h3></div>
           <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
                  <div className="switch-field ">
@@ -198,10 +199,10 @@ const notifyerror = (msg) => toast.error(msg, {
                 <div className='line-break'/>
             <div className='mb-3'>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex'>
+              <div className='d-flex table-responsive pb-2'>
                 {framedata.map((itm,k)=>(
                   <div key={k} className='ps-2'>
-                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} height={47} alt="img" />
                  </div>
                 ))}              
               </div>

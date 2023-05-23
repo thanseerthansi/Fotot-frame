@@ -149,7 +149,7 @@ const handleOnDragEnd = (result) => {
   }
   return (
     <div>
-        <div className=''>
+        <div className='container'>
         <div className='row padd' >
           <ToastContainer/>
           <div className='col-12 col-md-8 col-lg-8'>
@@ -211,9 +211,10 @@ const handleOnDragEnd = (result) => {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none '}} >
-          <h3 className="mt-4  ">College</h3>
+          
           {/* <div className='line-break'/> */}
-          <div className="table-responsive p-3">
+          <div className=" p-3">
+          <div><h3 className="pb-2  ">College</h3></div>
           <div className='line-break'/>
               <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
               <div className="switch-field ">
@@ -223,13 +224,13 @@ const handleOnDragEnd = (result) => {
               <label className='label2' htmlFor="radio-two">GLOSS</label>
             </div>
             <br/>
-            <div className='line-break'/>
-            <div className='mb-3'>
+            <div className='line-break '/>
+            <div className='mb-3 '>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex'>
+              <div className='d-flex table-responsive pb-2'>
                 {framedata.map((itm,k)=>(
                   <div key={k} className='ps-2'>
-                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} height={47} alt="img" />
                  </div>
                 ))}              
               </div>

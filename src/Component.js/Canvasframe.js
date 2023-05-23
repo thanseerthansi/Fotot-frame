@@ -124,8 +124,8 @@ const notifyerror = (msg) => toast.error(msg, {
   } 
   return (
     <div>
-        <div className=''>
-        <div className='row padd' >
+        <div className='container'>
+        <div className='row padd ' >
          <ToastContainer/> 
           <div className='col-12 col-md-8 col-lg-8'>
         <div className=' photocard_style '  >
@@ -179,7 +179,7 @@ const notifyerror = (msg) => toast.error(msg, {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <h3 className="mt-4  ">Canvas</h3>
+          <div><h3 className="mt-4  ">Canvas</h3></div>
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
           <div className='line-break'/>
@@ -195,13 +195,13 @@ const notifyerror = (msg) => toast.error(msg, {
             <div className='mb-3 ' style={frame?{display:'block'}:{display:'none'}}>
             <div className='line-break'/>
               <label className='ps-0 mb-2'><strong className='text-dark'>{frame} Frame</strong></label><br/>
-              <div className='d-flex overflowbar'>
+              <div className='d-flex overflowbar pb-2'>
               {/* <div className='ps-2'>
                <img className='frameimage ' style={frame==="Black"?{border:"2px solid black"}:{}} onClick={()=>setframe("Black")} src="\assets\img\photos\blackH.jpg" width={70} alt="img" />
               </div> */}
               {framedata.map((itm,k)=>(
                   <div key={k} className='ps-2'>
-                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} alt="img" />
+                  <img className='frameimage ' style={frame===itm.framename?{border:"2px solid black"}:{}} onClick={()=>setframe(itm.framename) & setselectitm(itm)} src={itm.main_image} width={70} height={47} alt="img" />
                  </div>
                 ))} 
               </div>

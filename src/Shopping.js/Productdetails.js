@@ -112,7 +112,7 @@ export default function Productdetails() {
  
   return (
     <div>
-      <div className=''>
+      <div className='container'>
         <div className='row padd' >
           <ToastContainer/>
           <div className='col-12 col-md-7 col-lg-7'>
@@ -134,9 +134,10 @@ export default function Productdetails() {
         </div>
         <div className=' col-12 col-md-5 col-lg-5'>
         <div className='p-2 my-5 border-cart ' >
-          <h3 className="mt-4  ">{productdata.length?productdata[0].product_name:null}</h3>
+          
           {/* <div className='line-break'/> */}
-          <div className="table-responsive p-3">
+          <div className=" p-3">
+          <h3 className="pb-2  ">{productdata.length?productdata[0].product_name:null}</h3>
           <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
                  <div className="switch-field ">
@@ -148,7 +149,7 @@ export default function Productdetails() {
                 
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Frame Type</strong></label><br/>              
-                  <div className='d-flex'>
+                  <div className='d-flex table-responsive pb-2'>
                   <select required onChange={(e)=>frametypehandler(e.target.value)} className="form-select form-select-md ">
                   {/* <option value="" hidden>select frame type</option> */}
                   <option value="" >PRINT ONLY</option>
@@ -171,7 +172,7 @@ export default function Productdetails() {
               </div>
                 <br/>
                 </>:null}
-                <br/>
+                
                 <div className='line-break'/>
                   <label className="ps-0"><strong className="text-dark">Size</strong></label><br/>              
                   <div className='d-flex'>

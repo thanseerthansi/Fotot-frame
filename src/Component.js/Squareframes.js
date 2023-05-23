@@ -9,7 +9,7 @@ export default function Squareframes() {
   return (
     <div>
           <div className=''>
-        <div className=' '  >
+        <div className='  '  >
         <div className="card-body minibackgound "  >   
         <div className='row col-12'>
       

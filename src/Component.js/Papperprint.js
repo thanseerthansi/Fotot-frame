@@ -122,7 +122,7 @@ const notifyerror = (msg) => toast.error(msg, {
 
   return (
     <div>
-        <div className=''>
+        <div className='container'>
         <div className='row padd' >
         <ToastContainer/> 
           <div className='col-12 col-md-8 col-lg-8'>
@@ -166,9 +166,10 @@ const notifyerror = (msg) => toast.error(msg, {
         </div>
         <div className=' col-12 col-md-4 col-lg-4  '>
         <div className='p-2 my-5 border-cart 'style={uploaded_images.length?{display:"block"}:{display:'none'}} >
-          <h3 className="mt-4  ">Print</h3>
+          
           {/* <div className='line-break'/> */}
           <div className="table-responsive p-3">
+          <div><h3 className="pb-2 ">Print</h3></div>
           <div className='line-break'/>
           <label className="ps-0"><strong className="text-dark">Papper</strong></label><br/>              
             <div className="switch-field ">

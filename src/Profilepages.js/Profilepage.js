@@ -176,7 +176,7 @@ export default function Profilepage() {
         {selectitm.product_type==="Mini Frame"?
         <div className='row '>
         {selectitm? selectitm.image_url.split(',').map((itm,k)=>(
-            <div key={k} className='col-12 col-md-6 '>
+            <div key={k} className='col-12  '>
             <div className="mt-2 item">
               <figure className='framebox-shadow' >
                
@@ -319,7 +319,7 @@ export default function Profilepage() {
     :selectitm.product_type==="Print"?<>
     {selectitm.image_url.split(',').length?selectitm.image_url.split(',').map((itm,k)=>(               
       <div key={k} className='  ' >             
-      <div className='box-shadow p-1 'style={{width:"50%",margin:"auto"}}>
+      <div className='box-shadow p-1 'style={{width:"100%",margin:"auto"}}>
         <img src={itm} alt="img" style={{width:"100%"}}   />   
        
       </div>
