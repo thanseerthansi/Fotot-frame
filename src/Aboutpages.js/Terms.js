@@ -5,7 +5,7 @@ export default function Terms() {
         window.scrollTo(0,0)
       }, [])
   return (
-    <div className='m-5'>
+    <div className='container mt-5'>
         <h1>Terms and Conditions</h1>
 <p>Last updated: May 15, 2023</p>
 <p>Please read these terms and conditions carefully before using Our Service.</p>

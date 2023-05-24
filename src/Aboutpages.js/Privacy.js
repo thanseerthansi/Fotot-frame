@@ -8,7 +8,7 @@ export default function Privacy() {
     // link : https://www.freeprivacypolicy.com/live/7628b582-d2c9-4c06-b95d-6f2e7f9ac3c9
   return (
     <div>
-        <div className='m-5'>
+        <div className='container mt-5'>
   <h1>Privacy Policy</h1>
   <p>Last updated: May 15, 2023</p>
   <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
