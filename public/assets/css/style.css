@@ -49428,11 +49428,11 @@ footer.bg-dark.angled.upper-start:before {
     color:var(--bs-blue)
 }
 .card_style{
-    height:250px
+    height:210px
     
 }
 .card_style img{
-    /* object-fit: fill; */
+    object-fit: contain;
     vertical-align: middle;
     display: inline-block;
     height: 100%;
@@ -49462,6 +49462,11 @@ footer.bg-dark.angled.upper-start:before {
 }
 .ml-left{
     margin-left: 10px;
+    background-color: #d9d9d5;
+    border-radius: 8px;
+    height: 118px;
+}
+.ml-leftfirst{
     background-color: #d9d9d5;
     border-radius: 8px;
     height: 118px;
@@ -49544,4 +49549,7 @@ footer.bg-dark.angled.upper-start:before {
 
 .checkbox_form{
     border:1px solid grey;
+}
+.backimage{
+    background-color: #f9f9f9;
 }

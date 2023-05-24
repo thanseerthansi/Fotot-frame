@@ -79,11 +79,11 @@ export default function Shoppinghome() {
             {/*/column */}
           </div>
           {/*/.row */}
-          <div className="grid grid-view projects-masonry shop mb-13">
-            <div className="row gx-md-8 gy-10 gy-md-13 isotope">
+          <div className="  projects-masonry shop mb-13">
+            <div className="row gx-md-8 gy-10 gy-md-13 ">
               {Searchhandling().map((itm,k)=>(
                 <div key={k} className="project item col-6 col-md-3 col-xl-3">
-                <figure className="rounded mb-6 card_style">
+                <figure className="backimage mb-6 card_style">
                 {/* <img src={"/assets/img/photos/black-frame.png"} alt="example"  style={{width:"100%",height:''}} />  */}
                   <img src={itm.product_image} alt=""/>
                   
@@ -94,7 +94,7 @@ export default function Shoppinghome() {
 
                   <h6 className="post-title h3 fs-17"><Link to={`/productdetails/${itm.id}`} className="link-dark">{itm.product_name}</Link></h6>
                   <p className="price">
-                    {/* <del><span className="amount">$55.00</span></del> */}
+
                      <ins><span className="amount">{itm.price}</span></ins><b className='aedsize'> AED</b></p>
                 </div>
                 {/* /.post-header */}
@@ -115,7 +115,8 @@ export default function Shoppinghome() {
         </div>
         {/* /column */}
         <aside className="col-lg-3 sidebar" >
-          <div className="widget">
+          <div className='row'>
+          <div className="widget col-6 col-md-12">
             <h4 className="widget-title mb-3">Theme</h4>
             <div className='row col-12 overflowx-theme'>
               {themedata.map((titm,tk)=>(
@@ -128,6 +129,7 @@ export default function Shoppinghome() {
             
             </div>
             
+          </div>
           </div>
          
           {/* /.widget */}
@@ -156,7 +158,7 @@ export default function Shoppinghome() {
           <div className="widget">
             <h4 className="widget-title mb-3">Orientation <button className='btn btn-sm btn-dark mt-1' style={{marginLeft:"60px"}} onClick={()=>setorientation('')}>Clear</button></h4>
             <div className='d-flex'>
-            <div onClick={()=>setorientation("potrait")} style={orientation==="potrait"?{border:"2px solid #000"}:{}} className='ml-left' >
+            <div onClick={()=>setorientation("potrait")} style={orientation==="potrait"?{border:"2px solid #000"}:{}} className='ml-leftfirst' >
               <div className='p-2' style={{width:"80px",height:"100px"}}>
               <div className='card border-cp' style={{width:"100%",height:"100%",borderWidth:"3px"}}/>               
                 <div>
